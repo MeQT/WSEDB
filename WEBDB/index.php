@@ -11,6 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <h2> Lets Try Shit </h2>
-        
+        <?php
+        phpinfo();
+        ?>
     </body>
 </html>
