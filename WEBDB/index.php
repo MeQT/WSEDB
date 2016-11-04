@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <h2> Lets Try Shit </h2>
+        <h2> Lets Try blub </h2>
         <?php
         phpinfo();
         ?>
