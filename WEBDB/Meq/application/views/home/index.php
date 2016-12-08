@@ -4,4 +4,4 @@
     <input type="password" />
     <input type="submit" />
 </form>
-<?php echo '<h1>Hello ' . $data['name'].'</h1>'; ?>
+<?php echo '<h1>Hello ' . $data['name']. ', '. $data['lastName'].'</h1>'; ?>
