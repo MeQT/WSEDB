@@ -9,8 +9,8 @@
   <body>
       <div>
           <a href="index.php" class="button">Home</a>              
-          <a href="index,php?url=home/login" class="button">Login</a>
-          <a href="index,php?url=home/register" class="button">Registrieren</a>
+          <a href="index,php?url=home/showLogin" class="button">Login</a>
+          <a href="index,php?url=home/showRegister" class="button">Registrieren</a>
           <a href="index,php?url=home/logout" class="button">Logout</a>
           <a href="index,php?url=help" class="button">Hilfe</a> 
       </div>

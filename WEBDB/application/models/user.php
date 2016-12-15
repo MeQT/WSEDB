@@ -1,5 +1,4 @@
 <?php
-
 class user{
     public $id;
     public $title;
@@ -7,15 +6,14 @@ class user{
     public $lastName;
     public $userName;
     public $eMail;
-    public $isValidated = false;
+    public $isValidated = 0;
     
     public function __construct($username) {
-        $info = $this->getData($username);
+        $this->getData($username);
     }
     private function getData($username){
-        $output = array(8);
         $db = new mysqli('projekt.wi.fh-flensburg.de:3306','projekt2016a','pkn_2404','projekt2016a');
-        $query = "SELECT * FROM person WHERE Username = '".$username."'";
+        $query = "SELECT * FROM Person WHERE Username = '".$username."'";
         $result = $db->query($query);
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc())
@@ -26,14 +24,9 @@ class user{
                 $this->lastName = $row['LastName'];
                 $this->username = $row['Username'];
                 $this->eMail = $row['Email'];
-                if($row['IsValidated'] == 1){
-                    $this->isValidated = TRUE;}
-                else{
-                    $this->isValidated = FALSE;}
-                
+                $this->isValidated = $row['IsValidated'];
             }
         }
-        // Model soll sich hier füllen
+        $db->close();
     }
 }
-
