@@ -3,24 +3,36 @@
         public function __construct() {
             
         }
+    //<editor-fold defaultstate="collapsed" desc="Navigation">
         public function index(){
+            $this->view('header');
             $this->view('subheader');
             $this->view('/userpanel/index');
+            $this->view('footer');
         }
-
         public function showQuestions(){
+            $this->view('header');
+            $this->view('subheader');
             $this->view('/userpanel/questions');
+            $this->view('footer');
         }
         public function showQuestionairy(){
+            $this->view('header');
+            $this->view('subheader');
             $this->view('/userpanel/questionairy');
+            $this->view('footer');
         }
         public function showAdminpanel(){
+            $this->view('header');
+            $this->view('subheader');
             $this->view('/userpanel/adminpanel');
+            $this->view('footer');
         }
-        public function showQuestionsPool(){
-            $this->view('/userpanel/questionspool');
+        public function showOptions(){
+            $this->view('header');
+            $this->view('subheader');
+            $this->view('/userpanel/options');
+            $this->view('footer');
         }
-        public function showQuestionariesPool(){
-            $this->view('/userpanel/questionariespool');
-        }
+// </editor-fold>
     }

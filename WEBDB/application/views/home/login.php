@@ -1,10 +1,9 @@
 <?php
-if(null !== (filter_input(INPUT_POST, 'User'))){
-        echo 'loggedin';
+session_start();
+if(isset($_SESSION['Username'])){
+        header("Location: index.php?url=home");
     }
 ?>
-
-
 <form action="index.php?url=home/login" method="Post">
   <table>
       <tr>
@@ -12,7 +11,7 @@ if(null !== (filter_input(INPUT_POST, 'User'))){
               <p class="text">Username</p>
           </td>
           <td>
-              <input type="text" class="" name="Username">
+              <input type="text" class="" name="Username" value="<?php echo filter_input(INPUT_POST, 'Username')?>">
           </td>
       </tr>
       <tr>
@@ -20,7 +19,7 @@ if(null !== (filter_input(INPUT_POST, 'User'))){
               <p class="text">Password</p>
           </td>
           <td>
-              <input type="password" class="" name="Password">
+              <input type="password" class="" name="Password" value="<?php echo filter_input(INPUT_POST, 'Password')?>">
           </td>
       </tr>
       <tr>
