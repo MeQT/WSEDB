@@ -32,6 +32,6 @@ if(null !== (filter_input(INPUT_POST, 'User'))){
   </table>
 </form>
 <div>
-    <a href="index,php?url=home/login" class="button" value="Password vergessen?">Password vergessen?</a>
+    <a href="index.php?url=home/login" class="button" value="Password vergessen?">Password vergessen?</a>
 </div>
 
