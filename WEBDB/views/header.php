@@ -7,9 +7,11 @@
     <link href="css/bootstrap.css" rel="stylesheet">
   </head>
   <body>
+      
       <div>
           <a href="index.php" class="btn btn-default">Home</a>              
           <?php 
+          echo "blub";
           if(isset($_SESSION['User'])){
               echo '<a href="index,php?url=home/logout" class="btn btn-default">Logout</a>';
           }
