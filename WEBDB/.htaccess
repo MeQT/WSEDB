@@ -1,8 +1,15 @@
-Options -MultiViews
+
 RewriteEngine On
-RewriteBase /WSEDB/WSEDB/WEBDB/public/
+RewriteBase /WSEDB\WSEDB\WEBDB
+#RewriteBase /~projekt2016a/
+
 RewriteCond %{REQUEST_FILENAME} !-d
+
 RewriteCond %{REQUEST_FILENAME} !-f
+
 RewriteCond %{REQUEST_FILENAME} !-l
 
+
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+
