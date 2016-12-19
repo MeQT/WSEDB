@@ -23,17 +23,20 @@ class home extends controller{
             
         }
         public function checkLogin(){
-        
+        session_start();
+        unset($_SESSION['UsernameCheck']);
+        unset($_SESSION['PasswordCheck']);
+        unset($_SESSION['LoginValidation']);
         require_once '../application/models/user.php';
         $returnvalue = false;
         
         $username = filter_input(INPUT_POST,'Username');
         if($username == ""){
-            echo 'Username bitte eingeben';
+            $_SESSION['UsernameCheck'] = 'Username bitte eingeben';
         }
         $password = filter_input(INPUT_POST,'Password');
         if($password == ""){
-            echo 'Password bitte eingeben';
+            $_SESSION['PasswordCheck'] = 'Password bitte eingeben';
         }
         if($password != "" && $username != ""){
             $query = "SELECT * FROM Person WHERE Username ='".$username."' AND Password ='".$password."'";
@@ -42,23 +45,22 @@ class home extends controller{
             if($result->num_rows > 0){
                 $model = new user($username);
                 if($model->isValidated == 1){
-                    session_start();
-                    $_SESSION['Username'] = $model->firstName;
+
                     $_SESSION['User'] = $model;
                     $returnvalue = true;}
                 else{
-                    echo 'Ihr Account ist noch nicht freigegeben';
+                    $_SESSION['LoginValidation'] = 'Ihr Account ist noch nicht freigegeben';
                 }
             }
             else{
-                echo 'Ihr Login scheint falsch zu sein';
+                $_SESSION['LoginValidation'] = 'Ihr Login scheint falsch zu sein';
             }
         }
         return $returnvalue;
         }     
         public function logout(){
             session_start();
-            if(isset($_SESSION['Username'])){
+            if(isset($_SESSION['User'])){
                 session_destroy();
                 $_SESSION = array();
             }

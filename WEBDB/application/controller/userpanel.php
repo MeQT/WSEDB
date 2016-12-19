@@ -1,9 +1,9 @@
 <?php
     class userpanel extends controller{
         public function __construct() {
-            
+            session_start();
         }
-    //<editor-fold defaultstate="collapsed" desc="Navigation">
+    //<editor-fold defaultstate="visibile" desc="Navigation">
         public function index(){
             $this->view('header');
             $this->view('subheader');
