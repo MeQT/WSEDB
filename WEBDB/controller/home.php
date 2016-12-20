@@ -72,7 +72,7 @@ class home extends controller{
             $this->view('footer');
         }
         public function showLogin(){
-            $this->view('/header');
+            $this->view('header');
             $this->view('/home/login');
             $this->view('footer');
         }
