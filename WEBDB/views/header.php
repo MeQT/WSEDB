@@ -13,13 +13,13 @@
           <?php 
           echo "blub";
           if(isset($_SESSION['User'])){
-              echo '<a href="index,php?url=home/logout" class="btn btn-default">Logout</a>';
+              echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
           }
           else{
-              echo '<a href="index,php?url=home/showLogin" class="btn btn-default">Login</a>';
-              echo '<a href="index,php?url=home/showRegister" class="btn btn-default">Registrieren</a>';
+              echo '<a href="index.php?url=home/showLogin" class="btn btn-default">Login</a>';
+              echo '<a href="index.php?url=home/showRegister" class="btn btn-default">Registrieren</a>';
           }?>
-          <a href="index,php?url=help" class="btn btn-default">Hilfe</a> 
+          <a href="index.php?url=help" class="btn btn-default">Hilfe</a> 
       </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
