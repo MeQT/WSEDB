@@ -51,6 +51,6 @@ if(isset($_SESSION['User'])){
   </table>
 </form>
 <div>
-    <a href="index.php?url=home/login" class="button" value="Password vergessen?">Password vergessen?</a>
+    <a href="index.php?url=home/lostpassword" class="button" value="Password vergessen?">Password vergessen?</a>
 </div>
 
