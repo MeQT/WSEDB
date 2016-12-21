@@ -27,7 +27,7 @@ class home extends controller{
         unset($_SESSION['UsernameCheck']);
         unset($_SESSION['PasswordCheck']);
         unset($_SESSION['LoginValidation']);
-        require_once '../application/models/user.php';
+        require_once 'models/user.php';
         $returnvalue = false;
         
         $username = filter_input(INPUT_POST,'Username');
