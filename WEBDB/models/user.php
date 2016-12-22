@@ -12,7 +12,7 @@ class user{
         $this->getData($username);
     }
     private function getData($username){
-        $db = new mysqli('projekt.wi.fh-flensburg.de:3306','projekt2016a','pkn_2404','projekt2016a');
+        $db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         $query = "SELECT * FROM Person WHERE Username = '".$username."'";
         $result = $db->query($query);
         if($result->num_rows > 0){

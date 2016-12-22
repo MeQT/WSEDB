@@ -1,7 +1,7 @@
 
 RewriteEngine On
-RewriteBase /WSEDB\WSEDB\WEBDB
-#RewriteBase /~projekt2016a/
+#RewriteBase /WSEDB\WSEDB\WEBDB
+RewriteBase /~projekt2016a/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 

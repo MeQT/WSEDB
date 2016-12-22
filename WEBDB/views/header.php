@@ -11,7 +11,6 @@
       <div>
           <a href="index.php" class="btn btn-default">Home</a>              
           <?php 
-          echo "blub";
           if(isset($_SESSION['User'])){
               echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
           }
@@ -25,6 +24,3 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
-
