@@ -5,22 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/table.js"></script>
   </head>
-  <body>
-      
+  <body >
       <div>
-          <a href="index.php" class="btn btn-default">Home</a>              
           <?php 
-          if(isset($_SESSION['User'])){
-              echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
-          }
-          else{
-              echo '<a href="index.php?url=home/showLogin" class="btn btn-default">Login</a>';
-              echo '<a href="index.php?url=home/showRegister" class="btn btn-default">Registrieren</a>';
-          }?>
-          <a href="index.php?url=help" class="btn btn-default">Hilfe</a> 
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            require_once 'models/user.php';
+            if(isset($_SESSION['User'])){
+                $user = unserialize($_SESSION['User']);
+                if($user->title == ""){
+                    echo 'Willkommen '.$user->firstName.' '.$user->lastName.'</br>';
+                }
+                else{
+                    echo 'Willkommen '.$user->title.' '.$user->lastName.'</br>';
+                }
+                echo '<a href="index.php?url=nav/questions" class="btn btn-default">Meine Fragen</a>';
+                echo '<a href="index.php?url=nav/questionairies" class="btn btn-default">Meine Fragebögen</a>';
+                echo '<a href="index.php?url=nav/options" class="btn btn-default">Einstellungen</a>';
+                echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Adminpanel</a>';
+                echo '<a href="index.php?url=nav/help" class="btn btn-default"><img src="assets/help_user.png" style="width:24px;height:24px;">Hilfe</a>';
+                echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
+                echo '<br>';
+            }
+            else{
+                echo '<a href="index.php" class="btn btn-default">Home</a>';
+                echo '<a href="index.php?url=nav/login" class="btn btn-default">Login</a>';
+                echo '<a href="index.php?url=nav/registration" class="btn btn-default">Registrieren</a>';
+                echo '<a href="index.php?url=nav/help" class="btn btn-default"><img src="assets/help_user.png" style="width:24px;height:24px;">Hilfe</a>';
+                echo '<br>';
+            }
+            ?>
       </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>

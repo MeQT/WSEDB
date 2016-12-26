@@ -1,4 +1,7 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}   
 if(isset($_SESSION['User'])){
         header("Location: index.php?url=home");
     }
@@ -38,7 +41,7 @@ if(isset($_SESSION['User'])){
       <tr>
           <td></td>
           <td>
-              <input type="submit" class="btn btn-primary" value="einloggen!"/>
+              <input type="submit" class="" value="einloggen!"/>
           </td>
           <td>
               <?php 
@@ -51,6 +54,6 @@ if(isset($_SESSION['User'])){
   </table>
 </form>
 <div>
-    <a href="index.php?url=home/lostpassword" class="button" value="Password vergessen?">Password vergessen?</a>
+    <a href="index.php?url=home/showResetPassword" class="" value="Password vergessen?">Password vergessen?</a>
 </div>
 

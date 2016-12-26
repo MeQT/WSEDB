@@ -1,38 +1,14 @@
 <?php
+    require_once 'nav.php';
     class userpanel extends controller{
+        private $nav;
         public function __construct() {
             session_start();
+            $this->nav = new nav();
         }
     //<editor-fold defaultstate="visibile" desc="Navigation">
         public function index(){
-            $this->view('header');
-            $this->view('subheader');
-            $this->view('/userpanel/index');
-            $this->view('footer');
-        }
-        public function showQuestions(){
-            $this->view('header');
-            $this->view('subheader');
-            $this->view('/userpanel/questions');
-            $this->view('footer');
-        }
-        public function showQuestionairy(){
-            $this->view('header');
-            $this->view('subheader');
-            $this->view('/userpanel/questionairy');
-            $this->view('footer');
-        }
-        public function showAdminpanel(){
-            $this->view('header');
-            $this->view('subheader');
-            $this->view('/userpanel/adminpanel');
-            $this->view('footer');
-        }
-        public function showOptions(){
-            $this->view('header');
-            $this->view('subheader');
-            $this->view('/userpanel/options');
-            $this->view('footer');
+            $this->nav->questions();
         }
 // </editor-fold>
     }

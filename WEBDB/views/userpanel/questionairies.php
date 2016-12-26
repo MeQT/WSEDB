@@ -1,8 +1,13 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<p> 
+  <input type="button" value="Add Passenger" onClick="addRow('dataTable')" /> 
+</p>
+				
+<table id="dataTable" class="">
+<tbody>
+  <tr>
+	<td>
+	<input type="text" name="AnswerText[]">
+	</td>
+  </tr>
+ </tbody>
+</table>
