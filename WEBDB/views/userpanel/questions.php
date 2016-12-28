@@ -1,13 +1,8 @@
+<div class="container">
 <table>
     <tr>
         <td>
             <?php echo '<a href="index.php?url=question/index" class="btn btn-default">Neue Frage erstellen</a>'?>
-        </td>
-        <td>
-            <?php echo '<a href="index.php?url=userpanel/showEditQuestion" class="btn btn-default">Frage bearbeiten</a>'?>
-        </td>
-        <td>
-            <?php echo '<a href="index.php?url=userpanel/showDeleteQuestion" class="btn btn-default">Neue Frage erstellen</a>'?>
         </td>
     </tr>
     <?php 
@@ -18,6 +13,14 @@
             echo filter_var($_SESSION['QuestionAdded']);
         }
         unset($_SESSION['QuestionAdded']);
+        if(isset($_SESSION['DeleteComplete'])){
+            echo filter_var($_SESSION['DeleteComplete']);
+        }
+        unset($_SESSION['DeleteComplete']);
+        if(isset($_SESSION['QuestionEdited'])){
+            echo filter_var($_SESSION['QuestionEdited']);
+        }
+        unset($_SESSION['QuestionEdited']);
     ?>
 </table>
 <?php
@@ -37,6 +40,7 @@ echo '<table class="">';
     </th>';
         require_once 'models/questions.php';
         foreach($data as $entry){
+            $count = 0;
             echo '<tr>';
                 echo '<td>';
                 echo $entry->QuestionID;
@@ -50,6 +54,18 @@ echo '<table class="">';
                 echo '<td>';
                 echo $entry->Time;
                 echo '</td>';
+                echo '<td>';
+                echo '<form action="index.php?url=userpanel/editQuestion" method="POST">';
+                echo '<input type="hidden" name="id_to_edit" value="'.$entry->QuestionID.'"/>';
+                echo '<input type="submit" value="bearbeiten"/>';
+                echo '</form>';
+                echo '</td>';
+                echo '<td>';
+                echo '<form action="index.php?url=userpanel/deleteQuestion" method="POST">';
+                echo '<input type="hidden" name="id_to_delete" value="'.$entry->QuestionID.'"/>';
+                echo '<input type="submit" value="entfernen"/>';
+                echo '</form>';
+                echo '</td>';
             echo '</tr>';
         }
 echo '</table>';
@@ -58,3 +74,4 @@ if($data == -1){
     echo 'Sie haben noch keine Fragen angelegt :(';
 }
 ?>
+</div>

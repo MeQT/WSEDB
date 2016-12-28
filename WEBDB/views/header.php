@@ -8,7 +8,7 @@
     <script type="text/javascript" src="js/table.js"></script>
   </head>
   <body >
-      <div>
+      <div class = "navbar-fixed-top">
           <?php 
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
@@ -26,7 +26,6 @@
                 echo '<a href="index.php?url=nav/questionairies" class="btn btn-default">Meine Fragebögen</a>';
                 echo '<a href="index.php?url=nav/options" class="btn btn-default">Einstellungen</a>';
                 echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Adminpanel</a>';
-                echo '<a href="index.php?url=nav/help" class="btn btn-default"><img src="assets/help_user.png" style="width:24px;height:24px;">Hilfe</a>';
                 echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
                 echo '<br>';
             }
@@ -34,7 +33,6 @@
                 echo '<a href="index.php" class="btn btn-default">Home</a>';
                 echo '<a href="index.php?url=nav/login" class="btn btn-default">Login</a>';
                 echo '<a href="index.php?url=nav/registration" class="btn btn-default">Registrieren</a>';
-                echo '<a href="index.php?url=nav/help" class="btn btn-default"><img src="assets/help_user.png" style="width:24px;height:24px;">Hilfe</a>';
                 echo '<br>';
             }
             ?>

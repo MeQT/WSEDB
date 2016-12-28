@@ -35,6 +35,9 @@
         public function addquestion($data){
             $this->view('/userpanel/addquestion',$data);
         }
+        public function editquestion($model){
+            $this->view('/userpanel/editquestion',$model);
+        }
         public function questionairies(){
             $this->view('/userpanel/questionairies');
         }
@@ -44,7 +47,6 @@
         public function adminpanel(){
             $this->view('/userpanel/adminpanel');
         }
-        
         private function destroySession(){
             session_start();
             session_destroy();

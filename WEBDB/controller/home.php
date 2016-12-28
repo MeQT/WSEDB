@@ -153,10 +153,10 @@ class home extends controller{
             $_SESSION['UsernameCheck'] = 'Username bitte eingeben';
         }
         $password = md5(filter_input(INPUT_POST,'Password'));
-        if($password == ""){
+        if(filter_input(INPUT_POST,'Password') == ""){
             $_SESSION['PasswordCheck'] = 'Password bitte eingeben';
         }
-        if($password != "" && $username != ""){
+        if(filter_input(INPUT_POST,'Password') != "" && $username != ""){
             require_once 'core/database.php';
             $db = new DB();
             if($db->checkLogin($username,$password) == true){

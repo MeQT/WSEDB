@@ -6,54 +6,34 @@ if(isset($_SESSION['User'])){
         header("Location: index.php?url=home");
     }
 ?>
+<div class = container >
+<h2> Bitte Daten eingeben </h2></br>
 <form action="index.php?url=home/login" method="Post">
-  <table>
-      <tr>
-          <td>
-              <p class="text">Username</p>
-          </td>
-          <td>
-              <input type="text" class="" name="Username" value="<?php echo filter_input(INPUT_POST, 'Username')?>">
-          </td>
-          <td>
-              <?php 
+    <div class ="form-group">
+    <label class="control-label" for="Username">Username</label>
+    <input type="text" class="form-control" name="Username" placeholder =" Username" value="<?php echo filter_input(INPUT_POST, 'Username')?>">
+     <?php 
               if(isset($_SESSION['UsernameCheck'])){
                 echo $_SESSION['UsernameCheck'];
               }
               ?>
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <p class="text">Password</p>
-          </td>
-          <td>
-              <input type="password" class="" name="Password" value="<?php echo filter_input(INPUT_POST, 'Password')?>">
-          </td>
-          <td>
-              <?php 
+    </div>
+    <div class ="form-group">
+    <label class="control-label" for="Username">Password</label>
+    <input type="password" class="form-control" name="Password" placeholder =" Password" value="<?php echo filter_input(INPUT_POST, 'Password')?>">
+     <?php 
               if(isset($_SESSION['PasswordCheck'])){
                 echo $_SESSION['PasswordCheck'];
               }
               ?>
-          </td>
-      </tr>
-      <tr>
-          <td></td>
-          <td>
-              <input type="submit" class="" value="einloggen!"/>
-          </td>
-          <td>
+    </div> 
+              <input type="submit" class="btn btn-primary" value="einloggen"/> 
+              <a href="index.php?url=nav/lostpw" class="btn btn-primary">Login zurücksetzen</a>
               <?php 
               if(isset($_SESSION['LoginValidation'])){
                 echo $_SESSION['LoginValidation'];
               }
               ?>
-          </td>
-      </tr>
-  </table>
 </form>
-<div>
-    <a href="index.php?url=home/showResetPassword" class="" value="Password vergessen?">Password vergessen?</a>
 </div>
 

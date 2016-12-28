@@ -1,13 +1,5 @@
-<p> 
-  <input type="button" value="Add Passenger" onClick="addRow('dataTable')" /> 
-</p>
-				
-<table id="dataTable" class="">
-<tbody>
-  <tr>
-	<td>
-	<input type="text" name="AnswerText[]">
-	</td>
-  </tr>
- </tbody>
-</table>
+<div class="container">
+    <h2>Neuen Fragebogen erstellen</h2>
+    <form action="" method="Post" name="Questionairy" >
+    </form>
+</div>
