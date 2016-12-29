@@ -131,7 +131,7 @@ define('DBPASS', 'pkn_2404');
         	if($result ->num_rows >0){
         		$count = 0;
         		while($row = $result->fetch_row()){
-        			$person = new user(row[0]);
+        			$person = new user($row[0]);
         			$person->firstName = $row[1];
         			$person->lastName = $row[2];
         			$person->eMail = $row[3];

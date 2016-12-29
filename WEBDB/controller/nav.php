@@ -49,6 +49,9 @@
         	$db = new DB();
             $this->view('/userpanel/adminpanel',$db->getUsers());
         }
+        public function courses(){
+            $this->view('/userpanel/course');
+        }
         private function destroySession(){
             session_start();
             session_destroy();
