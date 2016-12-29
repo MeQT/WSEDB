@@ -47,7 +47,7 @@ class home extends controller{
                 }    
             }
             else{
-                $_SESSION['EmailCheck'] = "Email not found";
+                $_SESSION['EmailCheck'] = "E-Mail-Adresse nicht gefunden";
                 $this->nav->lostpw();
                 //$this->view('/home/lostpassword');
             }
@@ -74,37 +74,37 @@ class home extends controller{
             unset($_SESSION['PasswordPairCheck']);
             // 
             if(filter_input(INPUT_POST,'FirstName') == ""){
-                $_SESSION['FirstNameCheck'] = 'Vornamen bitte eingeben';
+                $_SESSION['FirstNameCheck'] = 'Bitte Vornamen eingeben';
                 $registrationValid = false;
             }
             if(filter_input(INPUT_POST,'LastName') == ""){
-                $_SESSION['LastNameCheck'] = 'Nachname bitte eingeben';
+                $_SESSION['LastNameCheck'] = 'Bitte Nachnamen eingeben';
                 $registrationValid = false;
             }
             if(filter_input(INPUT_POST,'Password') == ""){
-                $_SESSION['PasswordCheck'] = 'Password bitte eingeben';
+                $_SESSION['PasswordCheck'] = 'Bitte Passwort eingeben';
                 $registrationValid = false;
             }
             if(filter_input(INPUT_POST,'RepeatPassword') == ""){
-                $_SESSION['RepeatPasswordCheck'] = 'Password erneut eingeben';
+                $_SESSION['RepeatPasswordCheck'] = 'Bitte Passwort erneut eingeben';
                 $registrationValid = false;
             }
             if(!filter_var(filter_input(INPUT_POST, 'Email'),FILTER_VALIDATE_EMAIL)){
-                $_SESSION['EmailCheck'] = "Email bitte eingeben";
+                $_SESSION['EmailCheck'] = "Bitte E-Mail-Adresse eingeben";
                 $registrationValid = false;
             }
             if(!filter_var(filter_input(INPUT_POST, 'RepeatEmail'),FILTER_VALIDATE_EMAIL)){
-                $_SESSION['RepeatEmailCheck'] = "Email bitte wiederholen";
+                $_SESSION['RepeatEmailCheck'] = "Bitte E-Mail-Adresse wiederholen";
                 $registrationValid = false;
             }
             if($registrationValid == TRUE){
                 if (filter_input(INPUT_POST, 'Email') != filter_input(INPUT_POST, 'RepeatEmail')){
                     $registrationValid = false;
-                    $_SESSION['EmailPairCheck'] = "Email stimmen nicht überein";
+                    $_SESSION['EmailPairCheck'] = "E-Mail-Adressen stimmen nicht überein!";
                 }
                 if (filter_input(INPUT_POST, 'Password') != filter_input(INPUT_POST, 'RepeatPassword')){
                     $registrationValid = false;
-                    $_SESSION['PasswordPairCheck'] = "Passwörter stimmen nicht überein";
+                    $_SESSION['PasswordPairCheck'] = "Passwörter stimmen nicht überein!";
                 }
             }
             if($registrationValid == false){
@@ -150,11 +150,11 @@ class home extends controller{
         
         $username = filter_input(INPUT_POST,'Username');
         if($username == ""){
-            $_SESSION['UsernameCheck'] = 'Username bitte eingeben';
+            $_SESSION['UsernameCheck'] = 'Bitte Benutzernamen eingeben';
         }
         $password = md5(filter_input(INPUT_POST,'Password'));
         if(filter_input(INPUT_POST,'Password') == ""){
-            $_SESSION['PasswordCheck'] = 'Password bitte eingeben';
+            $_SESSION['PasswordCheck'] = 'Bitte Passwort eingeben';
         }
         if(filter_input(INPUT_POST,'Password') != "" && $username != ""){
             require_once 'core/database.php';
@@ -165,11 +165,11 @@ class home extends controller{
                     $_SESSION['User'] = serialize($model);
                     $returnvalue = true;}
                 else{
-                    $_SESSION['LoginValidation'] = 'Ihr Account ist noch nicht freigegeben';
+                    $_SESSION['LoginValidation'] = 'Ihr Account ist noch nicht freigegeben!';
                 }
             }
             else{
-                $_SESSION['LoginValidation'] = 'Ihr Login scheint falsch zu sein';
+                $_SESSION['LoginValidation'] = 'Ihre Login-Daten sind inkorrekt!';
             }
             $db->close();
         }
