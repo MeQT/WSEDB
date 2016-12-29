@@ -52,6 +52,9 @@
         public function courses(){
             $this->view('/userpanel/course');
         }
+        public function addquestionairy(){
+            $this->view('/userpanel/addquestionairy');
+        }
         private function destroySession(){
             session_start();
             session_destroy();
