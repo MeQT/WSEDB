@@ -12,6 +12,7 @@ function addRows(tableid){
     var cell1 = row.insertCell(1);
     var element1 = document.createElement("input");
     element1.type = "text";
+    element1.className = "form-control";
     element1.name = "AnswerText"+ (rowCount - elementsAbove +1);
     cell1.appendChild(element1);
     
@@ -23,5 +24,11 @@ function addRows(tableid){
 }
 function hello(){
     window.alert("hi");
+}
+
+function deleteRow(rowid)  
+{   
+    var row = document.getElementById(rowid);
+    row.parentNode.removeChild(row);
 }
 document.onload = addRows('dataTable');

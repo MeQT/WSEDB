@@ -3,12 +3,10 @@ require_once 'models/answerModel.php';
 require_once 'models/answers.php';
 require_once 'models/questions.php';
 $answerModel = unserialize($data);
-print_r($answerModel->Question);
 ?>
 <div class="container">
-<form action="index.php?url=question/saveEditedQuestion" method="Post" class="">
+<form action="index.php?url=question/saveQuestion" method="Post" class="">
     <table class="table" id="editTable">
-
         <tr>
             <td>
                 Ihre Frage:
@@ -119,7 +117,7 @@ print_r($answerModel->Question);
                 if (isset($answerModel->Answers[$i - 1]->Text)) {
                     $valueText = $answerModel->Answers[$i - 1]->Text;
                 }
-                echo '<tr>';
+                echo '<tr id="'.$i.'">';
                 echo '<td>';
                 echo '<label for"Antwort" class="">Antwort '.$i.'</label>';
                 echo '</td>';
@@ -133,6 +131,9 @@ print_r($answerModel->Question);
                     echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '"/>';
                 }
                 echo '</td>';
+                echo '<td>';
+                echo '<input type="button" class="" onclick="deleteRow('.$i.')" value="entfernen"/>';
+                echo '</td>';
                 echo '</tr>';
             }
             ?>
@@ -143,7 +144,8 @@ print_r($answerModel->Question);
       echo '<input type="hidden" name ="QuestionID" value="'.$answerModel->Question->QuestionID.'"/>'; 
       }
     ?>
-    <input class="" onclick="addRows('editTable')" value="Möglichkeit hinzufügen"/>
+    <input type="hidden" name="QuestionID" value="<?php echo $answerModel->Question->QuestionID ?>"/>
+    <input type="button" onclick="addRows('editTable')" value="Möglichkeit hinzufügen"/>
     <input type="submit" class="" value="Speichern"/>
 </form>
         <?php

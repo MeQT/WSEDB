@@ -3,8 +3,6 @@ define('DBHOST', 'projekt.wi.fh-flensburg.de');
 define('DBNAME', 'projekt2016a');
 define('DBUSER', 'projekt2016a');
 define('DBPASS', 'pkn_2404');
-
-
     class DB{
         private $db;
         public function __construct() {
@@ -148,44 +146,6 @@ define('DBPASS', 'pkn_2404');
             else{
                 return false;
             }
-        }
-        public function editQuestion($question){
-            //questionmodel - speichern;
-            require_once 'models/questions.php';
-            $query = "UPDATE Question SET "
-                     ."Text = '".$question->Text."', "
-                     ."SelectionType = '".$question->SelectionType."', "
-                     ."Time = '".$question->Time."'"
-                     ." WHERE QuestionID = ".$question->QuestionID;
-            if($this->db->query($query) == TRUE){
-                return TRUE;
-            }
-            else{
-                return FALSE;
-            }             
-        }
-        public function editAnswer($answer){
-            if(!isset($answer->AnswerID)){
-                $this->saveAnswer($answer);
-            }else{
-                //answermodel - speichern;
-                $rightorwrong = 0;
-                if($answer->IsRight == TRUE){
-                    $rightorwrong = 1;
-                }
-                require_once 'models/answers.php';
-                $query = "UPDATE Answer SET "
-                         ."Text = '".$answer->Text."', "
-                         ."IsRight = ".$rightorwrong
-                         ." WHERE AnswerID = ".$answer->AnswerID;
-                if($this->db->query($query) == TRUE){
-                    return TRUE;
-                }
-                else{
-                    return FALSE;
-                } 
-            }
-
         }
         public function saveAnswer($answer){
             require_once 'models/answers.php';

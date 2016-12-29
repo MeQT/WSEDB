@@ -6,7 +6,7 @@ if(isset($_SESSION['User'])){
         header("Location: index.php?url=home");
     }
 ?>
-<div class = container >
+<div class ="container" >
 <h3> Bitte geben Sie hier Ihre Daten ein </h3></br>
 <form action="index.php?url=home/login" method="Post">
     <div class ="form-group">
