@@ -7,6 +7,7 @@ class user{
     public $userName;
     public $eMail;
     public $isValidated = 0;
+    public $isAdmin;
     
     public function __construct($username) {
         $this->getData($username);

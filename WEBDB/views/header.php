@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="js/table.js"></script>
-  </head>
-  <body >
-      <div class = "navbar-fixed-top">
-          <?php 
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
+</head>
+<body >
+<div class = "navbar-fixed-top">
+<?php   
+		if (session_status() == PHP_SESSION_NONE) {          	
+          	@session_start();          	
+          }
             require_once 'models/user.php';
             if(isset($_SESSION['User'])){
                 $user = unserialize($_SESSION['User']);

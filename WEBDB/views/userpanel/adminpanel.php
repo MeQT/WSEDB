@@ -1,4 +1,3 @@
-
 <?php 
 if (!empty($data) && $data != -1)
 {	
@@ -20,16 +19,31 @@ if (!empty($data) && $data != -1)
 		echo '<td  class="col-md-3">'.$entry->eMail.'</td>';
 		echo '<form action="index.php?url=home/validateUser" method="Post">';
 		echo '<input type = "hidden" name="email" value ="'.$entry->eMail.'">';
-		if ($entry->isValidated == true){
-			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert"/></td>';
-		}	
+		if ($entry->isAdmin == 0){
+			if ($entry->isValidated == true){
+				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert"/></td>';
+			}
+			else{
+				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren "/></td>';
+			}
+		}
 		else{
-			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren "/></td>';
+			if ($entry->isValidated == true){
+				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert" disabled="No"/></td>';
+			}
+			else{
+				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren" disabled="No"/></td>';
+			}
 		}
 		echo '</form>';
 		echo '<form action="index.php?url=home/deleteUser" method="Post">';
 		echo '<input type = "hidden" name="email" value ="'.$entry->eMail.'">';
-		echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+		if ($entry->isAdmin == 0){
+			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+		}
+		else{
+			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';
+		}
 		echo '</form>';
 		echo "</tr>";		
 	}
