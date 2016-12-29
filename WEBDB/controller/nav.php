@@ -45,7 +45,9 @@
             $this->view('/userpanel/options');
         }
         public function adminpanel(){
-            $this->view('/userpanel/adminpanel');
+        	require_once 'core/database.php';
+        	$db = new DB();
+            $this->view('/userpanel/adminpanel',$db->getUsers());
         }
         private function destroySession(){
             session_start();

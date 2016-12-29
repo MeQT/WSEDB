@@ -11,7 +11,7 @@ if(isset($_SESSION['User'])){
     <h3> Bitte geben Sie hier den Quiz-Code ein</h3></br>
     <div class ="form-group">
     <label for="Quiznummer">Quiznummer</label>
-    <input type="text" class="form-control" name="Quiznummer" placeholder ="Quiznummer"
+    <input type="text" class="form-control" name="Quiznummer" placeholder ="Quiznummer">
     </div> 
     <br>
     <input type="submit" class="btn btn-primary" value="Quiz starten"> </br>

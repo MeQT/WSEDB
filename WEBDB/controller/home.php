@@ -134,7 +134,7 @@ class home extends controller{
                     $this-view('/home/registration');
                 }
         }
-    }
+    }               
         private function destroySession(){
             session_start();
             session_destroy();
@@ -174,5 +174,31 @@ class home extends controller{
             $db->close();
         }
         return $returnvalue;
-        }     
+        } 
+        public function deleteUser(){
+        	if (isset($_POST['email'])){
+        		require_once 'core/database.php';
+        		$db = new DB();
+        		$db->deleteUser($_POST['email']);
+        		
+        		$this->nav->adminpanel();
+        	}
+        	else{
+        		$db->close();
+        		$this->nav->adminpanel();
+        	}
+        }
+        public function validateUser(){
+        	if (isset($_POST['email'])){
+        		require_once 'core/database.php';
+        		$db = new DB();
+        		$db->validateUser($_POST['email']);
+        		
+        		$this->nav->adminpanel();
+        	}
+        	else{
+        		$db->close();
+        		$this->nav->adminpanel();
+        	}
+        }
 }
