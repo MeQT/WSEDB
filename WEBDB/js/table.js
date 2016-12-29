@@ -4,18 +4,10 @@ function addRows(tableid){
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     
-//    var cell1 = row.insertCell(0);
-//    var element1 = document.createElement("input");
-//    element1.type = "checkbox";
-//    element1.name="chkbox[]";
-//    cell1.appendChild(element1);
-
-
     var cell0 = row.insertCell(0);
     var element0 = document.createElement("Label");
     element0.innerHTML = "Antwort " + (rowCount - elementsAbove +1);
     cell0.appendChild(element0);
-
 
     var cell1 = row.insertCell(1);
     var element1 = document.createElement("input");

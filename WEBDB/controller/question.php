@@ -170,19 +170,35 @@
             for($i = 1; $isthere == true; $i++){
                 if(isset($_POST['AnswerText'.$i])){
                     if(filter_input(INPUT_POST,'AnswerText'.$i) != ""){
-                        $model->Answers[$i -1]->Text = filter_input(INPUT_POST,'AnswerText'.$i);
-                        if(isset($_POST['RightOrWrong'.$i])){
-                            $model->Answers[$i -1]->IsRight = true;
-                            $isThereARightAnswer = true;
+                        if(isset($model->Answers[$i-1])){                    
+                            $model->Answers[$i -1]->Text = filter_input(INPUT_POST,'AnswerText'.$i);
+                            if(isset($_POST['RightOrWrong'.$i])){
+                                $model->Answers[$i -1]->IsRight = true;
+                                $isThereARightAnswer = true;
+                            }
+                            else{
+                                $model->Answers[$i -1]->IsRight = false;
+                            } 
                         }
                         else{
-                            $model->Answers[$i -1]->IsRight = false;
-                        } 
+                            $answer = new answers();
+                            $answer->Text = filter_input(INPUT_POST,'AnswerText'.$i);
+                            $answer->Question = $model->Question->QuestionID;
+                            $answer->Author = $model->Question->Author;
+                            if(isset($_POST['RightOrWrong'.$i])){
+                                $answer->IsRight = true;
+                                $isThereARightAnswer = true;
+                            }
+                            else{
+                                $answer->IsRight = false;
+                            } 
+                            $model->Answers[$i -1] = $answer;
+                        }
                     }
                     else{
                         $model->Answers[$i -1]->Text = "";
                         $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben";
-                        $validation = false;
+                        //$validation = false;
                     }
                 }
                 else{

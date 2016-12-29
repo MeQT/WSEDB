@@ -63,7 +63,7 @@ define('DBPASS', 'pkn_2404');
         }
         public function getQuestion($questionID){
             require_once 'models/questions.php';
-            $query = "SELECT QuestionID, Text, SelectionType, Time FROM Question WHERE QuestionID =".$questionID;
+            $query = "SELECT QuestionID, Text, SelectionType, Time, Author FROM Question WHERE QuestionID =".$questionID;
             $result = $this->db->query($query);
             $question = new questions();
             if($result->num_rows >0){
@@ -72,11 +72,13 @@ define('DBPASS', 'pkn_2404');
                     $question->Text = $row['Text'];
                     $question->SelectionType = $row['SelectionType'];
                     $question->Time = $row['Time'];
+                    $question->Author = $row['Author'];
                 }
                 return $question;
             }
             else{
-                return -1;
+                echo $query;
+                //return -1;
             }           
         }
         public function getAnswers($questionID){
@@ -163,22 +165,27 @@ define('DBPASS', 'pkn_2404');
             }             
         }
         public function editAnswer($answer){
-            //answermodel - speichern;
-            $rightorwrong = 0;
-            if($answer->IsRight == TRUE){
-                $rightorwrong = 1;
+            if(!isset($answer->AnswerID)){
+                $this->saveAnswer($answer);
+            }else{
+                //answermodel - speichern;
+                $rightorwrong = 0;
+                if($answer->IsRight == TRUE){
+                    $rightorwrong = 1;
+                }
+                require_once 'models/answers.php';
+                $query = "UPDATE Answer SET "
+                         ."Text = '".$answer->Text."', "
+                         ."IsRight = ".$rightorwrong
+                         ." WHERE AnswerID = ".$answer->AnswerID;
+                if($this->db->query($query) == TRUE){
+                    return TRUE;
+                }
+                else{
+                    return FALSE;
+                } 
             }
-            require_once 'models/answers.php';
-            $query = "UPDATE Answer SET "
-                     ."Text = '".$answer->Text."', "
-                     ."IsRight = ".$rightorwrong
-                     ." WHERE AnswerID = ".$answer->AnswerID;
-            if($this->db->query($query) == TRUE){
-                return TRUE;
-            }
-            else{
-                return FALSE;
-            }
+
         }
         public function saveAnswer($answer){
             require_once 'models/answers.php';
