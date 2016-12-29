@@ -18,7 +18,11 @@
                 Ihre Frage:
             </td>
             <td>
-                <input type="text" class="" name="QuestionText"/>
+                <input type="text" class="" name="QuestionText" 
+                       value="<?php
+                        if(isset($_POST['QuestionText'])){
+                            echo $_POST['QuestionText'];
+                        }  ?>"/>
             </td>
             <td>
                 <?php 
@@ -35,15 +39,25 @@
         </tr>
             <?php
             for ($i = 1; $i <= $data->Count;$i++){
+                $valueText = "";
+                if(isset($_POST['AnswerText'.$i])){
+                    $string = 'AnswerText'.$i;
+                    $valueText = filter_input(INPUT_POST,$string);
+                }
                 echo '<tr>';
                 echo '<td>';
                 echo $i.".";
                 echo '</td>';
                 echo '<td>';
-                echo '<input type="text" class="" name="AnswerText'.$i.'"/>';
+                echo '<input type="text" class="" name="AnswerText'.$i.'" value="'.$valueText.'"/>';
                 echo '</td>';
                 echo '<td>';
-                echo '<input type="checkbox" class="" name="RightOrWrong'.$i.'"/>';
+                if(isset($_POST['RightOrWrong'.$i])){
+                    echo '<input type="checkbox" class="" name="RightOrWrong'.$i.'" checked="checked"/>';
+                }
+                else{
+                    echo '<input type="checkbox" class="" name="RightOrWrong'.$i.'"/>';
+                }
                 echo '</td>';
                 echo '</tr>';                
             }
@@ -78,6 +92,9 @@
         <option value="300">5 Minuten</option>
     </select>
     <?php 
+        if(isset($_SESSION['RightAnswerMissing'])){
+            echo $_SESSION['RightAnswerMissing'];
+        }
         if(isset($_SESSION['TimeMissing'])){
             echo $_SESSION['TimeMissing'];
         }

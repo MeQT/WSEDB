@@ -1584,10 +1584,14 @@ pre code {
   overflow-y: scroll;
 }
 .container {
+  background-color: #fff;
+  padding-top: 75px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-bottom: 75px;
   margin-right: auto;
   margin-left: auto;
+  height: auto;
 }
 @media (min-width: 400px) {
   .container {
@@ -4266,10 +4270,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-fixed-top {
+  background-color: #887ab7;
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
   top: 0;
   border-width: 0 0 1px;
 }
 .navbar-fixed-bottom {
+  background-color: #887ab7;
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
   bottom: 0;
   margin-bottom: 0;
   border-width: 1px 0 0;
@@ -6758,3 +6770,35 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.fussbereich 
+{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: yellow;
+    height: 2em;
+}
+.textmitabstand
+{
+    padding-right: 15px;
+}
+.containernebeneinanderlinks {
+  float: left;
+  width: auto;
+  background-color: #fff;
+  padding-top: 75px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.containernebeneinanderrechts {
+  float: left;
+  width: auto;
+  background-color: #fff;
+  padding-top: 75px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}

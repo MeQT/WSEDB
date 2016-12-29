@@ -6,6 +6,7 @@ if(isset($_SESSION['User'])){
         header("Location: index.php?url=home");
     }
 ?>
+<div class="container">
 <form method="POST" action="index.php?url=home/resetLogin">
     <?php 
         if(isset($_SESSION['PasswordChanged'])){
@@ -24,3 +25,4 @@ if(isset($_SESSION['User'])){
         </tr>
     </table>
 </form>
+</div>
