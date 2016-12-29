@@ -109,7 +109,7 @@
                 $this->nav->questions();
             }
             else{
-                $this->nav->addquestion($this->answerModel);
+                $this->nav->addq($this->answerModel);
             }
         }
         public function saveEditedQuestion(){

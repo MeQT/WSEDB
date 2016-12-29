@@ -8,10 +8,10 @@ if(isset($_SESSION['User'])){
 ?>
 <div class = container >
 <form action="index.php" method="Post">   
-    <h2> Bitte Quiz-Code eingeben </h2></br>
+    <h3> Bitte geben Sie hier den Quiz-Code ein</h3></br>
     <div class ="form-group">
     <label for="Quiznummer">Quiznummer</label>
-    <input type="text" class="form-control" name="Quiznummer" placeholder =" Quiznummer"
+    <input type="text" class="form-control" name="Quiznummer" placeholder ="Quiznummer"
     </div> 
     <br>
     <input type="submit" class="btn btn-primary" value="Quiz starten"> </br>

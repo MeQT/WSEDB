@@ -35,7 +35,7 @@
         public function addquestion($data){
             $this->view('/userpanel/addquestion',$data);
         }
-        public function addq(){
+        public function addq($data){
             $this->view('/userpanel/_addquestion');
         }
         public function editquestion($model){
