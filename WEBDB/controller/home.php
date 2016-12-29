@@ -180,6 +180,25 @@ class home extends controller{
         		require_once 'core/database.php';
         		$db = new DB();
         		$db->deleteUser($_POST['email']);
+        		
+        		$this->nav->adminpanel();
+        	}
+        	else{
+        		$db->close();
+        		$this->nav->adminpanel();
+        	}
+        }
+        public function validateUser(){
+        	if (isset($_POST['email'])){
+        		require_once 'core/database.php';
+        		$db = new DB();
+        		$db->validateUser($_POST['email']);
+        		
+        		$this->nav->adminpanel();
+        	}
+        	else{
+        		$db->close();
+        		$this->nav->adminpanel();
         	}
         }
 }

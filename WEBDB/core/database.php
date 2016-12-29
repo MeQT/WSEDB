@@ -151,6 +151,11 @@ define('DBPASS', 'pkn_2404');
         }
         public function deleteUser($email){
         	$query = "DELETE FROM Person WHERE Email='$email'";
+        	$resultSet = mysqli_query($this->db, $query);        	
+        }
+        
+        public function validateUser($email){
+        	$query = "UPDATE Person SET IsValidated =IF(IsValidated=1,0,1) WHERE Email='$email'";
         	$resultSet = mysqli_query($this->db, $query);
         }
         public function saveQuestion($question){

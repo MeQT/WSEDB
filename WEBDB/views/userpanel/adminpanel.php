@@ -1,4 +1,4 @@
-<form action="index.php?url=home/deleteUser" method="Post">
+
 <?php 
 if (!empty($data) && $data != -1)
 {	
@@ -17,19 +17,25 @@ if (!empty($data) && $data != -1)
 	{
 		echo "<tr>";		
 		echo '<td  class="col-md-3">'.$entry->firstName." ".$entry->lastName.'</td>';
-		echo '<td  class="col-md-3"><input type = "hidden" name="email" value ="'.$entry->eMail.'">'.$entry->eMail.'</td>';
+		echo '<td  class="col-md-3">'.$entry->eMail.'</td>';
+		echo '<form action="index.php?url=home/validateUser" method="Post">';
+		echo '<input type = "hidden" name="email" value ="'.$entry->eMail.'">';
 		if ($entry->isValidated == true){
-			echo '<td align = center><input type="checkbox" checked></td>';
+			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert"/></td>';
 		}	
 		else{
-			echo '<td align = center><input type="checkbox"></td>';
+			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren "/></td>';
 		}
+		echo '</form>';
+		echo '<form action="index.php?url=home/deleteUser" method="Post">';
+		echo '<input type = "hidden" name="email" value ="'.$entry->eMail.'">';
 		echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+		echo '</form>';
 		echo "</tr>";		
 	}
 	echo "</table>\n";
         echo '</div>';
 }
 ?>
-</form>
+
 
