@@ -15,13 +15,13 @@ if(isset($_SESSION['User'])){
     ?>
     <table>
         <tr>
-            <td>Email-Adresse</td>
+            <td>E-Mail-Adresse</td>
             <td><input type="text" name="Email"></td>
             <td><?php if(isset($_SESSION['EmailCheck'])){echo $_SESSION['EmailCheck'];}?></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Password zurücksetzen"></td>
+            <td><input type="submit" value="Passwort zurücksetzen"></td>
         </tr>
     </table>
 </form>
