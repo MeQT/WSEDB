@@ -6,7 +6,6 @@ require_once 'core/database.php';
         private $db;
         public $Question;
         public $Answers = array();
-        public $Count = 3;
         public function __construct() {
             $this->Question = new questions();
         }
