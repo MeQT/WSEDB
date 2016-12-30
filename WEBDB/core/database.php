@@ -198,7 +198,60 @@ define('DBPASS', 'pkn_2404');
             }
         }    
         public function getQuestionairy($questionairyid){
-            
+            require_once 'models/questionairy.php';
+            $query = "SELECT QuestionairyID, Author, Title, Description, DateOfCreation FROM Questionairy WHERE QuestionairyID = ".$questionairyid;
+            $result = $this->db->query($query);
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $questionairy = new questionairy();
+                    $questionairy->QuestionairyID = $row['QuestionairyID'];
+                    $questionairy->Author = $row['Author'];
+                    $questionairy->Title = $row['Title'];
+                    $questionairy->Description = $row['Description'];
+                    $questionairy->DateOfCreation = $row['DateOfCreation'];
+                }
+                return $questionairy;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getQuestionairyQuestion($id){
+            require_once 'models/questionairy.php';
+            require_once 'models/questions.php';
+            $query = "SELECT Question FROM QuestionairyQuestions WHERE Questionairy = ".$id;
+            $result = $this->db->query($query);
+            $output = array();
+            $count = 0;
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $output[$count++] = $this->getQuestion($row['Question']);
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getOutQuestionairyQuestion($QuestionairyID, $authorID){
+            require_once 'models/questionairy.php';
+            require_once 'models/questions.php';
+            $query = "SELECT QuestionID FROM Question WHERE Question.Author =".$authorID." AND Question.QuestionID NOT IN (
+                SELECT Question
+                from QuestionairyQuestions
+                WHERE Questionairy = ".$QuestionairyID.")";
+            $result = $this->db->query($query);
+            $output = array();
+            $count = 0;
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $output[$count++] = $this->getQuestion($row['QuestionID']);
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
         }
         public function deleteQuestionairy($questionairyid){
             $query = "DELETE FROM Questionairy WHERE QuestionairyID = ".$questionairyid;
@@ -227,7 +280,7 @@ define('DBPASS', 'pkn_2404');
                 return $output;
             }
             else{
-                return $query;
+                return -1;
             }
         }
         public function saveQuestionaire($data){

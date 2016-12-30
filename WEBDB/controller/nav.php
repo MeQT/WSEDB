@@ -39,7 +39,19 @@
             $this->view('/userpanel/editquestion',$model);
         }
         public function questionairies(){
-            $this->view('/userpanel/questionairies');
+            require_once 'core/database.php';
+            require_once 'models/user.php';
+            if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+            if(isset($_SESSION['User'])){
+                $user = unserialize($_SESSION['User']);
+                $db = new DB();
+                $this->view('/userpanel/questionairies',$db->getQuestionairies($user->id));
+            }
+            else{
+                $this->view('/userpanel/questionairies');
+            }            
         }
         public function options(){
             $this->view('/userpanel/options');
