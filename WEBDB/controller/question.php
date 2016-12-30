@@ -2,7 +2,6 @@
     require_once 'nav.php';
     require_once 'models/answerModel.php';
     class question extends controller{
-        private $questionModel;
         private $answerModel;
         private $nav;
         public function __construct() {
@@ -91,7 +90,7 @@
                     $answer = new answers();
                 }
                 else{
-                    if($i <=3){
+                    if($i <=1){
                         $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben";
                     }
                     $isthere = false;

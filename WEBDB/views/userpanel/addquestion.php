@@ -1,11 +1,9 @@
-<?php 
-?>
 <script type="text/javascript">
 window.addEventListener("load", function(){
     for(var i = 0; i <2; i++){
         addRows('dataTable');
     }
-});;
+});
 </script>
 <div class="container">
     <?php 

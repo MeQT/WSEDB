@@ -21,6 +21,7 @@
             echo filter_var($_SESSION['QuestionEdited']);
         }
         unset($_SESSION['QuestionEdited']);
+
     ?>
 </table>
 <?php
