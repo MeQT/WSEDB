@@ -7,29 +7,29 @@
             $this->nav = new nav();
         }
 	public function deleteUser(){
-		if (isset($_POST['personID'])){
-			require_once 'core/database.php';
-			$db = new DB();
-			$db->deleteUser($_POST['personID']);
 
-			$this->nav->adminpanel();
+		unset($_SESSION['DeleteUser']);
+		require_once 'core/database.php';
+		$db = new DB();		
+		if (isset($_POST['personID'])){			
+			if ($db->deleteUser($_POST['personID']) == TRUE){
+				$_SESSION['DeleteUser'] = 'User erfolgreich gelöscht.';
+			}
 		}
-		else{
-			$db->close();
-			$this->nav->adminpanel();
-		}
+		$this->nav->adminpanel();		
 	}
 	public function validateUser(){
-		if (isset($_POST['personID'])){
-			require_once 'core/database.php';
-			$db = new DB();
-			$db->validateUser($_POST['personID']);
-
-			$this->nav->adminpanel();
+		unset($_SESSION['ValidateUser']);		
+		require_once 'core/database.php';
+		$db = new DB();
+		if (isset($_POST['personID'])){			
+			if ($db->validateUser($_POST['personID']) == 0){
+				$_SESSION['ValidateUser'] = "User erfolgreich gesperrt.";				
+			}
+			else {
+				$_SESSION['ValidateUser'] = "User erfolgreich zugelassen.";
+			}
 		}
-		else{
-			$db->close();
-			$this->nav->adminpanel();
-		}
+		$this->nav->adminpanel();
 	}
 }
