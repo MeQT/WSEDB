@@ -197,5 +197,33 @@ define('DBPASS', 'pkn_2404');
             else{
                 return -1;
             }
-        }       
+        }    
+        public function saveQuestionaire($data){
+            require_once 'models/questionairy.php';
+            $query = "INSERT INTO Questionairy (Author,Title,Description)"
+            ."VALUES("        
+            .$data->Author."','"
+            .$data->Title."','"
+            .$data->Description
+             ."')";
+            if($this->db->query($query) == TRUE){
+                return $this->db->insert_id;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function saveQuestionairyQuestion($questionairyID, $questionID){
+            $query ="INSERT INTO QuestionairyQuestions (Questionairy,Question) "
+                    ."VALUES("
+                    .$questionairyID.", "
+                    .$questionID
+                    .")";
+            if($this->db->query($query) == TRUE){
+                return TRUE;
+            }
+            else{
+                return -1;
+            }
+        }
     }

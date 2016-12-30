@@ -145,7 +145,7 @@ $answerModel = unserialize($data);
       }
     ?>
     <input type="hidden" name="QuestionID" value="<?php echo $answerModel->Question->QuestionID ?>"/>
-    <input type="button" onclick="addRows('editTable')" value="Möglichkeit hinzufügen"/>
+    <input type="button" onclick="addRowsWithButton('editTable')" value="Möglichkeit hinzufügen"/>
     <input type="submit" class="" value="Speichern"/>
 </form>
         <?php

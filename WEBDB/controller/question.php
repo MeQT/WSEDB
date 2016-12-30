@@ -1,13 +1,11 @@
 <?php
     require_once 'nav.php';
     require_once 'models/answerModel.php';
-    require_once 'models/questionModel.php';
     class question extends controller{
         private $questionModel;
         private $answerModel;
         private $nav;
         public function __construct() {
-            $this->questionModel = new questionModel();
             $this->answerModel = new answerModel();
             $this->nav = new nav();
         }

@@ -53,7 +53,19 @@
             $this->view('/userpanel/course');
         }
         public function addquestionairy(){
-            $this->view('/userpanel/addquestionairy');
+            require_once 'core/database.php';
+            require_once 'models/user.php';
+            if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+            if(isset($_SESSION['User'])){
+                $user = unserialize($_SESSION['User']);
+                $db = new DB();
+                $this->view('/userpanel/addquestionairy',$db->getQuestions($user->id));
+            }
+            else{
+                $this->view('/userpanel/addquestionairy');
+            }
         }
         private function destroySession(){
             session_start();

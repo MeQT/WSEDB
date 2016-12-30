@@ -1,4 +1,9 @@
 <div class="container">
+        <?php 
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }  
+        ?>
     <h2>Neuen Fragebogen erstellen</h2>
     <a href="index.php?url=nav/addquestionairy" class="btn btn-default">Neu anlegen</a>
     <table class="table">
