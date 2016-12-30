@@ -79,6 +79,9 @@
                 $this->view('/userpanel/addquestionairy');
             }
         }
+        public function addCourse(){
+            $this->view('/userpanel/addCourse');
+        }
         private function destroySession(){
             session_start();
             session_destroy();

@@ -20,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Waschlappen</a>
+      <a class="navbar-brand" href="#">Wasch-<br>Lappen</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,28 +35,24 @@
                 $user = unserialize($_SESSION['User']);
                 if($user->title == ""){
                     
-                    echo"<font color='000'><b>Eingeloggt als $user->firstName $user->lastName</br></b></font>";
+                    echo"<font color='585858'>Eingeloggt als $user->firstName $user->lastName</br></font>";
                 }
                 else{
                     echo 'Willkommen '.$user->title.' '.$user->lastName.'</br>';
                 }
-                echo '<a href="index.php?url=nav/questions" class="btn btn-default">Meine Fragen</a>';
-                echo '<a href="index.php?url=nav/questionairies" class="btn btn-default">Meine Fragebögen</a>';
-                echo '<a href="index.php?url=nav/courses" class="btn btn-default">Meine Kurse</a>';
-                echo '<a href="index.php?url=nav/options" class="btn btn-default">Einstellungen</a>';
-                echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Administration</a>';
-                echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
-                echo '<br>';
+                //buttons die eingeloggter sieht;
+                echo '<li class="active"><a href="index.php?url=nav/questions">Meine Fragen<span class="sr-only">(current)</span></a></li>';
+                echo '<li><a href="index.php?url=nav/questionairies">Meine Fragebögen</a></li>';
+                echo '<li class="active"><a href="index.php?url=nav/courses">Meine Kurse<span class="sr-only">(current)</span></a></li>';
+                echo '<li><a href="index.php?url=nav/options">Einstellungen</a></li>';
+                echo '<li class="active"><a href="index.php?url=nav/adminpanel">Adminpanel<span class="sr-only">(current)</span></a></li>';
+                echo '<li><a href="index.php?url=home/logout">Logout</a></li>';
             }
             else{
                  echo '<li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>';
                  echo '<li><a href="index.php?url=nav/registration">Registrieren</a></li>';
-                 echo '<li class="active"><a href="index.php?url=nav/login">Login<span class="sr-only">(current)</span></a></li>';
-               
-            }    
-                
-            
-            
+                 echo '<li class="active"><a href="index.php?url=nav/login">Login<span class="sr-only">(current)</span></a></li>';               
+            }               
             ?>   
        <ul class="nav navbar-nav navbar-right">
          <li class="dropdown">

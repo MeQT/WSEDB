@@ -329,4 +329,37 @@ define('DBPASS', 'pkn_2404');
                 return -1;
             }
         }
+        public function getCourses($authorID){
+            $query = "SELECT CourseID, Text, Shortcut, Author FROM Course WHERE Author = ".$authorID;
+            $output = array();
+            $count = 0;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                $course = new course();
+                $course->CourseID = $row['CourseID'];
+                $course->Text = $row['Text'];
+                $course->Shortcut = $row['Shortcut'];
+                $course->Author = $row['Author'];
+                $output[$count++] = $course;
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function addCourse($model){
+            require_once 'models/course.php';
+            $query = 'INSERT INTO Course (Text, Shortcut, Author) VALUES ("'
+                    .$model->Text.'", "'
+                    .$model->Shortcut.'",'
+                    .$model->Author.')';
+            if($this->db->query($query) == TRUE){
+                return $this->db->insert_id;
+            }
+            else{
+                return -1;
+            }
+        }
     }
