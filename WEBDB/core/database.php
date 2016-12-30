@@ -126,22 +126,22 @@ define('DBPASS', 'pkn_2404');
         public function getUsers(){
         	require_once 'models/user.php';
         	$persons = array();
-        	$query = "SELECT Username, FirstName, LastName, Email, IsValidated, IsAdmin FROM Person;";
+        	$query = "SELECT PersonID, Username, FirstName, LastName, Email, IsValidated, IsAdmin FROM Person;";
         	$result = $this->db->query($query);
         	if($result ->num_rows >0){
         		$count = 0;
         		while($row = $result->fetch_row()){
-        			$person = new user(row[0]);
-        			$person->firstName = $row[1];
-        			$person->lastName = $row[2];
-        			$person->eMail = $row[3];
-        			if ($row[4] == '1'){
+        			$person = new user($row[1]);
+        			$person->firstName = $row[2];
+        			$person->lastName = $row[3];
+        			$person->eMail = $row[4];
+        			if ($row[5] == '1'){
         				$person->isValidated = true;
         			}
         			else{
         				$person->isValidated = false;
         			}
-        			$person->isAdmin = $row[5];
+        			$person->isAdmin = $row[6];
         			$persons[$count++] = $person;
         		}
         		return $persons;
@@ -150,13 +150,13 @@ define('DBPASS', 'pkn_2404');
         		return -1;
         	}
         }
-        public function deleteUser($email){
-        	$query = "DELETE FROM Person WHERE Email='$email'";
+        public function deleteUser($id){
+        	$query = "DELETE FROM Person WHERE PersonID='$id'";
         	$resultSet = mysqli_query($this->db, $query);        	
         }
         
-        public function validateUser($email){
-        	$query = "UPDATE Person SET IsValidated =IF(IsValidated=1,0,1) WHERE Email='$email'";
+        public function validateUser($id){
+        	$query = "UPDATE Person SET IsValidated =IF(IsValidated=1,0,1) WHERE PersonID='$id'";
         	$resultSet = mysqli_query($this->db, $query);
         }
         public function saveQuestion($question){

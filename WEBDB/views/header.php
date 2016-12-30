@@ -25,7 +25,7 @@
                 echo '<a href="index.php?url=nav/questions" class="btn btn-default">Meine Fragen</a>';
                 echo '<a href="index.php?url=nav/questionairies" class="btn btn-default">Meine Fragebögen</a>';
                 echo '<a href="index.php?url=nav/options" class="btn btn-default">Einstellungen</a>';
-                echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Adminpanel</a>';
+                echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Administration</a>';
                 echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
                 echo '<br>';
             }
