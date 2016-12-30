@@ -153,8 +153,7 @@ define('DBPASS', 'pkn_2404');
         public function deleteUser($email){
         	$query = "DELETE FROM Person WHERE Email='$email'";
         	$resultSet = mysqli_query($this->db, $query);        	
-        }
-        
+        }       
         public function validateUser($email){
         	$query = "UPDATE Person SET IsValidated =IF(IsValidated=1,0,1) WHERE Email='$email'";
         	$resultSet = mysqli_query($this->db, $query);
@@ -198,11 +197,44 @@ define('DBPASS', 'pkn_2404');
                 return -1;
             }
         }    
+        public function getQuestionairy($questionairyid){
+            
+        }
+        public function deleteQuestionairy($questionairyid){
+            $query = "DELETE FROM Questionairy WHERE QuestionairyID = ".$questionairyid;
+            if($this->db->query($query) == true){
+                return true;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getQuestionairies($userid){
+            require_once 'models/questionairy.php';
+            $query = "SELECT QuestionairyID, Author, Title, Description, DateOfCreation FROM Questionairy WHERE Author = ".$userid;
+            $result = $this->db->query($query);
+            if($result->num_rows >0){
+                $count = 0;
+                while($row = $result->fetch_assoc()){
+                    $questionairy = new questionairy();
+                    $questionairy->QuestionairyID = $row['QuestionairyID'];
+                    $questionairy->Author = $row['Author'];
+                    $questionairy->Title = $row['Title'];
+                    $questionairy->Description = $row['Description'];
+                    $questionairy->DateOfCreation = $row['DateOfCreation'];
+                    $output[$count++] = $questionairy;
+                }
+                return $output;
+            }
+            else{
+                return $query;
+            }
+        }
         public function saveQuestionaire($data){
             require_once 'models/questionairy.php';
             $query = "INSERT INTO Questionairy (Author,Title,Description)"
             ."VALUES("        
-            .$data->Author."','"
+            .$data->Author.",'"
             .$data->Title."','"
             .$data->Description
              ."')";
