@@ -40,13 +40,13 @@
                 else{
                     echo 'Willkommen '.$user->title.' '.$user->lastName.'</br>';
                 }
-                //buttons die eingeloggter sieht;
-                echo '<li class="active"><a href="index.php?url=nav/questions">Meine Fragen<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="index.php?url=nav/questionairies">Meine Fragebögen</a></li>';
-                echo '<li class="active"><a href="index.php?url=nav/courses">Meine Kurse<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="index.php?url=nav/options">Einstellungen</a></li>';
-                echo '<li class="active"><a href="index.php?url=nav/adminpanel">Adminpanel<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="index.php?url=home/logout">Logout</a></li>';
+                echo '<a href="index.php?url=nav/questions" class="btn btn-default">Meine Fragen</a>';
+                echo '<a href="index.php?url=nav/questionairies" class="btn btn-default">Meine Fragebögen</a>';
+                echo '<a href="index.php?url=nav/courses" class="btn btn-default">Meine Kurse</a>';
+                echo '<a href="index.php?url=nav/options" class="btn btn-default">Einstellungen</a>';
+                echo '<a href="index.php?url=nav/adminpanel" class="btn btn-default">Administration</a>';
+                echo '<a href="index.php?url=home/logout" class="btn btn-default">Logout</a>';
+                echo '<br>';
             }
             else{
                  echo '<li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>';

@@ -150,13 +150,31 @@ define('DBPASS', 'pkn_2404');
         		return -1;
         	}
         }
-        public function deleteUser($email){
-        	$query = "DELETE FROM Person WHERE Email='$email'";
-        	$resultSet = mysqli_query($this->db, $query);        	
+        public function deleteUser($id){
+        	$query = "DELETE FROM Person WHERE PersonID ='$id'";
+        	if (mysqli_query($this->db, $query) == TRUE){
+        		return true;
+        	}
+        	else{
+        		return false;
+        	}        		
         }       
-        public function validateUser($email){
-        	$query = "UPDATE Person SET IsValidated =IF(IsValidated=1,0,1) WHERE Email='$email'";
-        	$resultSet = mysqli_query($this->db, $query);
+        public function validateUser($id){        	
+        	$query = "UPDATE Person SET IsValidated = IF(IsValidated=1,0,1) WHERE PersonID='$id'";
+        	if (mysqli_query($this->db, $query) == TRUE){
+        		return $this->getUserID($id);
+        	}
+        	else{
+        		return false;
+        	}
+        }
+        private function getUserID($id){
+        	$query = "SELECT IsValidated FROM Person WHERE PersonID='$id'";  
+        	
+        	$result = mysqli_query($this->db, $query);        	
+        	$row = mysqli_fetch_array($result);
+        	
+        	return $row['IsValidated'];    	
         }
         public function saveQuestion($question){
             require_once 'models/questions.php';

@@ -11,7 +11,7 @@
             $this->nav->questions();
         }
         public function deleteQuestion(){
-            unset($_SESSION['DeleteComplete']);
+        	unset($_SESSION['DeleteComplete']);
             require_once 'core/database.php';
             $db = new DB();
             if(isset($_POST['id_to_delete'])){
@@ -34,4 +34,5 @@
             $this->nav->editquestion(serialize($model));
         }
 // </editor-fold>
+        
     }
