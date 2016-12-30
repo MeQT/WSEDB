@@ -20,25 +20,29 @@ require_once 'core/database.php';
         }
         public function saveData(){
             $this->db = new DB();
-            $questionid = $this->db->saveQuestion($this->Question);
-            foreach ($this->Answers as $ans) {
-                $ans->Question = $questionid; //$questionid;
-                $this->db->saveAnswer($ans);
+            $oldQID = $this->Question->QuestionID;
+            if(isset($this->Question->QuestionID)){
+                unset($this->Question->QuestionID);
+                $questionid = $this->db->saveQuestion($this->Question);
+                foreach ($this->Answers as $ans) {
+                    unset($ans->AnswerID);
+                    $ans->Question = $questionid;
+                    $this->db->saveAnswer($ans);
+                }
+                $this->UpdateQuestionary($oldQID,$questionid); 
+            $this->db->deleteQuestion($oldQID);
+            }
+            else{
+                $questionid = $this->db->saveQuestion($this->Question);
+                foreach ($this->Answers as $ans) {
+                    $ans->Question = $questionid; //$questionid;
+                    $this->db->saveAnswer($ans); 
+                }
             }
             $this->db->close();
         }
-        public function saveChanges(){
-            $this->db = new DB();
-            $insertA = false;
-            $insertQ = $this->db->editQuestion($this->Question);
-            if($insertQ == TRUE){
-
-                foreach ($this->Answers as $entry)
-                {
-                    $insertA = $this->db->editAnswer($entry);
-                }
-            }
-            return $insertA;
+        private function updateQuestionary($oldQID, $newQID){
+            // machmal
         }
         public function close(){
             $this->db->close();

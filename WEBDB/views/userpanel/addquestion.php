@@ -1,13 +1,19 @@
-<?php 
-?>
 <script type="text/javascript">
 window.addEventListener("load", function(){
-    for(var i = 0; i <1; i++){
+    for(var i = 0; i <2; i++){
         addRows('dataTable');
     }
-});;
+});
 </script>
 <div class="container">
+    <?php 
+    if(isset($_POST['RightAnswerMissing'])){
+        echo filter_input(INPUT_POST,'RightAnswerMissing');
+    }
+    if(isset($_POST['AnswerMissing'])){
+        echo filter_input(INPUT_POST,'AnswerMissing');
+    }
+    ?>
     <form action="index.php?url=question/saveQuestion" method="Post" name="QuestionForm" id="QuestionForm">
         <table id="dataTable" class="table">
             <tr>
