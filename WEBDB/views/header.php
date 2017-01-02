@@ -44,7 +44,7 @@
                 echo '<li class="active"><a href="index.php?url=nav/questions">Meine Fragen<span class="sr-only">(current)</span></a></li>';
                 echo '<li><a href="index.php?url=nav/questionairies">Meine Fragebögen</a></li>';
                 echo '<li class="active"><a href="index.php?url=nav/courses">Meine Kurse<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="">Meine Umfragen</a></li>';
+                echo '<li><a href="index.php?url=nav/showSurveys">Meine Umfragen</a></li>';
                 echo '<li class="active"><a href="index.php?url=nav/options">Einstellungen<span class="sr-only">(current)</span></a></li>';
                 echo '<li><a href="index.php?url=nav/adminpanel">Meine Aufgaben</a></li>';
                 echo '<li class="active"><a href="index.php?url=home/logout">Logout<span class="sr-only">(current)</span></a></li>';                

@@ -112,6 +112,15 @@
             $course = $db->getCourse($id);
             $this->view('/userpanel/editcourse', serialize($course));
         }
+        public function showSurveys(){
+            $this->view('userpanel/survey');
+        }
+        public function startSurvey(){
+            
+        }
+        public function showResults(){
+            
+        }
         private function destroySession(){
             session_start();
             session_destroy();
