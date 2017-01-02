@@ -169,12 +169,44 @@ define('DBPASS', 'pkn_2404');
         	}
         }
         private function getUserID($id){
-        	$query = "SELECT IsValidated FROM Person WHERE PersonID='$id'";  
-        	
+        	$query = "SELECT IsValidated FROM Person WHERE PersonID='$id'";        	
         	$result = mysqli_query($this->db, $query);        	
-        	$row = mysqli_fetch_array($result);
-        	
+        	$row = mysqli_fetch_array($result);        	
         	return $row['IsValidated'];    	
+        }
+        public function validatePassword($password){
+        	$query = "SELECT PersonID FROM Person WHERE Password='$password'";
+        	$result = mysqli_query($this->db, $query);
+        	if ($result->num_rows == 0){
+        		return false;
+        	}
+        	else{
+        		return true;
+        	}
+        }
+        public function updatePassword($id, $password){
+        	$query = "UPDATE Person SET Password = '$password' WHERE PersonID = '$id'";
+        	if(mysqli_query($this->db, $query) == TRUE){
+        		return true;
+        	}
+        	else{
+        		return false;
+        	}
+        }
+        public function getEmail($id){
+        	$query = "SELECT Email FROM Person WHERE PersonID = '$id'";
+        	$result = mysqli_query($this->db, $query);
+        	$row = mysqli_fetch_array($result);
+        	return $row['Email'];
+        }
+        public function updateEmail($id, $email){
+        	$query = "UPDATE Person SET Email = '$email' WHERE PersonID = '$id'";
+        	if(mysqli_query($this->db, $query) == TRUE){
+        		return true;
+        	}
+        	else{
+        		return false;
+        	}
         }
         public function saveQuestion($question){
             require_once 'models/questions.php';
