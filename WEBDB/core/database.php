@@ -75,7 +75,7 @@ define('DBPASS', 'pkn_2404');
                 return $question;
             }
             else{
-                echo $query;
+                echo -1;
                 //return -1;
             }           
         }
@@ -248,7 +248,61 @@ define('DBPASS', 'pkn_2404');
             }
         }    
         public function getQuestionairy($questionairyid){
-            
+            require_once 'models/questionairy.php';
+            $query = "SELECT QuestionairyID, Author, Title, Description, DateOfCreation, Course FROM Questionairy WHERE QuestionairyID = ".$questionairyid;
+            $result = $this->db->query($query);
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $questionairy = new questionairy();
+                    $questionairy->QuestionairyID = $row['QuestionairyID'];
+                    $questionairy->Author = $row['Author'];
+                    $questionairy->Title = $row['Title'];
+                    $questionairy->Description = $row['Description'];
+                    $questionairy->DateOfCreation = $row['DateOfCreation'];
+                    $questionairy->Course = $row['Course'];
+                }
+                return $questionairy;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getQuestionairyQuestion($id){
+            require_once 'models/questionairy.php';
+            require_once 'models/questions.php';
+            $query = "SELECT Question FROM QuestionairyQuestions WHERE Questionairy = ".$id;
+            $result = $this->db->query($query);
+            $output = array();
+            $count = 0;
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $output[$count++] = $this->getQuestion($row['Question']);
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getOutQuestionairyQuestion($QuestionairyID, $authorID){
+            require_once 'models/questionairy.php';
+            require_once 'models/questions.php';
+            $query = "SELECT QuestionID FROM Question WHERE Question.Author =".$authorID." AND Question.QuestionID NOT IN (
+                SELECT Question
+                from QuestionairyQuestions
+                WHERE Questionairy = ".$QuestionairyID.")";
+            $result = $this->db->query($query);
+            $output = array();
+            $count = 0;
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $output[$count++] = $this->getQuestion($row['QuestionID']);
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
         }
         public function deleteQuestionairy($questionairyid){
             $query = "DELETE FROM Questionairy WHERE QuestionairyID = ".$questionairyid;
@@ -261,7 +315,7 @@ define('DBPASS', 'pkn_2404');
         }
         public function getQuestionairies($userid){
             require_once 'models/questionairy.php';
-            $query = "SELECT QuestionairyID, Author, Title, Description, DateOfCreation FROM Questionairy WHERE Author = ".$userid;
+            $query = "SELECT QuestionairyID, Author, Title, Description, DateOfCreation, Course FROM Questionairy WHERE Author = ".$userid;
             $result = $this->db->query($query);
             if($result->num_rows >0){
                 $count = 0;
@@ -272,20 +326,22 @@ define('DBPASS', 'pkn_2404');
                     $questionairy->Title = $row['Title'];
                     $questionairy->Description = $row['Description'];
                     $questionairy->DateOfCreation = $row['DateOfCreation'];
+                    $questionairy->Course = $row['Course'];
                     $output[$count++] = $questionairy;
                 }
                 return $output;
             }
             else{
-                return $query;
+                return -1;
             }
         }
         public function saveQuestionaire($data){
             require_once 'models/questionairy.php';
-            $query = "INSERT INTO Questionairy (Author,Title,Description)"
+            $query = "INSERT INTO Questionairy(Author,Title,Course,Description)"
             ."VALUES("        
             .$data->Author.",'"
-            .$data->Title."','"
+            .$data->Title."',"
+            .$data->Course.", '"
             .$data->Description
              ."')";
             if($this->db->query($query) == TRUE){
@@ -303,6 +359,86 @@ define('DBPASS', 'pkn_2404');
                     .")";
             if($this->db->query($query) == TRUE){
                 return TRUE;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function removeQuestionairyQuestion($questionairyID, $questionID){
+            $query = 'DELETE FROM QuestionairyQuestions WHERE Questionairy = '.$questionairyID.' AND Question = '.$questionID;
+            if($this->db->query($query) == true){
+                return TRUE;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getCourses($authorID){
+                require_once 'models/course.php';
+            $query = "SELECT CourseID, Text, Shortcut, Author FROM Course WHERE Author = ".$authorID;
+            $output = array();
+            $count = 0;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                $course = new course();
+                $course->CourseID = $row['CourseID'];
+                $course->Text = $row['Text'];
+                $course->Shortcut = $row['Shortcut'];
+                $course->Author = $row['Author'];
+                $output[$count++] = $course;
+                }
+                return $output;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function addCourse($model){
+            require_once 'models/course.php';
+            $query = 'INSERT INTO Course (Text, Shortcut, Author) VALUES ("'
+                    .$model->Text.'", "'
+                    .$model->Shortcut.'",'
+                    .$model->Author.')';
+            if($this->db->query($query) == TRUE){
+                return $this->db->insert_id;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function deleteCourse($id){
+            $query = "DELETE FROM Course WHERE CourseID = ".$id;
+            if($this->db->query($query)){
+                return true;
+            }   
+            else{
+                return $query;
+            }
+        }
+        public function editCourse($course){
+            require_once 'models/course.php';
+            $query = 'UPDATE Course SET Text = "'.$course->Text. '", Shortcut = "'.$course->Shortcut.'" WHERE CourseID = '.$course->CourseID;
+            if($this->db->query($query)){
+                return true;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getCourse($id){
+            require_once 'models/course.php';
+            $query = "SELECT CourseID, Text, Shortcut, Author FROM Course WHERE CourseID = ".$id;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                $course = new course();
+                $course->CourseID = $row['CourseID'];
+                $course->Text = $row['Text'];
+                $course->Shortcut = $row['Shortcut'];
+                $course->Author = $row['Author'];
+                }
+                return $course;
             }
             else{
                 return -1;

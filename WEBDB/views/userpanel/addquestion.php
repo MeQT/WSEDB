@@ -7,21 +7,22 @@ window.addEventListener("load", function(){
 </script>
 <div class="container">
     <?php 
-    if(isset($_POST['RightAnswerMissing'])){
-        echo filter_input(INPUT_POST,'RightAnswerMissing');
+    if(isset($_SESSION['RightAnswerMissing'])){
+        echo $_SESSION['RightAnswerMissing'];
     }
-    if(isset($_POST['AnswerMissing'])){
-        echo filter_input(INPUT_POST,'AnswerMissing');
+    if(isset($_SESSION['AnswerMissing'])){
+        echo $_SESSION['AnswerMissing'];
     }
     ?>
+    <h3>Hier können sie ihre Fragen erstellen</h3></br>
     <form action="index.php?url=question/saveQuestion" method="Post" name="QuestionForm" id="QuestionForm">
         <table id="dataTable" class="table">
             <tr>
                 <td>
-                    Ihre Frage:
+                    <label class="control-label" for="IhreFrage">Ihre Frage</label>
                 </td>
                 <td>
-                    <input type="text" class="" name="QuestionText" value="<?php echo filter_input(INPUT_POST, 'QuestionText')?>"/>
+                    <input type="text" class="form-control" name="QuestionText" placeholder ="Fragetext" value="<?php echo filter_input(INPUT_POST, 'QuestionText')?>"/>
                 </td>
                 <td>
                     <?php 
@@ -33,7 +34,7 @@ window.addEventListener("load", function(){
             </tr>
             <tr>
                 <td>
-                    QuestionType
+                    <label class="control-label" for="IhreFrage">Art der Frage</label>
                 <td>
                     <select name="SelectionType" class="form-control">
                         <option value="9"></option>
@@ -71,11 +72,11 @@ window.addEventListener("load", function(){
                             echo $_SESSION['TimeMissing'];
                         }
                     ?>
-                </td>>
+                </td>
         </tr>
         </table>
-    <input class="" onclick="addRows('dataTable')" value="Möglichkeit hinzufügen"/>
+    <input type = "button" class="btn btn-primary" onclick="addRows('dataTable')" value="Möglichkeit hinzufügen"/>
         <input type="hidden" value="" name="Checked" id="Checked"/>   
-        <input type="submit" class="" value="Speichern"/>
+        <input type="submit" class="btn btn-primary" value="Speichern"/>
     </form>
 </div>
