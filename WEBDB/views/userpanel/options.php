@@ -18,6 +18,11 @@
 <label class="" for="newPassword">neues Passwort:</label>
 <input type="text" class="" name="newPassword" placeholder="neues Passwort" value="<?php if(!isset($_SESSION['NewPasswordCheck'])){ echo filter_input(INPUT_POST, 'newPassword');}?>"/>
 <?php 
+              if(isset($_SESSION['PasswordCheck'])){
+              	echo  '<span id="hilfeText" class="">';
+              	echo $_SESSION['PasswordCheck'];
+              	echo '</span>';
+              }
               if(isset($_SESSION['NewPasswordCheck'])){
                 echo  '<span id="hilfeText" class="">';
                 echo $_SESSION['NewPasswordCheck'];
