@@ -35,9 +35,43 @@
         }
         public function saveEditQuestionairy(){
             require_once 'models/questionaryModel.php';
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             $model = unserialize(base64_decode($_POST['HiddenModel']));
-            print_r($model->Questions);
-            print_r($model->Questionairy);
+            $validation = true;
+            if(!empty($_POST['HiddenTitle'])){
+                $newTitle = filter_input(INPUT_POST, 'HiddenTitle');
+            }
+            else{
+                $_SESSION['NewTitleMissing'];
+                $validation = false;
+            }
+            if(!empty($_POST['HiddenDescription'])){
+                $newDescription = filter_input(INPUT_POST, 'HiddenDescription');
+            }
+            else{
+                $_SESSION['NewDescriptionMissing'];
+                $validation = false;
+            }
+            if($_POST['Course'] != 0){
+                $newCourse = filter_input(INPUT_POST, 'Course');
+            }
+            $model->Questionairy->Title = $newTitle;
+            $model->Questionairy->Description = $newDescription;
+            if(isset($newCourse)){
+                $model->Questionairy->Course = $newCourse;
+            }
+            $model->saveData();
+            
+            if($validation){
+                $_SESSION['QuestionairyEdited'] = "Editierung erfolgreich";
+                $this->nav->questionairies();
+            }
+            else{
+                $_SESSION['QuestionairyFailed'] = "Editierung nicht geschafft :/";
+                $this->nav->editQuestionairy($model);
+            }
         }
         public function DelQuestion(){
             require_once 'models/questionaryModel.php';
@@ -60,6 +94,9 @@
             $model = new questionairyModel();
             $model->loadData($_POST['HiddenQuestionairyToAdd']);
             $idToAdd = filter_input(INPUT_POST, 'id_to_add');
+            if(count($model->Questions) == 0){
+                $model->Questions = array();
+            }
             $model->Questions[count($model->Questions)] = $db->getQuestion($idToAdd);
             $db->saveQuestionairyQuestion($model->Questionairy->QuestionairyID, $idToAdd);
             $model->removeQuestionFromOutQuestion($idToAdd);

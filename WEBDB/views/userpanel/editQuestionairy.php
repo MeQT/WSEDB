@@ -3,6 +3,10 @@
         require_once 'models/questionaryModel.php';
         require_once 'models/questions.php';
         require_once 'models/questionairy.php';
+        if(isset($_SESSION['QuestionairyFailed'])){
+            echo $_SESSION['QuestionairyFailed'];
+            unset($_SESSION['QuestionairyFailed']);
+        }
         echo '<table class="table">';
                 echo '<input type="text" class="form-control" id="Title" name="Title" value="'.$data->Questionairy->Title.'"/>';
                 echo '<br>';
@@ -59,7 +63,6 @@
             else{
                 echo '<option value="'.$data->Courses[$i]->CourseID.'">'.$data->Courses[$j]->Text.'</option>';
             }
-
         }
         echo '</select>';
         echo '<input type="hidden" name="HiddenDescription" id="HiddenDescription"/>';

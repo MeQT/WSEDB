@@ -67,7 +67,6 @@ function deleteRow(rowid)
 function copyQuestionairy(){
     var title = document.getElementById('Title').value;
     var description = document.getElementById('Description').value;
-    window.alert(title + ' ' + description);
     document.getElementById('HiddenTitle').value = title;
     document.getElementById('HiddenDescription').value = description;
 }

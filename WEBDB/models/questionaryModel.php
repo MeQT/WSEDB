@@ -25,9 +25,20 @@
         }
         public function saveData(){
             $this->db = new DB();
-            if(($QuestionairyID = $this->db->saveQuestionaire($this->Questionairy)) != -1){
-                foreach ($this->Questions as $entry){
-                    $this->db->saveQuestionairyQuestion($QuestionairyID,$entry);
+            if(isset($this->Questionairy->QuestionairyID)){
+                $this->db->deleteQuestionairy($this->Questionairy->QuestionairyID);
+                unset($this->Questionairy->QuestionairyID);
+                if(($QuestionairyID = $this->db->saveQuestionaire($this->Questionairy)) != -1){
+                    foreach ($this->Questions as $entry){
+                        $this->db->saveQuestionairyQuestion($QuestionairyID,$entry->QuestionID);
+                    }
+                }
+            }
+            else{
+                if(($QuestionairyID = $this->db->saveQuestionaire($this->Questionairy)) != -1){
+                    foreach ($this->Questions as $entry){
+                        $this->db->saveQuestionairyQuestion($QuestionairyID,$entry);
+                    }
                 }
             }
         }
@@ -44,10 +55,13 @@
             require_once 'models/questions.php';
             $this->db = new DB();
             $count = count($this->OutQuestions);
-            if(empty($this->OutQuestions)){
-                $count = 0;
+            if($count == 0){
+                $this->OutQuestions = array();
+                $this->OutQuestions[0] = $this->db->getQuestion($id);
+            }else{
+                $this->OutQuestions[$count] = $this->db->getQuestion($id);
             }
-            $this->OutQuestions[$count] = $this->db->getQuestion($id);
+            
             $this->removeQuestionFromQuestionairy($id);
         }
         private function removeQuestionFromQuestionairy($id){
