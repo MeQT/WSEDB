@@ -20,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Wasch-<br>Lappen</a>
+      <a class="navbar-brand" href="#">Waschlappen</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,9 +44,10 @@
                 echo '<li class="active"><a href="index.php?url=nav/questions">Meine Fragen<span class="sr-only">(current)</span></a></li>';
                 echo '<li><a href="index.php?url=nav/questionairies">Meine Fragebögen</a></li>';
                 echo '<li class="active"><a href="index.php?url=nav/courses">Meine Kurse<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="index.php?url=nav/options">Einstellungen</a></li>';
-                echo '<li class="active"><a href="index.php?url=nav/adminpanel">Adminpanel<span class="sr-only">(current)</span></a></li>';
-                echo '<li><a href="index.php?url=home/logout">Logout</a></li>';
+                echo '<li><a href="">Meine Umfragen</a></li>';
+                echo '<li class="active"><a href="index.php?url=nav/options">Einstellungen<span class="sr-only">(current)</span></a></li>';
+                echo '<li><a href="index.php?url=nav/adminpanel">Meine Aufgaben</a></li>';
+                echo '<li class="active"><a href="index.php?url=home/logout">Logout<span class="sr-only">(current)</span></a></li>';                
             }
             else{
                  echo '<li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>';
