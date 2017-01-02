@@ -57,7 +57,7 @@
         	require_once 'core/database.php';
         	require_once 'models/user.php';
         	$db = new DB();
-        	$user = unserialize($_SESSION['User']);
+        	//$user = unserialize($_SESSION['User']);
         	$this->view('/userpanel/options');
         }
         public function adminpanel(){
