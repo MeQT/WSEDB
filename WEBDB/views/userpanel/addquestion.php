@@ -6,15 +6,15 @@ window.addEventListener("load", function(){
 });
 </script>
 <div class="container">
-    <h3>Hier können sie ihre Fragen erstellen</h3></br>
     <?php 
-    if(isset($_POST['RightAnswerMissing'])){
-        echo filter_input(INPUT_POST,'RightAnswerMissing');
+    if(isset($_SESSION['RightAnswerMissing'])){
+        echo $_SESSION['RightAnswerMissing'];
     }
-    if(isset($_POST['AnswerMissing'])){
-        echo filter_input(INPUT_POST,'AnswerMissing');
+    if(isset($_SESSION['AnswerMissing'])){
+        echo $_SESSION['AnswerMissing'];
     }
     ?>
+    <h3>Hier können sie ihre Fragen erstellen</h3></br>
     <form action="index.php?url=question/saveQuestion" method="Post" name="QuestionForm" id="QuestionForm">
         <table id="dataTable" class="table">
             <tr>

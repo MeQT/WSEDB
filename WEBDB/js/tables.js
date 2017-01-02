@@ -54,16 +54,21 @@ function addRowsWithButton(tableid){
     element3.className = "btn btn-default";
     element3.value = "entfernen";
     element3.setAttribute('onclick', command);
-    //element3.onclick = function(){deleteRow((rowCount - elementsAbove +1));};
     cell3.appendChild(element3);
 }
 function hello(){
     window.alert("hi");
 }
-
 function deleteRow(rowid)  
 {   
     var row = document.getElementById(rowid);
     row.parentNode.removeChild(row);
+}
+function copyQuestionairy(){
+    var title = document.getElementById('Title').value;
+    var description = document.getElementById('Description').value;
+    window.alert(title + ' ' + description);
+    document.getElementById('HiddenTitle').value = title;
+    document.getElementById('HiddenDescription').value = description;
 }
 document.onload = addRows('dataTable');

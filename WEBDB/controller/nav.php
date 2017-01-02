@@ -62,7 +62,23 @@
             $this->view('/userpanel/adminpanel',$db->getUsers());
         }
         public function courses(){
-            $this->view('/userpanel/course');
+            require_once 'core/database.php';
+            require_once 'models/courseModel.php';
+            require_once 'models/user.php';
+            if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+            if(isset($_SESSION['User'])){
+                $db = new DB();
+                $user = unserialize($_SESSION['User']);
+                $model = new courseModel();
+                $model->loadData($user->id);
+                $this->view('/userpanel/course', $model);
+            }
+            else{
+                $this->view('/userpanel/course');
+            }
+           
         }
         public function addquestionairy(){
             require_once 'core/database.php';
@@ -73,14 +89,28 @@
             if(isset($_SESSION['User'])){
                 $user = unserialize($_SESSION['User']);
                 $db = new DB();
-                $this->view('/userpanel/addquestionairy',$db->getQuestions($user->id));
+                $data = array();
+                $data[0] = $db->getQuestions($user->id);
+                $data[1] = $db->getCourses($user->id);
+                $this->view('/userpanel/addquestionairy', $data);
             }
             else{
                 $this->view('/userpanel/addquestionairy');
             }
         }
+        public function editQuestionairy($model){
+            $this->view('/userpanel/editQuestionairy',$model);
+        }
         public function addCourse(){
-            $this->view('/userpanel/addCourse');
+            $this->view('userpanel/addcourse');
+        }
+        public function editCourse(){
+            require_once 'core/database.php';
+            require_once 'models/course.php';
+            $id = filter_input(INPUT_POST, 'id_to_edit');
+            $db = new DB();
+            $course = $db->getCourse($id);
+            $this->view('/userpanel/editcourse', serialize($course));
         }
         private function destroySession(){
             session_start();

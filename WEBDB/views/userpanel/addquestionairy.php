@@ -4,6 +4,8 @@
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
+            $questions = $data[0];
+            $courses = $data[1];
             if(!empty($data) & $data != -1){
                 echo '<input type="submit" value="Speichern" class="btn btn-default"/>';
                 echo '<br>';
@@ -35,28 +37,35 @@
                         Hinzufügen
                     </th>';
                         require_once 'models/questions.php';
-                        for($i = 0; $i < count($data);$i++){
+                        for($i = 0; $i < count($questions);$i++){
                             $count = 0;
                             echo '<tr>';
                                 echo '<td>';
-                                echo $data[$i]->QuestionID;
+                                echo $questions[$i]->QuestionID;
                                 echo '</td>';
                                 echo '<td>';
-                                echo $data[$i]->Text;
+                                echo $questions[$i]->Text;
                                 echo '</td>';
                                 echo '<td>';
-                                echo $data[$i]->SelectionType;
+                                echo $questions[$i]->SelectionType;
                                 echo '</td>';
                                 echo '<td>';
-                                echo $data[$i]->Time;
+                                echo $questions[$i]->Time;
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<input type="hidden" name="QuestionToAdd'.($i+1).'" value="'.$data[$i]->QuestionID.'"/>';
+                                echo '<input type="hidden" name="QuestionToAdd'.($i+1).'" value="'.$questions[$i]->QuestionID.'"/>';
                                 echo '<input type="checkbox" class="form-control" name="AddQuestion'.($i + 1).'"/>';
                                 echo '</td>';
                             echo '</tr>';
                         }
                 echo '</table>';
+                
+                echo '<select class="form-control" name="Course">';
+                echo '<option value="0"></option>';
+                for($i = 0; $i < count($courses);$i++){
+                    echo '<option  value="'.$courses[$i]->CourseID.'">'.$courses[$i]->Text.'</option>';
+                }
+                echo '</select>';
             }
             else{
                 echo 'Keine Fragen vorhanden :(';

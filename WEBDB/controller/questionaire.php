@@ -34,16 +34,36 @@
             }
         }
         public function saveEditQuestionairy(){
-            echo 'speichern';
-            print_r($_POST);
+            require_once 'models/questionaryModel.php';
+            $model = unserialize(base64_decode($_POST['HiddenModel']));
+            print_r($model->Questions);
+            print_r($model->Questionairy);
         }
-        public function saveDelQuestionairy(){
-            echo 'del';
-            print_r($_POST);
+        public function DelQuestion(){
+            require_once 'models/questionaryModel.php';
+            require_once 'core/database.php';
+            require_once 'models/questions.php';
+            $db = new DB();
+            $model = new questionairyModel();
+            $model->loadData($_POST['HiddenQuestionairyToDel']);
+            $idToDel = filter_input(INPUT_POST, 'id_to_delete');
+            $model->OutQuestionsQuestions[count($model->OutQuestions)] = $db->getQuestion($idToDel);
+            $db->removeQuestionairyQuestion($model->Questionairy->QuestionairyID, $idToDel);
+            $model->AddQuestionOntoOutQuestion($idToDel);
+            $this->nav->editQuestionairy($model);
         }
-        public function saveAddQuestionairy(){
-            echo 'add';
-            print_r($_POST);
+        public function AddQuestion(){
+            require_once 'models/questionaryModel.php';
+            require_once 'core/database.php';
+            require_once 'models/questions.php';
+            $db = new DB();
+            $model = new questionairyModel();
+            $model->loadData($_POST['HiddenQuestionairyToAdd']);
+            $idToAdd = filter_input(INPUT_POST, 'id_to_add');
+            $model->Questions[count($model->Questions)] = $db->getQuestion($idToAdd);
+            $db->saveQuestionairyQuestion($model->Questionairy->QuestionairyID, $idToAdd);
+            $model->removeQuestionFromOutQuestion($idToAdd);
+            $this->nav->editQuestionairy($model);
         }
         public function saveQuestionary(){
             $validation = true;      
@@ -69,6 +89,9 @@
             else{
                 $_SESSION['DescriptionMissing'] = "Bitte eine Beschreibung für den Fragebogen angeben.";
                 $validation = FALSE;
+            }
+            if(isset($_POST['Course']) && filter_input(INPUT_POST, 'Course') != 0){
+                $this->model->Questionairy->Course = filter_input(INPUT_POST, 'Course');
             }
             for($i = 1; $isthere == TRUE; $i++){
                 if(isset($_POST['QuestionToAdd'.$i])){

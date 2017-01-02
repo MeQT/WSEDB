@@ -18,7 +18,7 @@ echo '<table class="table">';
         require_once 'models/questions.php';
         foreach($data as $entry){
             $count = 0;
-            echo '<tr>';
+            echo '<tr id="'.$entry->QuestionID.'"  >'; // onclick="hello('.$entry->QuestionID.')"
                 echo '<td>';
                 echo $entry->QuestionID;
                 echo '</td>';

@@ -5,5 +5,6 @@
         public $Title;
         public $Description;
         public $DateOfCreation;
+        public $Course;
     }
 ?>

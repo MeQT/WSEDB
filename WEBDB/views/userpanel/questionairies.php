@@ -20,6 +20,9 @@
             echo 'Beschreibung';
             echo '</th>';
             echo '<th>';
+            echo 'Kurs';
+            echo '</th>';
+            echo '<th>';
             echo 'Erstellungsdatum';
             echo '</th>';
             echo '<th>';
@@ -38,6 +41,9 @@
                 echo '</td>';
                 echo '<td>';
                 echo $row->Description;
+                echo '</td>';
+                echo '<td>';
+                echo $row->Course;
                 echo '</td>';
                 echo '<td>';
                 echo $row->DateOfCreation;
