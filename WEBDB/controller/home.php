@@ -127,6 +127,7 @@ class home extends controller{
                         $this->view('/home/index');
                     } else {
                         $this->view('/home/registration');
+                        
                     }
                 }
                 else{

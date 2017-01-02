@@ -108,7 +108,7 @@
             $isthereaquestion = false;
             $count = 0;
             if (session_status() == PHP_SESSION_NONE) {
-                session_start();
+                @session_start();
             }
             unset($_SESSION['TitleMissing']);
             unset($_SESSION['DescriptionMissing']);

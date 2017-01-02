@@ -54,11 +54,15 @@
             }            
         }
         public function options(){
-            $this->view('/userpanel/options');
+        	require_once 'core/database.php';
+        	require_once 'models/user.php';
+        	$db = new DB();
+        	$user = unserialize($_SESSION['User']);
+        	$this->view('/userpanel/options');
         }
         public function adminpanel(){
-        	require_once 'core/database.php';
-        	$db = new DB();
+        	require_once 'core/database.php';        	
+        	$db = new DB();        	
             $this->view('/userpanel/adminpanel',$db->getUsers());
         }
         public function courses(){

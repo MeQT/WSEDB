@@ -2,7 +2,7 @@
 if (!empty($data) && $data != -1)
 {	    
 	echo'<div class="container" >';
-	echo '<table class="table"></br>' ;
+	echo '<table class="table"></br>';
 	
 	echo "<tr>";
 	echo "<th>Name</th>";
