@@ -91,8 +91,8 @@
         	unset($_SESSION['EmailCheck']);
         	unset($_SESSION['UpdateEmail']);
         	
-        	if(filter_input(INPUT_POST,'newEmail') == ""){
-        		$_SESSION['EmailCheck'] = 'Bitte eine Email eingeben';
+        	if(!filter_var(filter_input(INPUT_POST,'newEmail'), FILTER_VALIDATE_EMAIL)){
+        		$_SESSION['EmailCheck'] = 'Bitte Email-Adresse eingeben';
         		$updateValid = false;
         	}
         	if($updateValid == false){
