@@ -55,10 +55,14 @@
         	else{
         		if ($db->validatePassword(md5(filter_input(INPUT_POST,'oldPassword'))) == FALSE)
         		{
-        			$_SESSION['OldPasswordCheck'] = "Passwort ist nicht korrekt";
+        			$_SESSION['OldPasswordCheck'] = 'Passwort ist nicht korrekt!';
         			$updateValid = false;
         		}
-        	}        	
+        	}   
+        	if(filter_input(INPUT_POST,'oldPassword') == filter_input(INPUT_POST, 'newPassword')){
+        		$_SESSION['PasswordCheck'] = 'neues Passwort ist identisch mit dem alten!';
+        	}
+        			
         	if(filter_input(INPUT_POST,'newPassword') == ""){
         		$_SESSION['NewPasswordCheck'] = 'Bitte neues Passwort eingeben';
         		$updateValid = false;

@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">   
+    <script src="js/bootstrap-toggle.min.js"></script> 
+</head>
+<body>
 <?php 
 if (!empty($data) && $data != -1)
 {	    
@@ -13,38 +20,48 @@ if (!empty($data) && $data != -1)
 	
 	require_once 'models/user.php';
 	foreach ($data as $entry)	
-	{
+	{		
 		echo "<tr>";		
 		echo '<td  class="col-md-3">'.$entry->firstName." ".$entry->lastName.'</td>';
 		echo '<td  class="col-md-3">'.$entry->eMail.'</td>';
-		echo '<form action="index.php?url=adminpanel/validateUser" method="Post">';
-		echo '<input type = "hidden" name="personID" value ="'.$entry->id.'">';
-		if ($entry->isAdmin == 0){
+		echo '<form id="form1" action="index.php?url=adminpanel/validateUser" method="Post">';
+		echo '<input type = "hidden" id="personID" name="personID" value="'.$entry->id.'">';
+		if ($entry->isAdmin == 0){			
 			if ($entry->isValidated == true){
-				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert"/></td>';
-				$validate = true;
+				echo '<td class="col-md-3"><input id="'.$entry->id.'" type="checkbox" checked data-toggle="toggle" data-on="zugelassen" data-size="mini" data-width="30%"/></td>';
+							
+// 				$validate = true;
 			}
 			else{
-				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren "/></td>';
-				$validate = false;
+				echo '<td class="col-md-3"><input id="'.$entry->id.'" type="checkbox" data-toggle="toggle" data-off="gesperrt" data-size="mini" data-width="30%"/></td>';					
+				
+// 				$validate = false;
 			}
+			echo '<script>';
+			echo '$(function() {';
+			echo '$("#'.$entry->id.'").change(function() {';
+			echo 'document.getElementById("personID").value="'.$entry->id.'";';
+			echo 'document.getElementById("form1").submit();';
+			echo '	})';
+			echo '})';
+			echo '</script>';
 		}
 		else{
 			if ($entry->isValidated == true){
-				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validiert" disabled/></td>';
+				echo '<td class="col-md-3"><input type="checkbox" checked data-toggle="toggle" data-on="zugelassen" data-size="mini" data-width="30%" disabled/></td>';
 			}
 			else{
-				echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "validieren" disabled/></td>';
+				echo '<td class="col-md-3"><input type="checkbox" data-toggle="toggle" data-off="gesperrt" data-size="mini" data-width="20%" disabled/></td>';
 			}
 		}
 		echo '</form>';
 		echo '<form action="index.php?url=adminpanel/deleteUser" method="Post">';
 		echo '<input type = "hidden" name="personID" value ="'.$entry->id.'">';
 		if ($entry->isAdmin == 0){
-			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+			echo '<td class="col-md-3"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
 		}
 		else{
-			echo '<td><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';
+			echo '<td class="col-md-3"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';
 		}
 		echo '</form>';
 		echo "</tr>";		
@@ -61,5 +78,10 @@ if (!empty($data) && $data != -1)
     echo '</div>';
 }
 ?>
+
+
+</body>
+</html>
+
 
 
