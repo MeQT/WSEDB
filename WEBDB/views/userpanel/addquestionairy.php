@@ -60,6 +60,7 @@
                         }
                 echo '</table>';
                 
+                echo 'Kurszuordnung';
                 echo '<select class="form-control" name="Course">';
                 echo '<option value="0"></option>';
                 for($i = 0; $i < count($courses);$i++){
