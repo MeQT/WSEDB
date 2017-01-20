@@ -35,7 +35,7 @@
                 $user = unserialize($_SESSION['User']);
                 if($user->title == ""){
                     
-                    echo"<font color='585858'>Eingeloggt als $user->firstName $user->lastName</br></font>";
+                    echo"<font color='585858'>Benutzer: $user->firstName $user->lastName</br></font>";
                 }
                 else{
                     echo 'Willkommen '.$user->title.' '.$user->lastName.'</br>';

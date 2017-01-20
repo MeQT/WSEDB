@@ -1,5 +1,6 @@
 <div class="container">
-        <?php 
+    <h3>Fragebögenübersicht</h3></br>
+       <?php 
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }  
@@ -9,8 +10,8 @@
         }
         require_once 'models/questionairy.php';
         ?>
-    <h2>Ihre Fragebögenübsicht</h2>
-    <a href="index.php?url=nav/addquestionairy" class="btn btn-default">Neu anlegen</a>
+    
+    <a href="index.php?url=nav/addquestionairy" class="btn btn-primary">Neuen Fragebogen erstellen</a></br>
     <table class="table">
         <?php
         if(!empty($data) & $data != -1){
@@ -58,13 +59,13 @@
                 echo '<td>';
                 echo '<form action="index.php?url=questionaire/editQuestionairy" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$row->QuestionairyID.'"/>';
-                echo '<input type="submit" value="bearbeiten"/>';
+                echo '<input type="submit" class="btn btn-primary btn-xs" value="bearbeiten"/>';
                 echo '</form>';
                 echo '</td>';
                 echo '<td>';
                 echo '<form action="index.php?url=questionaire/deleteQuestionairy" method="POST">';
                 echo '<input type="hidden" name="id_to_delete" value="'.$row->QuestionairyID.'"/>';
-                echo '<input type="submit" value="entfernen"/>';
+                echo '<input type="submit" class="btn btn-primary btn-xs" value="entfernen"/>';
                 echo '</form>';
                 echo '</td>';
                 echo '<td>';

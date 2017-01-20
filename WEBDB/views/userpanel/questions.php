@@ -1,19 +1,26 @@
 <div class="container">
-     <h3> Ihre Fragenübersicht</h3></br>
+     <h3> Fragenübersicht</h3></br>
+     <a href="index.php?url=question/index" class="btn btn-primary">Neue Frage erstellen</a>
 <?php
 if(!empty($data) & $data != -1){
 echo '<table class="table">';
     echo '<th>
-        Nummer
+        Nr
+        </th>
+    <th>
+        Frage
     </th>
     <th>
-        Text
-    </th>
-    <th>
-        Auswahltyp
+        Fragetyp
     </th>
     <th>
         Zeit
+    </th>
+    <th>
+        Bearbeiten
+    </th>
+    <th>
+        Entfernen
     </th>';
         require_once 'models/questions.php';
         foreach($data as $entry){
@@ -26,21 +33,25 @@ echo '<table class="table">';
                 echo $entry->Text;
                 echo '</td>';
                 echo '<td>';
-                echo $entry->SelectionType;
+                if($entry->SelectionType == '0')
+                    {echo ' Einzelauswahl';}
+                    else if($entry->SelectionType == '1')
+                    {echo ' Mehrfachauswahl';}
+                    else {echo ' Freitext';}
                 echo '</td>';
                 echo '<td>';
-                echo $entry->Time;
+                echo $entry->Time . ' Sek';
                 echo '</td>';
                 echo '<td>';
                 echo '<form action="index.php?url=userpanel/editQuestion" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$entry->QuestionID.'"/>';
-                echo '<input type="submit" class="btn-primary" value="bearbeiten"/>';
+                echo '<input type="submit" class="btn btn-primary btn-xs" value="bearbeiten"/>';
                 echo '</form>';
                 echo '</td>';
                 echo '<td>';
                 echo '<form action="index.php?url=userpanel/deleteQuestion" method="POST">';
                 echo '<input type="hidden" name="id_to_delete" value="'.$entry->QuestionID.'"/>';
-                echo '<input type="submit" class="btn-primary" value="entfernen"/>';
+                echo '<input type="submit" class="btn btn-primary btn-xs" value="entfernen"/>';
                 echo '</form>';
                 echo '</td>';
             echo '</tr>';
@@ -52,12 +63,6 @@ if($data == -1){
 }
 ?>
      <table>
-    <tr>
-        <td>
-            <?php echo '<a href="index.php?url=question/index" class="btn btn-primary">Neue Frage erstellen</a>'?>
-            <p style="margin-bottom: 25px"></p>
-        </td>
-    </tr>
     <?php 
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
