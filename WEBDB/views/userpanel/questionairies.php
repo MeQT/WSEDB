@@ -35,6 +35,9 @@
             echo '<th>';
             echo 'Entfernen';
             echo '</th>';
+            echo '<th>';
+            echo 'Starten';
+            echo '</th>';
             foreach ($data as $row) {
                 echo '<tr>';
                 echo '<td>';
@@ -62,6 +65,12 @@
                 echo '<form action="index.php?url=questionaire/deleteQuestionairy" method="POST">';
                 echo '<input type="hidden" name="id_to_delete" value="'.$row->QuestionairyID.'"/>';
                 echo '<input type="submit" value="entfernen"/>';
+                echo '</form>';
+                echo '</td>';
+                echo '<td>';
+                echo '<form action="index.php?url=surveyController/setup" method="POST">';
+                echo '<input type="hidden" name="id_to_start" value="'.$row->QuestionairyID.'"/>';
+                echo '<input type="submit" value="starten"/>';
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
