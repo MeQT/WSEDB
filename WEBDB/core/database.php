@@ -12,6 +12,18 @@ define('DBPASS', 'pkn_2404');
         public function close(){
             $this->db->close();
         }
+        public function getUser($username){
+            $model;
+            $query = "SELECT * FROM Person WHERE Username = '".$username."'";
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc())
+                {
+                    $model = $row;
+                }
+            }
+            return $model;
+        }
         // user model
         public function checkLogin($username,$password){
             $query = "SELECT * FROM Person WHERE Username ='".$username."' AND Password ='".$password."'";
@@ -23,7 +35,7 @@ define('DBPASS', 'pkn_2404');
             }
         }
         public function checkEmail($email){
-            $query = "SELECT * FROM Person where Email ='".$email."'";
+            $query = "SELECT * FROM Person WHERE Email ='".$email."'";
             if($this->db->query($query)->num_rows > 0){
                 return true;
             }
@@ -443,5 +455,98 @@ define('DBPASS', 'pkn_2404');
             else{
                 return -1;
             }
+        }
+        public function checkStartCode($startCode){
+            $query = "SELECT * FROM Survey WHERE SurveyCode = ".$startCode;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public function createSurvey($survey){
+            require_once 'models/survey.php';
+            $survey->Endtime = $survey->EndTime->add(new DateInterval('PT' . $survey->Time . 'M'));
+            $query = "INSERT INTO Survey(QuestionairyID,TimeStart,TimeEnd,SurveyCode,Person)"
+                    ."VALUES('"
+                    .$survey->QuestionairyID."','"
+                    .$survey->StartTime->format('Y-m-d H:i:s')."','"
+                    .$survey->EndTime->format('Y-m-d H:i:s')."','"
+                    .$survey->StartCode."','"
+                    .$survey->PersonID."')";
+            if ($this->db->query($query) == TRUE){
+                return $this->db->insert_id;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getSurvey($surveyID){
+            require_once 'models/survey.php';
+            $query = "SELECT SurveyID,QuestionairyID,TimeStart,TimeEnd,SurveyCode,Person FROM Survey WHERE SurveyID =".$surveyID;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                $model = new survey();
+                while($row = $result->fetch_assoc()){
+                    $model->SurveyID = $row['SurveyID'];
+                    $model->QuestionairyID = $row['QuestionairyID'];
+                    $model->StartTime = $row['TimeStart'];
+                    $model->EndTime = new DateTime($row['TimeEnd']);
+                    $model->StartCode = $row['SurveyCode'];
+                    $model->PersonID = $row['Person'];
+                }
+                return $model;
+            }
+            else{
+                return -1;
+            }
+        }
+        public function getSurveys($userID){
+            require_once 'models/survey.php';
+            require_once 'models/questionairy.php';
+            $output = array();
+            $query = "SELECT SurveyID,QuestionairyID,TimeStart,TimeEnd,SurveyCode FROM Survey WHERE Person =".$userID;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                $i = 0;
+                while($row = $result->fetch_assoc()){
+                    $questionairy = $this->getQuestionairy($row['QuestionairyID']);
+                    $attendence = $this->getSurveyAttendences($row['SurveyID']);
+                    $output[$i]['Survey'] = $row;
+                    $output[$i]['Questionairy'] = $questionairy;
+                    $output[$i]['Attendence'] = $attendence;
+                    $i++;
+                }
+            }
+            return $output;
+        }
+        public function getSurveyAttendences($surveyID){
+            $output = 0;
+            $query = "SELECT Count(*) as Count FROM Result WHERE SurveyID =".$surveyID;
+            $result = $this->db->query($query);
+            while($row = $result->fetch_assoc()){
+                $output = $row['Count'];
+            }
+            return $output;
+        }
+        public function getSurveyByCode($surveyCode){   
+            require_once 'models/survey.php';
+            $query = "SELECT SurveyID,QuestionairyID,TimeStart,TimeEnd,SurveyCode,Person FROM Survey WHERE SurveyCode =".$surveyCode;
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                $model = new survey();
+                while($row = $result->fetch_assoc()){
+                    $model->SurveyID = $row['SurveyID'];
+                    $model->QuestionairyID = $row['QuestionairyID'];
+                    $model->StartTime = $row['TimeStart'];
+                    $model->EndTime = new DateTime($row['TimeEnd']);
+                    $model->StartCode = $row['SurveyCode'];
+                    $model->PersonID = $row['Person'];
+                }
+                return $model;
+            }   
+                
         }
     }

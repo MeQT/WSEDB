@@ -120,10 +120,30 @@
             $this->view('userpanel/survey');
         }
         public function startSurvey(){
-            
+            $this->view('userpanel/activesurvey');
         }
-        public function showResults(){
-            
+        public function setupSurvey($model){
+            $this->view('userpanel/survey', $model);
+        }
+        public function showSurveyInfos($model){
+            $this->view('userpanel/surveyinfos', $model);
+        }
+        public function showSurveyOverview(){
+            require_once 'core/database.php';
+            $this->db = new DB();
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            require_once 'models/user.php';
+            $user = unserialize($_SESSION['User']);
+            $result = $this->db->getSurveys($user->id);
+            $this->view('userpanel/surveyoverview', serialize($result));
+        }
+        public function studentSurveyStart($model){
+            $this->view('survey/start',$model);
+        }
+        public function showQuestion($model){
+            $this->view('survey/answer',$model);
         }
         private function destroySession(){
             session_start();

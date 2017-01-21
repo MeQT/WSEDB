@@ -6,6 +6,7 @@
         public function __construct() {
             $this->mail = new PHPMailer();
             $this->mail->isSMTP();
+            $this->mail->CharSet = 'UTF-8';
             $this->mail->Host = 'smtp.gmail.com';
             $this->mail->SMTPAuth = true; 
             $this->mail->SMTPSecure = 'tls';
@@ -16,11 +17,18 @@
             $this->mail->isHTML(true);
         }
         public function sendRegistration($registration){
+            $message = "Hallo ".$registration->FirstName." ". $registration->LastName.", <br>
+                        Sie haben sich erfolgreich bei Testimeter registriert.<br><br>
+                        Ihre Benutzerkonto: ".$registration->Username."<br><br>
+                        Ihr Zugang wird freigegeben sobald der Administrator Sie bestätigt hat.<br>
+                        Sie werden per Email benachrichtigt, sobald dies geschehen ist.<br><br>
+                        Viele Grüße";
+
             $this->mail->addAddress($registration->Email);
-            $this->mail->Subject = 'Registration erfolgreich!';
-            // echter Text hier rein
-            $this->mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            //$this->mail->addAddress("thomas.mueller@hs-flensburg.de");
+            $this->mail->Subject = 'HS Flensburg Testimeter Registration erfolgreich.';
+            $this->mail->Body    = $message;
+            $this->mail->AltBody = $message;
 
             if(!$this->mail->send()) {
                 return false;
@@ -30,11 +38,14 @@
             }
         }
         public function sendPassword($email,$newPassword){
+            $message = "Hallo,<br><br> Ihr Password wurde erfolgreich zurückgesetzt.<br>
+                        Ihr neues Passwort lautet: ".$newPassword."<br><br>Viele Grüße";
+            
             $this->mail->addAddress($email);
-            $this->mail->Subject = 'Ihr neues Passwort!';
+            $this->mail->Subject = 'HS Flensburg Testimeter Passwort zurückgesetzt.';
             // echter Text hier rein
-            $this->mail->Body    = 'Ihr neues Password lautet: '.$newPassword;
-            $this->mail->AltBody = 'Ihr neues Password lautet: '.$newPassword;
+            $this->mail->Body    = $message;
+            $this->mail->AltBody = $message;
 
             if(!$this->mail->send()) {
                 return false;

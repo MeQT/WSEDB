@@ -20,8 +20,8 @@
             if(isset($this->Questionairy->QuestionairyID)){
                 $this->Questions = $this->db->getQuestionairyQuestion($this->Questionairy->QuestionairyID);
                 $this->OutQuestions = $this->db->getOutQuestionairyQuestion($this->Questionairy->QuestionairyID, $this->Questionairy->Author);        
-            }      
-            
+            }
+            $this->db->close();
         }
         public function saveData(){
             $this->db = new DB();

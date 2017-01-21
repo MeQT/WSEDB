@@ -42,23 +42,14 @@ class home extends controller{
                     if($mail->sendPassword($email, $newPassword)){
                         $_SESSION['PasswordChanged'] = "Ihnen wurde ein neues Passwort zugesendet";
                         $this->nav->lostpw();
-                        //$this->view('/home/lostpassword');
                     }
                 }    
             }
             else{
                 $_SESSION['EmailCheck'] = "E-Mail-Adresse nicht gefunden";
                 $this->nav->lostpw();
-                //$this->view('/home/lostpassword');
             }
             $db->close();
-            // check input
-            //    -> error
-            // check if user exists
-            //    -> error
-            // check email exists
-            //    ->
-            // send new Password per mail
         }
         public function register(){
             session_start();
@@ -72,6 +63,7 @@ class home extends controller{
             unset($_SESSION['MailError']);
             unset($_SESSION['EmailPairCheck']);
             unset($_SESSION['PasswordPairCheck']);
+            unset($_SESSION['EmailAlreadyUsed']);
             // 
             if(filter_input(INPUT_POST,'FirstName') == ""){
                 $_SESSION['FirstNameCheck'] = 'Bitte Vornamen eingeben';
@@ -95,6 +87,10 @@ class home extends controller{
             }
             if(!filter_var(filter_input(INPUT_POST, 'RepeatEmail'),FILTER_VALIDATE_EMAIL)){
                 $_SESSION['RepeatEmailCheck'] = "Bitte E-Mail-Adresse wiederholen";
+                $registrationValid = false;
+            }
+            if($this->checkMail($_POST['Email'])== true){
+                $_SESSION['EmailAlreadyUsed'] = "Diese Email-Adresse wird bereits benutzt.";
                 $registrationValid = false;
             }
             if($registrationValid == TRUE){
@@ -175,5 +171,11 @@ class home extends controller{
             $db->close();
         }
         return $returnvalue;
-        }        
+        }       
+        private function checkMail($email){
+            require_once 'core/database.php';
+            $db = new DB();
+            $result = $db->checkEmail($email);
+            return $result;
+        }
 }

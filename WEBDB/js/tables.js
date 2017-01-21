@@ -59,10 +59,26 @@ function addRowsWithButton(tableid){
 function hello(){
     window.alert("hi");
 }
+function addButton(){
+    document.getElementById("startCode").style.visibility = "hidden";
+    document.getElementById("timer").style.visibility = "hidden";
+    document.getElementById("link").style.visibility = "hidden";
+    var br = document.createElement("br");
+    var form = document.getElementById("surveyForm");
+    var submit = document.createElement("input");
+    submit.type = "submit"
+    submit.innerHTML = "Ergebnisse anzeigen";
+    submit.className = "btn btn-default";
+    form.appendChild(br);
+    form.appendChild(submit);
+}
 function deleteRow(rowid)  
 {   
     var row = document.getElementById(rowid);
     row.parentNode.removeChild(row);
+}
+function submitQuestion(){
+    document.getElementById('answerform').submit();
 }
 function copyQuestionairy(){
     var title = document.getElementById('Title').value;

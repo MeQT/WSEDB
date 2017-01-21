@@ -2,6 +2,9 @@
     if(isset($_SESSION['MailError'])){
         echo $_SESSION['MailError'];
     }
+    if(isset($_SESSION['EmailAlreadyUsed'])){
+        echo $_SESSION['EmailAlreadyUsed'];
+    }
 ?>
 <div class = container >
 <h3> Bitte geben Sie hier Ihre Daten ein </h3></br>

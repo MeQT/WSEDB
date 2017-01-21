@@ -38,9 +38,9 @@ window.addEventListener("load", function(){
                 <td>
                     <select name="SelectionType" class="form-control">
                         <option value="9"></option>
-                        <option value="0">Single Choice</option>
-                        <option value="1">Multiple Choice</option>
-                        <option value="2">Freetext</option>
+                        <option value="0">Einzelauswahl</option>
+                        <option value="1">Mehrfachauswahl</option>
+                        <option value="2">Freitext</option>
                     </select>
                 </td>
                 <td>

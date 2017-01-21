@@ -4,7 +4,11 @@
 
     class surveyModel{
         public $QuestionairyModel;
-        
+        public $Survey;
+        public function __construct() {
+            $this->Survey = new survey();
+            $this->QuestionairyModel = new questionairyModel();
+        }
         public function loadData($questionairyModelID){
             require_once 'core/database.php';
             $db = new DB();

@@ -78,23 +78,25 @@
 
                 // validate answers and add them to the model;
                 // ($_POST['AnswerText'.$i] != ""
-                for($i = 1; $isthere == true; $i++){
-                    if(isset($_POST['AnswerText'.$i]) && !empty($_POST['AnswerText'.$i])    ){
-                        $answer->Text = filter_input(INPUT_POST,'AnswerText'.$i);
-                        $answer->Author = $author->id;
-                        if(isset($_POST['RightOrWrong'.$i])){
-                            $answer->IsRight = true;
-                            $isThereARightAnswer = true;
+                if($question->SelectionType != 2){
+                    for($i = 1; $isthere == true; $i++){
+                        if(isset($_POST['AnswerText'.$i]) && !empty($_POST['AnswerText'.$i])    ){
+                            $answer->Text = filter_input(INPUT_POST,'AnswerText'.$i);
+                            $answer->Author = $author->id;
+                            if(isset($_POST['RightOrWrong'.$i])){
+                                $answer->IsRight = true;
+                                $isThereARightAnswer = true;
+                            }
+                            else{
+                                $answer->IsRight = false;
+                            }
+                            $this->answerModel->Answers[$i-1] = $answer;
+                            $countAnswers++;
+                            $answer = new answers();
                         }
                         else{
-                            $answer->IsRight = false;
+                            $isthere = false;
                         }
-                        $this->answerModel->Answers[$i-1] = $answer;
-                        $countAnswers++;
-                        $answer = new answers();
-                    }
-                    else{
-                        $isthere = false;
                     }
                 }
             }

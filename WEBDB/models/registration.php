@@ -17,9 +17,11 @@
             $this->createUserName();
         }
         private function createUserName(){
-            $firstname = substr($this->FirstName, 0,2);
-            $lastname = substr($this->LastName, 0,2);
-            $this->Username = $firstname.$lastname;
+            mb_internal_encoding("UTF-8");            
+            $firstname = mb_substr($this->FirstName, 0,2);
+            $lastname = mb_substr($this->LastName, 0,2);
+            $randomNumber = rand(1000,9999);
+            $this->Username = $firstname.$lastname.$randomNumber;
         }
     }
 

@@ -13,21 +13,15 @@ class user{
         $this->getData($username);
     }
     private function getData($username){
-        $db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
-        $query = "SELECT * FROM Person WHERE Username = '".$username."'";
-        $result = $db->query($query);
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc())
-            {
-                $this->id = $row['PersonID'];
-                $this->title = $row['Title'];
-                $this->firstName = $row['FirstName'];
-                $this->lastName = $row['LastName'];
-                $this->username = $row['Username'];
-                $this->eMail = $row['Email'];
-                $this->isValidated = $row['IsValidated'];
-            }
-        }
-        $db->close();
+        require_once 'core/database.php';
+        $db = new DB();
+        $userinfos = $db->getUser($username);
+                            $this->id = $userinfos['PersonID'];
+                    $this->title = $userinfos['Title'];
+                    $this->firstName = $userinfos['FirstName'];
+                    $this->lastName = $userinfos['LastName'];
+                    $this->username = $userinfos['Username'];
+                    $this->eMail = $userinfos['Email'];
+                    $this->isValidated = $userinfos['IsValidated'];
     }
 }
