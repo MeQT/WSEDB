@@ -546,7 +546,20 @@ define('DBPASS', 'pkn_2404');
                     $model->PersonID = $row['Person'];
                 }
                 return $model;
-            }   
-                
+            }
+        }
+        public function saveSurveyFreeAnswer($sID, $quesID, $answer){
+            $query = 'INSERT INTO Result (SurveyID, QuestionID, Answers) VALUES('.
+                     $sID.','.
+                     $quesID.',"'.
+                     $answer.'")'; 
+            $this->db->query($query);
+        }
+        public function saveSurveyAnswer($sID, $qID, $aID){
+            $query = 'INSERT INTO Result (SurveyID, QuestionID, AnswerID) VALUES('.
+                     $sID.','.
+                     $qID.','.
+                     $aID.')'; 
+            $this->db->query($query);            
         }
     }

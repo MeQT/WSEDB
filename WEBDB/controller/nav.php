@@ -145,6 +145,12 @@
         public function showQuestion($model){
             $this->view('survey/answer',$model);
         }
+        public function EndQuiz(){
+            $this->view('survey/end');
+        }
+        public function studentSurveyError($message){
+            $this->view('survey/error',$message);
+        }
         private function destroySession(){
             session_start();
             session_destroy();

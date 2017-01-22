@@ -78,7 +78,7 @@ function deleteRow(rowid)
     row.parentNode.removeChild(row);
 }
 function submitQuestion(){
-    document.getElementById('answerform').submit();
+    document.getElementById('Answer').submit();
 }
 function copyQuestionairy(){
     var title = document.getElementById('Title').value;
