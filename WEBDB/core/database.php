@@ -563,6 +563,8 @@ define('DBPASS', 'pkn_2404');
             $this->db->query($query);            
         }
         public function getResultAnswers($surveyID) {
+        	$answer = null;
+        	
         	$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         	 
         	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";

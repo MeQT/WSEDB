@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" style="margin-left: 5%">
 <form action="index.php?url=result/nextQuestion" method="Post">
 <?php
 

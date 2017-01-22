@@ -22,7 +22,7 @@ class result extends controller {
 	public function nextQuestion() {
 		$this->db = new DB();
 		if (isset($_SESSION['surveyID'])) {
-			if ($_SESSION['sum'] < count($this->db->getResultAnswers($_SESSION['surveyID']))) {
+			if ($_SESSION['sum'] < count($this->db->getResultAnswers($_SESSION['surveyID']))-1) {
 				$_SESSION['sum']++;
 			}		
 			
