@@ -21,8 +21,9 @@
         echo $_SESSION['CourseEdited'];
         unset($_SESSION['CourseEdited']);
     }
+    echo '<div class="form-group">';
     echo '<a href="index.php?url=nav/addCourse" class="btn btn-primary">Neue Veranstaltung erstellen</a>';
-    echo '<br>';
+    echo '</div>';
     ?>
     <table class="table">
         <?php
@@ -48,19 +49,17 @@
                 echo $data->Courses[$i]->Text;
                 echo '</td>';
                 echo '<td>';
-                echo '<ul class="nav navbar-nav navbar-right"><li class="dropdown">';
-                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aktion<span class="caret"></span></a>
-                      <ul class="dropdown-menu btn-primary">';
-                echo '<li>';
+                echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
+                echo '<ul class="dropdown-menu">';
                 echo '<form action="index.php?url=nav/editCourse" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$data->Courses[$i]->CourseID.'"/>';
-                echo '<input type="submit" class="btn btn-primary btn-xs" value="bearbeiten"/>';
+                echo '<input type="submit" class="btn btn-primary btn-block" value="bearbeiten"/>';
                 echo '</form>';
                 echo '<form action="index.php?url=courseController/deleteCourse" method="POST" OnClick="return confirm(\'Möchten Sie diesen Kurs wirklich löschen?\');">';
                 echo '<input type="hidden" name="id_to_delete" value="'.$data->Courses[$i]->CourseID.'"/>';
-                echo '<input type="submit" class="btn btn-primary btn-xs"" value="entfernen"/>';
+                echo '<input type="submit" class="btn btn-primary btn-block"" value="entfernen"/>';
                 echo '</form>';
-                echo '</li>';
                 echo '</ul>';
                 echo '</ul>'; 
                 echo '</td>';

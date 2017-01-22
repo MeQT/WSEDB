@@ -50,7 +50,7 @@ $model = unserialize($data);
             echo '<td>';
             echo '<form action="index.php?url=resultShowResult" method="POST">';
             echo '<input type="hidden" value="'.$entry['Survey']['SurveyID'].'" name="survey_id"/>';
-            echo '<input type="submit" value="ansehen"/>';
+            echo '<input type="submit" class="btn btn-primary" value="ansehen"/>';
             echo '</form>';
             echo '</td>';
             echo '</tr>';

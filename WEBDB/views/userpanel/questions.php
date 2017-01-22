@@ -11,7 +11,9 @@
 <div class="container">
     
      <h3> Fragenübersicht</h3></br>
-     <a href="index.php?url=question/index" class="btn btn-primary">Neue Frage erstellen</a>
+     <div class="form-group">
+        <a href="index.php?url=question/index" class="btn btn-primary">Neue Frage erstellen</a>
+     </div>
 <?php
 
 if(!empty($data) & $data != -1){
@@ -46,24 +48,24 @@ echo '<table class="table">';
                 echo $entry->Time . ' Sek';
                 echo '</td>';
                 echo '<td>';
-                echo '<ul class="nav navbar-nav navbar-right"><li class="dropdown">';
-                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aktion<span class="caret"></span></a>
-                      <ul class="dropdown-menu btn-primary">';
-                echo '<li>';
+                echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
+                echo '<ul class="dropdown-menu">';
+                //echo '<li>';
                 echo '<form action="index.php?url=userpanel/editQuestion" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$entry->QuestionID.'"/>';
-                echo '<input type="submit" value="bearbeiten"/>';
+                echo '<input type="submit" class="btn btn-primary btn-block" value="bearbeiten"/>';
+                echo '</button>';
                 echo '</form>';
                 echo '<form action="index.php?url=userpanel/deleteQuestion" method="POST" OnClick="return confirm(\'Möchten Sie die Frage wirklich löschen?\');">';
                 echo '<input type="hidden" name="id_to_delete" value="'.$entry->QuestionID.'"/>';
-                echo '<input type="submit" class="btn btn-primary btn-xs" value="entfernen"/>';
+                echo '<input type="submit" class="btn btn-primary btn-block" value="entfernen"/>';
                 echo '</form>';
-                echo '</li>';
+                //echo '</li>';
                 echo '</ul>';
                 echo '</ul>';
                 echo '</td>';
                 echo '<td>';
-
                 echo '</td>';
             echo '</tr>';
         }
