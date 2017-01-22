@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ALL & ~E_NOTICE);
     require_once 'models/questionairy.php';
     require_once 'models/questionaryModel.php';
     require_once 'nav.php';
@@ -38,39 +39,47 @@
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            $model = unserialize(base64_decode($_POST['HiddenModel']));
-            $validation = true;
-            if(!empty($_POST['HiddenTitle'])){
-                $newTitle = filter_input(INPUT_POST, 'HiddenTitle');
-            }
-            else{
-                $_SESSION['NewTitleMissing'];
-                $validation = false;
-            }
-            if(!empty($_POST['HiddenDescription'])){
-                $newDescription = filter_input(INPUT_POST, 'HiddenDescription');
-            }
-            else{
-                $_SESSION['NewDescriptionMissing'];
-                $validation = false;
-            }
-            if($_POST['Course'] != 0){
-                $newCourse = filter_input(INPUT_POST, 'Course');
-            }
-            $model->Questionairy->Title = $newTitle;
-            $model->Questionairy->Description = $newDescription;
-            if(isset($newCourse)){
-                $model->Questionairy->Course = $newCourse;
-            }
-            $model->saveData();
-            
-            if($validation){
-                $_SESSION['QuestionairyEdited'] = "Editierung erfolgreich";
+            if($_SESSION['QuestionairyIDAdded'] != $_POST['HiddenQuestionairyToSave'])
+            {
+                $model = unserialize(base64_decode($_POST['HiddenModel']));
+                $validation = true;
+                if(!empty($_POST['HiddenTitle'])){
+                    $newTitle = filter_input(INPUT_POST, 'HiddenTitle');
+                }
+                else{
+                    $_SESSION['NewTitleMissing'];
+                    $validation = false;
+                }
+                if(!empty($_POST['HiddenDescription'])){
+                    $newDescription = filter_input(INPUT_POST, 'HiddenDescription');
+                }
+                else{
+                    $_SESSION['NewDescriptionMissing'];
+                    $validation = false;
+                }
+                if($_POST['Course'] != 0){
+                    $newCourse = filter_input(INPUT_POST, 'Course');
+                }
+                $model->Questionairy->QuestionairyID = $_POST['HiddenQuestionairyToSave'];
+                $model->Questionairy->Title = $newTitle;
+                $model->Questionairy->Description = $newDescription;
+                if(isset($newCourse)){
+                    $model->Questionairy->Course = $newCourse;
+                }
+                $model->saveData();
+
+                if($validation){
+                    $_SESSION['QuestionairyEdited'] = "Editierung erfolgreich.";
+                    $_SESSION['QuestionairyIDAdded'] = $_POST['HiddenQuestionairyToSave'];
+                    $this->nav->questionairies();
+                }
+                else{
+                    $_SESSION['QuestionairyFailed'] = "Editierung nicht erfolgreich.";
+                    $this->nav->editQuestionairy($model);
+                }
+            }else{
+                unset($_SESSION['QuestionairyIDAdded']);
                 $this->nav->questionairies();
-            }
-            else{
-                $_SESSION['QuestionairyFailed'] = "Editierung nicht geschafft :/";
-                $this->nav->editQuestionairy($model);
             }
         }
         public function DelQuestion(){
@@ -130,6 +139,9 @@
             if(isset($_POST['Course']) && filter_input(INPUT_POST, 'Course') != 0){
                 $this->model->Questionairy->Course = filter_input(INPUT_POST, 'Course');
             }
+            else{
+                $this->model->Questionairy->Course = 0;
+            }
             for($i = 1; $isthere == TRUE; $i++){
                 if(isset($_POST['QuestionToAdd'.$i])){
                     if(isset($_POST['AddQuestion'.$i])){
@@ -146,7 +158,7 @@
             $this->model->Questionairy->Author = $user->id;
             if($isthereaquestion == TRUE){
                 if($validation == TRUE){
-                    $result = $this->model->saveData();
+                    $this->model->saveData();
                     $this->nav->questionairies();
                 }
                 else {

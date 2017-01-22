@@ -67,6 +67,7 @@ function addButton(){
     var form = document.getElementById("surveyForm");
     var submit = document.createElement("input");
     submit.type = "submit"
+    submit.value = "Ergebnisse anzeigen";
     submit.innerHTML = "Ergebnisse anzeigen";
     submit.className = "btn btn-default";
     form.appendChild(br);

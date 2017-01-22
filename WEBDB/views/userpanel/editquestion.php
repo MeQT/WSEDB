@@ -1,4 +1,13 @@
 <?php
+    // redirect if user is not logged in
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['User'])){
+            header('Location: index.php?url=home/index');
+        }
+?>
+<?php
 require_once 'models/answerModel.php';
 require_once 'models/answers.php';
 require_once 'models/questions.php';

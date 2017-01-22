@@ -1,3 +1,12 @@
+<?php
+    // redirect if user is not logged in
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['User'])){
+            header('Location: index.php?url=home/index');
+        }
+?>
 <div class="container">
     <?php
         require_once 'models/questionaryModel.php';
@@ -57,11 +66,11 @@
         echo '<select class="form-control" name="Course">';
         echo '<option value="0"></option>';
          for($j = 0; $j < count($data->Courses);$j++){
-            if($data->Questionairy->Course == $data->Courses[$j]->CourseID){
-                echo '<option value="'.$data->Courses[$i]->CourseID.'" selected>'.$data->Courses[$j]->Text.'</option>';
+            if($data->Questionairy->Course === $data->Courses[$j]->CourseID){
+                echo '<option value="'.$data->Courses[$j]->CourseID.'" selected>'.$data->Courses[$j]->Text.'</option>';
             }
             else{
-                echo '<option value="'.$data->Courses[$i]->CourseID.'">'.$data->Courses[$j]->Text.'</option>';
+                echo '<option value="'.$data->Courses[$j]->CourseID.'">'.$data->Courses[$j]->Text.'</option>';
             }
         }
         echo '</select>';

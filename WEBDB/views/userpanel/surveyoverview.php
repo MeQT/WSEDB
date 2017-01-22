@@ -1,10 +1,22 @@
 <?php
+    // redirect if user is not logged in
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['User'])){
+            header('Location: index.php?url=home/index');
+        }
+?>
+<?php
 require_once 'models/survey.php';
 require_once 'models/questionairy.php';
 $model = unserialize($data);
 ?>
 <div class="container">
-    Umfrageübersicht
+    <?php if(count($model)> 0){
+        
+    
+    echo '<h3>Ihre Umfrageübersicht</h3></br> 
     <table class="table">
         <th>
             Fragebogen
@@ -20,8 +32,7 @@ $model = unserialize($data);
         </th>
         <th>
             Aktion
-        </th>
-        <?php 
+        </th>'; 
         foreach ($model as $entry) {
             echo '<tr>';
             echo '<td>';
@@ -44,6 +55,10 @@ $model = unserialize($data);
             echo '</td>';
             echo '</tr>';
         }
+    }
+    else{
+        echo '<br>Sie haben bisher keine Umfragen gestartet :(';
+    }
         ?>
     </table>
 </div>

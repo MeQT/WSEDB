@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_NOTICE);
     require_once 'nav.php';
     require_once 'models/answerModel.php';
     class question extends controller{
@@ -103,13 +104,15 @@
             else{
                 $questionAlreadyAdded = true;
             }
-            if(count($this->answerModel->Answers) < 2){
-                $validation = false;
-                $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben";
-            }
-            if($isThereARightAnswer == false){
-                $validation = FALSE;
-                $_SESSION['RightAnswerMissing'] = "Es gibt keine richtige Antwort.";
+            if($_POST['SelectionType'] != 2){
+                if(count($this->answerModel->Answers) < 2){
+                    $validation = false;
+                    $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben";
+                }
+                if($isThereARightAnswer == false){
+                    $validation = FALSE;
+                    $_SESSION['RightAnswerMissing'] = "Es gibt keine richtige Antwort.";
+                }
             }
             // overall validation
             // saving questions and answers

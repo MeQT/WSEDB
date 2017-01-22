@@ -41,13 +41,30 @@
         public function questionairies(){
             require_once 'core/database.php';
             require_once 'models/user.php';
+            require_once 'models/questionairy.php';
+            require_once 'models/course.php';
             if (session_status() == PHP_SESSION_NONE) {
             session_start();
             }
             if(isset($_SESSION['User'])){
                 $user = unserialize($_SESSION['User']);
                 $db = new DB();
-                $this->view('/userpanel/questionairies',$db->getQuestionairies($user->id));
+                $questionairies = $db->getQuestionairies($user->id);
+                if($questionairies != -1){
+                    foreach ($questionairies as $entry) {
+                        $id = $entry->Course;
+                        $course = $db->getCourse($id);
+                        if(isset($course->Shortcut)){
+                            $entry->CourseName = $course->Shortcut;
+                        }
+                        else{
+                            $entry->CourseName = "";
+                        }
+                    }
+                }
+                
+                
+                $this->view('/userpanel/questionairies',$questionairies);
             }
             else{
                 $this->view('/userpanel/questionairies');

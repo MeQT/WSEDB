@@ -1,3 +1,12 @@
+<?php
+    // redirect if user is not logged in
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['User'])){
+            header('Location: index.php?url=home/index');
+        }
+?>
 <div class="container">
     <form action="index.php?url=questionaire/saveQuestionary" method="POST" >
         <?php

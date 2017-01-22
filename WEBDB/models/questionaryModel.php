@@ -26,7 +26,8 @@
         public function saveData(){
             $this->db = new DB();
             if(isset($this->Questionairy->QuestionairyID)){
-                $this->db->deleteQuestionairy($this->Questionairy->QuestionairyID);
+                $id = $this->Questionairy->QuestionairyID;
+                $this->db->deleteQuestionairy($id);
                 unset($this->Questionairy->QuestionairyID);
                 if(($QuestionairyID = $this->db->saveQuestionaire($this->Questionairy)) != -1){
                     foreach ($this->Questions as $entry){
@@ -40,7 +41,9 @@
                         $this->db->saveQuestionairyQuestion($QuestionairyID,$entry);
                     }
                 }
+                
             }
+            
         }
         public function removeQuestionFromOutQuestion($id){
             for($i = 0; $i < count($this->OutQuestions);$i++){

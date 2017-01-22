@@ -1,3 +1,12 @@
+<?php
+    // redirect if user is not logged in
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['User'])){
+            header('Location: index.php?url=home/index');
+        }
+?>
 <script type="text/javascript">
 window.addEventListener("load", function(){
     for(var i = 0; i <2; i++){
@@ -6,6 +15,7 @@ window.addEventListener("load", function(){
 });
 </script>
 <div class="container">
+    
     <?php 
     if(isset($_SESSION['RightAnswerMissing'])){
         echo $_SESSION['RightAnswerMissing'];
@@ -13,6 +23,7 @@ window.addEventListener("load", function(){
     if(isset($_SESSION['AnswerMissing'])){
         echo $_SESSION['AnswerMissing'];
     }
+    
     ?>
     <h3>Hier können sie ihre Fragen erstellen</h3></br>
     <form action="index.php?url=question/saveQuestion" method="Post" name="QuestionForm" id="QuestionForm">

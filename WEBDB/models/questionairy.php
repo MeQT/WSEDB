@@ -6,5 +6,6 @@
         public $Description;
         public $DateOfCreation;
         public $Course;
+        public $CourseName;
     }
 ?>
