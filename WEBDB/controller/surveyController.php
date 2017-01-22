@@ -29,7 +29,7 @@
             require_once 'models/survey.php';
             require_once 'core/database.php';
             if (session_status() == PHP_SESSION_NONE) {
-                session_start();
+                @session_start();
             }
             require_once 'models/user.php';
             $user = unserialize($_SESSION['User']);

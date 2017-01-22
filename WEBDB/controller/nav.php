@@ -82,6 +82,7 @@
         	$db = new DB();        	
             $this->view('/userpanel/adminpanel',$db->getUsers());
         }
+                
         public function courses(){
             require_once 'core/database.php';
             require_once 'models/courseModel.php';
