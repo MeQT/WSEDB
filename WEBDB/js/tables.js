@@ -60,6 +60,7 @@ function hello(){
     window.alert("hi");
 }
 function addButton(){
+    document.getElementById("alternative").style.visibility ="hidden";
     document.getElementById("startCode").style.visibility = "hidden";
     document.getElementById("timer").style.visibility = "hidden";
     document.getElementById("link").style.visibility = "hidden";
@@ -69,7 +70,7 @@ function addButton(){
     submit.type = "submit"
     submit.value = "Ergebnisse anzeigen";
     submit.innerHTML = "Ergebnisse anzeigen";
-    submit.className = "btn btn-default";
+    submit.className = "btn btn-primary";
     form.appendChild(br);
     form.appendChild(submit);
 }

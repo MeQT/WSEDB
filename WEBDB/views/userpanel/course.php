@@ -50,7 +50,7 @@
                 echo '</td>';
                 echo '<td>';
                 echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
-                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color:purple" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';
                 echo '<form action="index.php?url=nav/editCourse" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$data->Courses[$i]->CourseID.'"/>';
