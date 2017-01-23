@@ -88,6 +88,7 @@ window.addEventListener("load", function(){
         </table>
     <input type = "button" class="btn btn-primary" onclick="addRows('dataTable')" value="Möglichkeit hinzufügen"/>
         <input type="hidden" value="" name="Checked" id="Checked"/>   
-        <input type="submit" class="btn btn-primary" value="Speichern"/>
+        <input type="submit" class="btn btn-primary" value="weitere Frage" name="Save"/>
+        <input type="submit" class="btn btn-primary" value="Speichern" name="Save"/>
     </form>
 </div>

@@ -16,7 +16,7 @@
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            
+            $_SESSION['UserID'] = $this->getRandomID();
             $this->nav = new nav();
             $code = filter_input(INPUT_POST, 'Quiznumber');
             // checkcode
@@ -51,6 +51,7 @@
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }  
+            $userID = $_SESSION['UserID'];
             if(isset($_POST['quiz'])){
                     $model = unserialize(base64_decode($_POST['quiz']));
                     if($model->Position < count($model->Questionairy->Questions)){
@@ -71,24 +72,24 @@
                 $model = unserialize(base64_decode($_POST['QuizModel']));
                 // save answer
                 // selectiontype
-                if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
+                if($model->Questionairy->Questions[$model->Position]->SelectionType == 1){
                     for ($i = 0; $i < count($model->Answers);$i++){
                         if(isset($_POST['Answer'.$i])){
                             $aID = $_POST['hiddenAnswer'.$i];
                             $sID = $model->Survey->SurveyID;
                             $qID = $model->Questionairy->Questions[$model->Position]->QuestionID;
                             $this->db = new DB();
-                            $this->db->saveSurveyAnswer($sID, $qID, $aID);
+                            $this->db->saveSurveyAnswer($sID, $qID, $aID, $userID);
                         }
                     }
                 }
-                if($model->Questionairy->Questions[$model->Position]->SelectionType == 1){
+                if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
                     if(isset($_POST['Answer'])){
                            $aID = $_POST['Answer'];
                            $sID = $model->Survey->SurveyID;
                            $qID = $model->Questionairy->Questions[$model->Position]->QuestionID;
                            $this->db = new DB();
-                           $this->db->saveSurveyAnswer($sID, $qID, $aID);                        
+                           $this->db->saveSurveyAnswer($sID, $qID, $aID, $userID);                        
                     }
                 }
                 if($model->Questionairy->Questions[$model->Position]->SelectionType == 2){
@@ -97,7 +98,7 @@
                        $answer = filter_input(INPUT_POST, 'FreeAnswer');
                        $questionID = $model->Questionairy->Questions[$model->Position]->QuestionID;
                        $this->db = new db();
-                       $this->db->saveSurveyFreeAnswer($sID, $questionID, $answer);
+                       $this->db->saveSurveyFreeAnswer($sID, $questionID, $answer,$userID);
                     }
                 }
                 
@@ -130,8 +131,9 @@
                 return -1;
             }           
         }
-        private function saveAnswer(){
-            
+        private function getRandomID(){
+            $id = rand(100000000, 999999999);
+            return $id;
         }
         
     }

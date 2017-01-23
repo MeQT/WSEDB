@@ -121,29 +121,31 @@ $answerModel = unserialize($data);
             
         </tr>
             <?php
-            for ($i = 1; $i <= count($answerModel->Answers); $i++) {
-                $valueText = "";
-                if (isset($answerModel->Answers[$i - 1]->Text)) {
-                    $valueText = $answerModel->Answers[$i - 1]->Text;
+            if(isset($answerModel->Answers)){
+                for ($i = 1; $i <= count($answerModel->Answers); $i++) {
+                    $valueText = "";
+                    if (isset($answerModel->Answers[$i - 1]->Text)) {
+                        $valueText = $answerModel->Answers[$i - 1]->Text;
+                    }
+                    echo '<tr id="'.$i.'">';
+                    echo '<td>';
+                    echo '<label for"Antwort" class="">Antwort '.$i.'</label>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<input type="Text" class="" name="AnswerText' . $i . '" value="' . $valueText . '"/>';
+                    echo '</td>';
+                    echo '<td>';
+                    if ($answerModel->Answers[$i - 1]->IsRight) {
+                        echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '" checked="checked"/>';
+                    } else {
+                        echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '"/>';
+                    }
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<input type="button" class="" onclick="deleteRow('.$i.')" value="entfernen"/>';
+                    echo '</td>';
+                    echo '</tr>';
                 }
-                echo '<tr id="'.$i.'">';
-                echo '<td>';
-                echo '<label for"Antwort" class="">Antwort '.$i.'</label>';
-                echo '</td>';
-                echo '<td>';
-                echo '<input type="Text" class="" name="AnswerText' . $i . '" value="' . $valueText . '"/>';
-                echo '</td>';
-                echo '<td>';
-                if ($answerModel->Answers[$i - 1]->IsRight) {
-                    echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '" checked="checked"/>';
-                } else {
-                    echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '"/>';
-                }
-                echo '</td>';
-                echo '<td>';
-                echo '<input type="button" class="" onclick="deleteRow('.$i.')" value="entfernen"/>';
-                echo '</td>';
-                echo '</tr>';
             }
             ?>
         </tr>

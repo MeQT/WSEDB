@@ -524,7 +524,7 @@ define('DBPASS', 'pkn_2404');
         }
         public function getSurveyAttendences($surveyID){
             $output = 0;
-            $query = "SELECT Count(*) as Count FROM Result WHERE SurveyID =".$surveyID;
+            $query = "SELECT COUNT(DISTINCT(UserID)) as Count FROM Result WHERE SurveyID =".$surveyID;
             $result = $this->db->query($query);
             while($row = $result->fetch_assoc()){
                 $output = $row['Count'];
@@ -548,18 +548,20 @@ define('DBPASS', 'pkn_2404');
                 return $model;
             }
         }
-        public function saveSurveyFreeAnswer($sID, $quesID, $answer){
-            $query = 'INSERT INTO Result (SurveyID, QuestionID, Answers) VALUES('.
+        public function saveSurveyFreeAnswer($sID, $quesID, $answer, $userID){
+            $query = 'INSERT INTO Result (SurveyID, QuestionID, Answers, UserID) VALUES('.
                      $sID.','.
                      $quesID.',"'.
-                     $answer.'")'; 
+                     $answer.'",'.
+                     $userID.'")'; 
             $this->db->query($query);
         }
-        public function saveSurveyAnswer($sID, $qID, $aID){
-            $query = 'INSERT INTO Result (SurveyID, QuestionID, AnswerID) VALUES('.
+        public function saveSurveyAnswer($sID, $qID, $aID, $userID){
+            $query = 'INSERT INTO Result (SurveyID, QuestionID, AnswerID, UserID) VALUES('.
                      $sID.','.
                      $qID.','.
-                     $aID.')'; 
+                     $aID.','.
+                     $userID.')'; 
             $this->db->query($query);            
         }
     }

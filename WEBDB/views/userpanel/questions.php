@@ -12,6 +12,12 @@
     
      <h3> Fragenübersicht</h3></br>
      <div class="form-group">
+         <?php
+            if(isset($_SESSION['QuestionAdded'])){
+                echo $_SESSION['QuestionAdded'];
+                unset($_SESSION['QuestionAdded']);
+            }
+         ?>
         <a href="index.php?url=question/index" class="btn btn-primary">Neue Frage erstellen</a>
      </div>
 <?php

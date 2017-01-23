@@ -38,6 +38,9 @@
         public function editquestion($model){
             $this->view('/userpanel/editquestion',$model);
         }
+        public function savequestionandmore(){
+            
+        }
         public function questionairies(){
             require_once 'core/database.php';
             require_once 'models/user.php';

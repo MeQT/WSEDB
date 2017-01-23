@@ -46,11 +46,11 @@
                 echo $row->CourseName;
                 echo '</td>';
                 echo '<td>';
-                echo $row->DateOfCreation;
+                echo $row->DateOfCreation;;
                 echo '</td>';
                 echo '<td>';
                 echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
-                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" style="color:purple" aria-hidden="true"></span><span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';
                 echo '<form action="index.php?url=questionaire/editQuestionairy" method="POST">';
                 echo '<input type="hidden" name="id_to_edit" value="'.$row->QuestionairyID.'"/>';
