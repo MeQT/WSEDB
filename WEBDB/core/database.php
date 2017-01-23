@@ -567,7 +567,7 @@ define('DBPASS', 'pkn_2404');
         public function getResultAnswers($surveyID) {
         	$answer = null;
         	
-<<<<<<< HEAD
+
         	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         	 
         	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
@@ -653,41 +653,4 @@ define('DBPASS', 'pkn_2404');
         
         	return $answerText;
         }
-=======
-        	$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
-        	 
-        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
-        	$questionResult = mysqli_query($db, $query);
-        	 
-        	$count = 0;
-        	while ($questionRow = mysqli_fetch_row($questionResult) ) {
-        		 
-        		$query = "SELECT DISTINCT AnswerID FROM Result where QuestionID ='".$questionRow[0]."'";
-        		$answerResult = mysqli_query($db, $query);
-        		 
-        		while ($answerRow = mysqli_fetch_row($answerResult) ) {
-        			if (is_null($answerRow[0])) {
-        				$query = "SELECT Answers FROM Result where SurveyID='".$surveyID."' and AnswerID is null";
-        				$result = mysqli_query($db, $query);
-        				 
-        				while ($resultRow = mysqli_fetch_row($result) )
-        					$answer[$count][] = $resultRow[0];
-        			}
-        			else {
-        				$query = "SELECT COUNT(AnswerID) FROM Result where SurveyID='".$surveyID."' and AnswerID ='".$answerRow[0]."'";
-        				$result = mysqli_query($db, $query);
-        				 
-        				while ($resultRow = mysqli_fetch_row($result) )
-        					$answer[$count][] = $resultRow[0];
-        			}
-        		}
-        		$count++;
-        	}
-        	mysqli_close($db);
-        	
-        	 
-        	
-        	return $answer;
-        }        
->>>>>>> branch 'Developement' of https://github.com/MeQT/WSEDB
     }
