@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 } 
-print_r($_POST);
+    
 require_once 'models/studentsurvey.php';
 require_once 'models/survey.php';
 require_once 'models/answerModel.php';
@@ -29,7 +29,7 @@ $counter = 0;
 // if selectiontype = single;
 // if selectiontype = multi;
 // if selectiontype = free;
-if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
+if($model->Questionairy->Questions[$model->Position]->SelectionType == 1){
     foreach ($model->Answers[$model->Position] as $value) {
         echo '<tr><td>';
         echo $value->Text;
@@ -39,7 +39,7 @@ if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
         echo '</td></tr>';
     }
 }
-if($model->Questionairy->Questions[$model->Position]->SelectionType == 1){
+if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
     foreach ($model->Answers[$model->Position] as $value) {
         echo '<tr><td>';
         echo $value->Text;

@@ -6804,5 +6804,8 @@ button.close {
   margin-right: auto;
   margin-left: auto;
 }
+.velvet {
+    color: #337ab7;
+}
 /*tr { background-color: #fff }
 tr:hover { background-color: #eee6ff };*/

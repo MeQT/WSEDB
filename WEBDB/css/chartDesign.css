@@ -13,7 +13,11 @@
 #q-graph caption {
   caption-side: top;
   width: 450px;
+<<<<<<< HEAD
   //text-transform: uppercase;
+=======
+  text-transform: uppercase;
+>>>>>>> branch 'Developement' of https://github.com/MeQT/WSEDB
   letter-spacing: .5px;
   top: -40px;
   position: relative;

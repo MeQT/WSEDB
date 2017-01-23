@@ -21,6 +21,7 @@
             $('.timer').rooster('start');
         })
     </script>
+    <div class ="container">
     <div class="" align="center" id="Code">
     <?php  
         echo '<div id="timer"> <p class="timer" data-rooster-seconds='.(($model->Time)*60).' data-rooster-onComplete="addButton();"></p></div>'; 
@@ -29,7 +30,12 @@
         ?>
         <form action="index.php?url=result/getResults" method="POST" id="surveyForm">
             <?php echo '<input type="hidden" name="surveyID" value="'.$model->SurveyID.'"/>';?>
+            <br>
+            <br>
+            <input type="submit" value="Ergebnisse vorzeitig anzeigen" id="alternative" class="btn btn-primary"/>
         </form>
     </div>
+        </div>
+        
 
 
