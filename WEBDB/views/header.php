@@ -10,7 +10,7 @@
 <body >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -20,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Waschlappen</a>
+      <a class="navbar-brand" href="#">Projekt2016a</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,11 +57,19 @@
             ?>   
        <ul class="nav navbar-nav navbar-right">
          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menü <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hilfe <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><a href="index.php?url=nav/help">Hilfe</a></li>
-            <li><a href="#">Impressum</a></li>
-            <li><a href="#">Platzhalter</a></li>
+            <li><a href="index.php?url=nav/helpAllgemeineNutzungshinweise">Allgemeine Nutzungshinweise</a></li>
+            <li><a href="index.php?url=nav/helpRegistrierung">Registrierung</a></li>
+            <li><a href="index.php?url=nav/helpAnmeldung">Anmeldung</a></li>
+            <li><a href="index.php?url=nav/helpPasswortVergessen">Passwort vergessen</a></li>
+            <li><a href="index.php?url=nav/helpFragen">Fragen</a></li>
+            <li><a href="index.php?url=nav/helpKurse">Kurse</a></li>
+            <li><a href="index.php?url=nav/helpFrageboegen">Fragebögen</a></li>
+            <li><a href="index.php?url=nav/helpUmfragen">Umfragen</a></li>
+            <li><a href="index.php?url=nav/helpAdministration">Administration</a></li>
+            <li><a href="index.php?url=nav/helpEinstellungen">Einstellungen</a></li>
+            <li><a href="index.php?url=nav/helpImpressum">Impressum</a></li>
             </ul>
          </li>
       </ul>
