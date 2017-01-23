@@ -595,6 +595,7 @@ define('DBPASS', 'pkn_2404');
         		$count++;
         	}
         	mysqli_close($db);
+        	
         	 
         	return $answer;
         }        
