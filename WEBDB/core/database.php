@@ -565,28 +565,28 @@ define('DBPASS', 'pkn_2404');
         public function getResultAnswers($surveyID) {
         	$answer = null;
         	
-        	$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
+        	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         	 
         	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
-        	$questionResult = mysqli_query($db, $query);
+        	$questionResult = mysqli_query($this->db, $query);
         	 
         	$count = 0;
         	while ($questionRow = mysqli_fetch_row($questionResult) ) {
         		 
         		$query = "SELECT DISTINCT AnswerID FROM Result where QuestionID ='".$questionRow[0]."'";
-        		$answerResult = mysqli_query($db, $query);
+        		$answerResult = mysqli_query($this->db, $query);
         		 
         		while ($answerRow = mysqli_fetch_row($answerResult) ) {
         			if (is_null($answerRow[0])) {
         				$query = "SELECT Answers FROM Result where SurveyID='".$surveyID."' and AnswerID is null";
-        				$result = mysqli_query($db, $query);
+        				$result = mysqli_query($this->db, $query);
         				 
         				while ($resultRow = mysqli_fetch_row($result) )
         					$answer[$count][] = $resultRow[0];
         			}
         			else {
         				$query = "SELECT COUNT(AnswerID) FROM Result where SurveyID='".$surveyID."' and AnswerID ='".$answerRow[0]."'";
-        				$result = mysqli_query($db, $query);
+        				$result = mysqli_query($this->db, $query);
         				 
         				while ($resultRow = mysqli_fetch_row($result) )
         					$answer[$count][] = $resultRow[0];
@@ -594,9 +594,60 @@ define('DBPASS', 'pkn_2404');
         		}
         		$count++;
         	}
-        	mysqli_close($db);
-        	
+        	//mysqli_close($db);        	
         	 
         	return $answer;
-        }        
+        } 
+        public function getResultQuestions($surveyID) {
+        	$questionText = null;
+        	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
+        
+        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
+        	$questionResult = mysqli_query($this->db, $query);
+        
+        	$count = 0;
+        	while ($questionRow = mysqli_fetch_row($questionResult) ) {
+        		$query = "Select Text FROM Question where QuestionID='".$questionRow[0]."'";
+        		$result = mysqli_query($this->db, $query);
+        			
+        		$row = mysqli_fetch_row($result);
+        			
+        		$questionText[$count] = $row[0];
+        			
+        		$count++;
+        	}
+        	//mysqli_close($db);
+        
+        	return $questionText;
+        }
+        
+        public function getAnswerText($surveyID) {
+        	
+        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
+        	$questionResult = mysqli_query($this->db, $query);
+        
+        	$count = 0;
+        	while ($questionRow = mysqli_fetch_row($questionResult) ) {
+        
+        		$query = "SELECT DISTINCT AnswerID FROM Result where QuestionID ='".$questionRow[0]."'";
+        		$answerResult = mysqli_query($this->db, $query);
+        
+        		while ($answerRow = mysqli_fetch_row($answerResult) ) {
+        			if (is_null($answerRow[0])) {
+        				$answerText[$count][] = 'null';
+        			}
+        			else {
+        				$query = "SELECT Text FROM Answer where AnswerID ='".$answerRow[0]."'";
+        				$result = mysqli_query($this->db, $query);
+        
+        				while ($resultRow = mysqli_fetch_row($result) )
+        					$answerText[$count][] = $resultRow[0];
+        			}
+        		}
+        		$count++;
+        	}
+        	//mysqli_close($db);
+        
+        	return $answerText;
+        }
     }

@@ -13,7 +13,7 @@
 #q-graph caption {
   caption-side: top;
   width: 450px;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   letter-spacing: .5px;
   top: -40px;
   position: relative;

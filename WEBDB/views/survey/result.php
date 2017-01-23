@@ -8,26 +8,27 @@
 </head>
 <body>
 
-<div class="container" style="margin-left: 5%">
+<div class="container" style="margin:auto; width: 60%; padding: 10%">
+<h3><?php echo $_SESSION['questionText']?></h3>
 <form action="index.php?url=result/nextQuestion" method="Post">
 <?php
 
 if (!empty($data)) {
 	@session_start();
 	
-	$sum = $_SESSION['sum'];
+	$questionNumber = $_SESSION['questionNumber'];
 	
 	$number = $_SESSION['sum']+1;
 	
 	$answerCount = 0;
 	
-	for ($x = 0; $x < count($data[$sum]); $x++ ) {
+	for ($x = 0; $x < count($data[$questionNumber]); $x++ ) {
 		$answerCount++;
 	}
 	
-	if (is_numeric($data[$sum][0])) {
+	if (is_numeric($data[$questionNumber][0])) {
 		echo '<table id="q-graph">';
-		echo '<caption style="width:calc('.$answerCount.'*80px);">Frage '.$number.'</caption>';
+		//echo '<caption style="width:calc('.$answerCount.'*80px);">'.$_SESSION['questionText'].'</caption>';
 		echo '<thead>';
 		echo '<tr style="margin-left:calc('.$answerCount.'*10%)" >';
 		echo '<th></th>';		
@@ -43,14 +44,14 @@ if (!empty($data)) {
 	
 		$answerCount = 1;
 	
-		for ($x = 0; $x < count($data[$sum]); $x++ ) {
-			$size += $data[$sum][$x];
+		for ($x = 0; $x < count($data[$questionNumber]); $x++ ) {
+			$size += $data[$questionNumber][$x];
 		}
 	
-		for ($y = 0; $y < count($data[$sum]); $y++) {
+		for ($y = 0; $y < count($data[$questionNumber]); $y++) {
 			echo '<tr class="qtr" style="margin-left:calc('.$left.'*1px);" id="">';
-			echo '<th scope="row">A'.$answerCount++.'</th>';
-			echo '<td class="answer bar" style="height: calc('.$data[$sum][$y].'/'.$size.' * 100%);"><p>'.$data[$sum][$y].'</p></td>';
+			echo '<th scope="row">'.$_SESSION['answerText'][$questionNumber][$y].'</th>';
+			echo '<td class="answer bar" style="height: calc('.$data[$questionNumber][$y].'/'.$size.' * 100%);"><p>'.$data[$questionNumber][$y].'</p></td>';
 			echo '</tr>';
 	
 			//$count++;
@@ -72,20 +73,27 @@ if (!empty($data)) {
 		echo '</div>';
 	}
 	else {
-		echo '<table border=0 cellpadding=8 id="">';
-		echo '<caption style="margin-bottom:10%">Frage '.$number.'</caption>';
-		echo '<tbody>';
+// 		echo '<table border=0 cellpadding=8 id="">';
+// 		echo '<caption style="margin-bottom:10%">'.$_SESSION['questionText'].'</caption>';
+// 		echo '<tbody>';
 	
-		for ($y = 0; $y < count($data[$sum]); $y++) {
-			echo '<tr>';
-			echo '<td>'.utf8_encode($data[$sum][$y]).'</td>';
-			echo '</tr>';
+// 		for ($y = 0; $y < count($data[$questionNumber]); $y++) {
+// 			echo '<tr>';
+// 			echo '<td>'.utf8_encode($data[$questionNumber][$y]).'</td>';
+// 			echo '</tr>';
+// 		}
+// 		echo '<tr>';
+// 		echo '<td class=""><input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input></td>';
+// 		echo '</tr>';
+// 		echo '</tbody>';
+// 		echo '</table>';
+		echo '<br/><br/>';
+		$count = 1;
+		for ($y = 0; $y < count($data[$questionNumber]); $y++) {
+			echo '<b>Antwort '.$count++.': </b>'.'<div>'.utf8_encode($data[$questionNumber][$y]).'</div>';
+			echo '<hr/>';
 		}
-		echo '<tr>';
-		echo '<td class=""><input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input></td>';
-		echo '</tr>';
-		echo '</tbody>';
-		echo '</table>';
+		echo '<input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input>';
 	}
 }
 ?>
