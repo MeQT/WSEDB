@@ -686,6 +686,7 @@ define('DBPASS', 'pkn_2404');
         	mysqli_close($db);
         	
         	 
+        	
         	return $answer;
         }        
 >>>>>>> branch 'Developement' of https://github.com/MeQT/WSEDB
