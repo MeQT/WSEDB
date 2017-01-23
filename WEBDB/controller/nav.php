@@ -4,9 +4,51 @@
         public function index(){
             $this->view('/home/index');
         }
-        public function help(){
-            $this->view('/help/index');
+           
+        public function helpAllgemeineNutzungshinweise(){
+            $this->view('/help/AllgemeineNutzungshinweise');
         }
+        
+        public function helpRegistrierung(){
+            $this->view('/help/Registrierung');
+        }
+        
+        public function helpAnmeldung(){
+            $this->view('/help/Anmeldung');
+        }
+        
+        public function helpPasswortVergessen(){
+            $this->view('/help/PasswortVergessen');
+        }
+        
+        public function helpFragen(){
+            $this->view('/help/Fragen');
+        }
+        
+        public function helpKurse(){
+            $this->view('/help/Kurse');
+        }
+        
+        public function helpFrageboegen(){
+            $this->view('/help/Frageboegen');
+        }
+        
+        public function helpUmfragen(){
+            $this->view('/help/Umfragen');
+        }
+        
+        public function helpAdministration(){
+            $this->view('/help/Administration');
+        }
+        
+        public function helpEinstellungen(){
+            $this->view('/help/Einstellungen');
+        }
+        
+        public function helpImpressum(){
+            $this->view('/help/Impressum');
+        }
+        
         public function registration(){
             $this->destroySession();
             $this->view('/home/registration');
