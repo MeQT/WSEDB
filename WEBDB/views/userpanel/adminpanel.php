@@ -18,11 +18,29 @@
 if (!empty($data) && $data != -1)
 {	    
 	echo'<div class="container" >';
+        echo'<h3>Administration</h3>';
+            if(isset($_SESSION['DeleteUser'])){
+                echo '<div>';
+                echo '<span id="hilfeText" class="help-block">';
+                echo $_SESSION['DeleteUser'];
+                unset($_SESSION['DeleteUser']);
+                echo '</span>';
+                echo '</div>';
+            }
+            if(isset($_SESSION['ValidateUser'])){
+                echo '<div>';
+                echo '<span id="hilfeText" class="help-block">';
+                echo $_SESSION['ValidateUser'];
+                unset($_SESSION['ValidateUser']);
+                echo '</span>';
+                echo '</div>';
+            }
 	echo '<table class="table"></br>';
 	
 	echo "<tr>";
 	echo "<th>Name</th>";
-	echo "<th>eMail</th>";
+        echo "<th>Benutzername</th>";
+	echo "<th>E-Mail-Adresse</th>";
 	echo "<th>Zulassen</th>";
 	echo "<th>Löschen</th>";
 	echo "</tr>";	
@@ -31,8 +49,9 @@ if (!empty($data) && $data != -1)
 	foreach ($data as $entry)	
 	{		
 		echo "<tr>";		
-		echo '<td  class="col-md-3">'.$entry->firstName." ".$entry->lastName.'</td>';
-		echo '<td  class="col-md-3">'.$entry->eMail.'</td>';
+		echo '<td class="col-xs-4">'.$entry->firstName." ".$entry->lastName.'</td>';
+                echo '<td class="col-xs-2">'.$entry->userName.'</td>';
+		echo '<td class="col-xs-4">'.$entry->eMail.'</td>';
 		echo '<form id="form1" action="index.php?url=adminpanel/validateUser" method="Post">';
 		echo '<input type = "hidden" id="personID" name="personID" value="'.$entry->id.'">';
 		if ($entry->isAdmin == 0){			
@@ -57,33 +76,25 @@ if (!empty($data) && $data != -1)
 		}
 		else{
 			if ($entry->isValidated == true){
-				echo '<td class="col-md-3"><input type="checkbox" checked data-toggle="toggle" data-on="zugelassen" data-size="mini" data-width="30%" disabled/></td>';
+				echo '<td class="col-xs-2"><input type="checkbox" checked data-toggle="toggle" data-on="zugelassen" data-size="mini" data-width="30%" disabled/></td>';
 			}
 			else{
-				echo '<td class="col-md-3"><input type="checkbox" data-toggle="toggle" data-off="gesperrt" data-size="mini" data-width="20%" disabled/></td>';
+				echo '<td class="col-xs-2"><input type="checkbox" data-toggle="toggle" data-off="gesperrt" data-size="mini" data-width="20%" disabled/></td>';
 			}
 		}
 		echo '</form>';
 		echo '<form action="index.php?url=adminpanel/deleteUser" method="Post">';
 		echo '<input type = "hidden" name="personID" value ="'.$entry->id.'">';
 		if ($entry->isAdmin == 0){
-			echo '<td class="col-md-3"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+			echo '<td class="col-xs-2"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
 		}
 		else{
-			echo '<td class="col-md-3"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';
+			echo '<td class="col-xs-2"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';
 		}
 		echo '</form>';
 		echo "</tr>";		
 	}
 	echo "</table>\n";
-	if (isset($_SESSION['DeleteUser'])){
-		echo '<label>'.$_SESSION['DeleteUser'].'</label>';
-		unset($_SESSION['DeleteUser']);
-	}	
-	if (isset($_SESSION['ValidateUser'])){
-		echo '<label>'.$_SESSION['ValidateUser'].'</label>';
-		unset($_SESSION['ValidateUser']);
-	}
     echo '</div>';
 }
 ?>

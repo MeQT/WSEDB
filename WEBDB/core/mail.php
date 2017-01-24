@@ -25,6 +25,7 @@
                         Viele Grüße";
 
             $this->mail->addAddress($registration->Email);
+            $this->mail->addAddress("Christian-Wolff@Posteo.de");
             //$this->mail->addAddress("thomas.mueller@hs-flensburg.de");
             $this->mail->Subject = 'HS Flensburg Testimeter Registration erfolgreich.';
             $this->mail->Body    = $message;
@@ -43,6 +44,21 @@
             
             $this->mail->addAddress($email);
             $this->mail->Subject = 'HS Flensburg Testimeter Passwort zurückgesetzt.';
+            // echter Text hier rein
+            $this->mail->Body    = $message;
+            $this->mail->AltBody = $message;
+
+            if(!$this->mail->send()) {
+                return false;
+            }           
+            else {
+                return true;
+            }
+        }
+        public function sendRegistrationAdmin(){
+            $message = 'Hallo, <br><br>es liegt eine neue Registrierung im HS Flensburg Testimeter vor.<br> Der Benutzer wartet auf Ihre Bestätigung.<br><br><a href ="http://projekt.wi.fh-flensburg.de/~projekt2016a/">Hier gelangen sie zum Testimeter </a><br><br>Viele Grüße';
+            $this->mail->addAddress("thomas.mueller@hs-flensburg.de");
+            $this->mail->Subject = 'HS Flensburg Testimeter neue Registration.';
             // echter Text hier rein
             $this->mail->Body    = $message;
             $this->mail->AltBody = $message;

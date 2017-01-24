@@ -18,12 +18,29 @@ window.addEventListener("load", function(){
     
     <?php 
     if(isset($_SESSION['RightAnswerMissing'])){
+        echo '<div>';
+        echo '<span id="hilfeText" class="help-block">';
         echo $_SESSION['RightAnswerMissing'];
+        unset($_SESSION['RightAnswerMissing']);
+        echo '</span>';
+        echo '</div>';
     }
     if(isset($_SESSION['AnswerMissing'])){
+        echo '<div>';
+        echo '<span id="hilfeText" class="help-block">';
         echo $_SESSION['AnswerMissing'];
+        unset($_SESSION['AnswerMissing']);
+        echo '</span>';
+        echo '</div>';
     }
-
+    if(isset($_SESSION['QuestionAdded'])){
+        echo '<div>';
+        echo '<span id="hilfeText" class="help-block">';
+        echo $_SESSION['QuestionAdded'];
+        unset($_SESSION['QuestionAdded']);
+        echo '</span>';
+        echo '</div>';
+    }
     
     ?>
     <h3>Hier können sie ihre Fragen erstellen</h3></br>
@@ -46,7 +63,7 @@ window.addEventListener("load", function(){
             </tr>
             <tr>
                 <td>
-                    <label class="control-label" for="IhreFrage">Art der Frage</label>
+                    <label class="control-label" for="IhreFrage">Fragetyp</label>
                 <td>
                     <select name="SelectionType" class="form-control">
                         <option value="9"></option>

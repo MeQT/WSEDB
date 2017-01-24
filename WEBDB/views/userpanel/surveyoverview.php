@@ -16,7 +16,7 @@ $model = unserialize($data);
     <?php if(count($model)> 0){
         
     
-    echo '<h3>Ihre Umfrageübersicht</h3></br> 
+    echo '<h3>Umfrageübersicht</h3></br> 
     <table class="table">
         <th>
             Fragebogen
@@ -35,19 +35,19 @@ $model = unserialize($data);
         </th>'; 
         foreach ($model as $entry) {
             echo '<tr>';
-            echo '<td>';
+            echo '<td class="col-xs-6">';
             echo $entry['Questionairy']->Title;
             echo '</td>';
-            echo '<td>';
+            echo '<td class="col-xs-2">';
             echo $entry['Survey']['TimeStart'];
             echo '</td>';
-            echo '<td>';
+            echo '<td class="col-xs-2">';
             echo $entry['Survey']['TimeEnd'];;
             echo '</td>';
-            echo '<td>';
+            echo '<td class="col-xs-1">';
             echo $entry['Attendence'];
             echo '</td>';
-            echo '<td>';
+            echo '<td class="col-xs-2">';
             echo '<form action="index.php?url=result/getResults" method="POST">';
             echo '<input type="hidden" value="'.$entry['Survey']['SurveyID'].'" name="surveyID"/>';
             echo '<input type="submit" class="btn btn-primary" value="ansehen"/>';

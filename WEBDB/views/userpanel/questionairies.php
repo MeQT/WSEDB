@@ -40,7 +40,7 @@
         <?php
         if(!empty($data) & $data != -1){
             echo '<th>';
-            echo 'Titel';
+            echo 'Fragebogen';
             echo '</th>';
             echo '<th>';
             echo 'Kurs';
@@ -53,16 +53,16 @@
             echo '</th>';
             foreach ($data as $row) {
                 echo '<tr>';
-                echo '<td>';
+                echo '<td class="col-xs-6">';
                 echo $row->Title;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-1">';
                 echo $row->CourseName;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 echo $row->DateOfCreation;;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
                 echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" style="color:purple" aria-hidden="true"></span><span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';

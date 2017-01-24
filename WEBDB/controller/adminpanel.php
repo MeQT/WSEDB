@@ -13,7 +13,7 @@
 		$db = new DB();		
 		if (isset($_POST['personID'])){			
 			if ($db->deleteUser($_POST['personID']) == TRUE){
-				$_SESSION['DeleteUser'] = 'User erfolgreich gelöscht.';
+				$_SESSION['DeleteUser'] = 'Benutzer erfolgreich gelöscht.';
 			}
 		}
 		$this->nav->adminpanel();		
@@ -24,10 +24,10 @@
 		$db = new DB();
 		if (isset($_POST['personID'])){			
 			if ($db->validateUser($_POST['personID']) == 0){
-				$_SESSION['ValidateUser'] = "User erfolgreich gesperrt.";				
+				$_SESSION['ValidateUser'] = "Benutzer erfolgreich gesperrt.";				
 			}
 			else {
-				$_SESSION['ValidateUser'] = "User erfolgreich zugelassen.";
+				$_SESSION['ValidateUser'] = "Benutzer erfolgreich zugelassen.";
 			}
 		}
 		$this->nav->adminpanel();

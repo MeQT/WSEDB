@@ -120,6 +120,7 @@ class home extends controller{
                     require_once 'core/mail.php';
                     $mail = new Mail();
                     if($mail->sendRegistration($registration) == true){
+                        $vali = $mail->sendRegistrationAdmin();
                         $this->view('/home/index');
                     } else {
                         $this->view('/home/registration');

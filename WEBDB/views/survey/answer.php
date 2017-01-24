@@ -50,7 +50,7 @@ if($model->Questionairy->Questions[$model->Position]->SelectionType == 0){
 }
 if($model->Questionairy->Questions[$model->Position]->SelectionType == 2){
     echo '<tr><td>';
-    echo '<textarea rows="5" name="FreeAnswer" placeholder="Ihre Antwort..."></textarea>';
+    echo '<textarea rows="5" name="FreeAnswer" class="form-control" placeholder="Ihre Antwort..."></textarea>';
     echo '</td></tr>';
 }
 echo '</table>';

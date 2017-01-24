@@ -14,7 +14,7 @@
         session_start();
     }
     echo '<div class="form-group">';
-    echo '<a href="index.php?url=nav/addCourse" class="btn btn-primary">Neuer Kurs erstellen</a>';
+    echo '<a href="index.php?url=nav/addCourse" class="btn btn-primary">Neuen Kurs erstellen</a>';
     echo '</div>';
     
         if(isset($_SESSION['CourseAdded'])){
@@ -52,20 +52,20 @@
                         Kürzel
                      </th>
                      <th>
-                        Veranstaltung
+                        Kurs
                     </th>
                     <th>
                         Aktionen
                     </th>';
             for($i = 0; $i < count($data->Courses); $i++){
                 echo '<tr>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 echo $data->Courses[$i]->Shortcut;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-6">';
                 echo $data->Courses[$i]->Text;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
                 echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color:purple" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';

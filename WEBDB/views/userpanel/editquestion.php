@@ -135,10 +135,12 @@ $answerModel = unserialize($data);
                     echo '<input type="Text" class="form-control" name="AnswerText' . $i . '" value="' . $valueText . '"/>';
                     echo '</td>';
                     echo '<td>';
-                    if ($answerModel->Answers[$i - 1]->IsRight) {
-                        echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '" checked="checked"/>';
-                    } else {
-                        echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '"/>';
+                    if(isset($answerModel->Answers[$i - 1]->IsRight)){
+                        if ($answerModel->Answers[$i - 1]->IsRight) {
+                            echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '" checked="checked"/>';
+                        } else {
+                            echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '"/>';
+                        }
                     }
                     echo '</td>';
                     echo '<td>';

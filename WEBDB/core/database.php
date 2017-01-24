@@ -138,7 +138,7 @@ define('DBPASS', 'pkn_2404');
         public function getUsers(){
         	require_once 'models/user.php';
         	$persons = array();
-        	$query = "SELECT Username, FirstName, LastName, Email, IsValidated, IsAdmin FROM Person;";
+        	$query = "SELECT Username, FirstName, LastName, Email, IsValidated, IsAdmin, Username FROM Person;";
         	$result = $this->db->query($query);
         	if($result ->num_rows >0){
         		$count = 0;
@@ -154,6 +154,7 @@ define('DBPASS', 'pkn_2404');
         				$person->isValidated = false;
         			}
         			$person->isAdmin = $row[5];
+                                $person->userName = $row[6];
         			$persons[$count++] = $person;
         		}
         		return $persons;

@@ -45,20 +45,26 @@ echo '<table class="table">';
         foreach($data as $entry){
             $count = 0;
             echo '<tr id="'.$entry->QuestionID.'"  >'; // onclick="hello('.$entry->QuestionID.')"
-                echo '<td>';
+                echo '<td class="col-xs-6">';
                 echo $entry->Text;
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 if($entry->SelectionType == '0')
-                    {echo ' Einzelauswahl';}
+                    {
+                        echo '<span class="glyphicon glyphicon-check " aria-hidden="true"></span>';
+                    }
                     else if($entry->SelectionType == '1')
-                    {echo ' Mehrfachauswahl';}
-                    else {echo ' Freitext';}
+                    {
+                        echo '<span class="glyphicon glyphicon-share" aria-hidden="true"></span>';
+                    }
+                    else {
+                        echo '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>';
+                    }
                 echo '</td>';
-                echo '<td>';
+                echo '<td  class="col-xs-2">';
                 echo $entry->Time . ' Sek';
                 echo '</td>';
-                echo '<td>';
+                echo '<td class="col-xs-2">';
                 echo '<ul class="btn btn-default dropdown">';//<li class="dropdown">';
                 echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color:purple" aria-expanded="false"><span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span><span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';
