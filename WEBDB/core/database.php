@@ -563,7 +563,7 @@ define('DBPASS', 'pkn_2404');
                      $sID.','.
                      $quesID.',"'.
                      $answer.'",'.
-                     $userID.'")'; 
+                     $userID.')'; 
             $this->db->query($query);
         }
         public function saveSurveyAnswer($sID, $qID, $aID, $userID){
