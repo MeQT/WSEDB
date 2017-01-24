@@ -21,7 +21,7 @@ $answerModel = unserialize($data);
                 Ihre Frage:
             </td>
             <td>
-                <input type="text" class="" name="QuestionText" 
+                <input type="text" class="form-control" name="QuestionText" 
                        value="<?php
                         if (isset($answerModel->Question->Text)) {
                             echo $answerModel->Question->Text;
@@ -41,7 +41,7 @@ $answerModel = unserialize($data);
                         
             </td>
             <td>
-                <select name="SelectionType" class="s">
+                <select name="SelectionType" class="form-control">
                     <option value="9"></option>
                     ^   <?php
                     if ($answerModel->Question->SelectionType == 0) {
@@ -75,7 +75,7 @@ $answerModel = unserialize($data);
                 
             </td>
             <td>
-            <select name="Time">
+                <select name="Time" class="form-control">
                 <option value="0"></option>
                     <?php
                     if ($answerModel->Question->Time == 10) {
@@ -132,17 +132,17 @@ $answerModel = unserialize($data);
                     echo '<label for"Antwort" class="">Antwort '.$i.'</label>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<input type="Text" class="" name="AnswerText' . $i . '" value="' . $valueText . '"/>';
+                    echo '<input type="Text" class="form-control" name="AnswerText' . $i . '" value="' . $valueText . '"/>';
                     echo '</td>';
                     echo '<td>';
                     if ($answerModel->Answers[$i - 1]->IsRight) {
-                        echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '" checked="checked"/>';
+                        echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '" checked="checked"/>';
                     } else {
-                        echo '<input type="checkbox" class="" name="RightOrWrong' . $i . '"/>';
+                        echo '<input type="checkbox" class="form-control" name="RightOrWrong' . $i . '"/>';
                     }
                     echo '</td>';
                     echo '<td>';
-                    echo '<input type="button" class="" onclick="deleteRow('.$i.')" value="entfernen"/>';
+                    echo '<input type="button" class="btn btn-primary" onclick="deleteRow('.$i.')" value="entfernen"/>';
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -156,8 +156,8 @@ $answerModel = unserialize($data);
       }
     ?>
     <input type="hidden" name="QuestionID" value="<?php echo $answerModel->Question->QuestionID ?>"/>
-    <input type="button" onclick="addRowsWithButton('editTable')" value="Möglichkeit hinzufügen"/>
-    <input type="submit" class="" value="Speichern"/>
+    <input type="button" class="btn btn-primary" onclick="addRowsWithButton('editTable')" value="Möglichkeit hinzufügen"/>
+    <input type="submit" class="btn btn-primary" value="Speichern"/>
 </form>
         <?php
         if (isset($_SESSION['AnswerMissing'])) {

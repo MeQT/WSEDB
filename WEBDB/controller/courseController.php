@@ -90,6 +90,7 @@ require_once 'core/database.php';
                     $result = $this->db->editCourse($course);
                     
                     if($result == true){
+                        $_SESSION['CourseAdded'] = "Kurs erfolgreich hinzugefügt.";
                         $this->nav->courses();
                     }
                     else{

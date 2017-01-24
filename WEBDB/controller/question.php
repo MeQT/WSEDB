@@ -111,7 +111,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 if($_POST['SelectionType'] != 2){
                     if(count($this->answerModel->Answers) < 2){
                         $validation = false;
-                        $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben";
+                        $_SESSION['AnswerMissing'] = "Bitte Antwortmöglichkeiten angeben.";
                     }
                     if($isThereARightAnswer == false){
                         $validation = FALSE;
@@ -125,7 +125,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                     //print_r($_SESSION);
                     $this->answerModel->saveData();
                     $_SESSION['LastQuestion'] = $this->answerModel->Question->Text;
-                    $_SESSION['QuestionAdded'] = "Frage erfolgreich gespeichert!";
+                    $_SESSION['QuestionAdded'] = "Frage erfolgreich gespeichert.";
                     $this->nav->questions();
                 }
                 else{

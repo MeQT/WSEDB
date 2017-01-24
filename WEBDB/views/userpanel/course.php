@@ -13,17 +13,34 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    if(isset($_SESSION['CourseDelete'])){
-        echo $_SESSION['CourseDelete'];
-        unset($_SESSION['CourseDelete']);
-    }
-    if(isset($_SESSION['CourseEdited'])){
-        echo $_SESSION['CourseEdited'];
-        unset($_SESSION['CourseEdited']);
-    }
     echo '<div class="form-group">';
-    echo '<a href="index.php?url=nav/addCourse" class="btn btn-primary">Neue Veranstaltung erstellen</a>';
+    echo '<a href="index.php?url=nav/addCourse" class="btn btn-primary">Neuer Kurs erstellen</a>';
     echo '</div>';
+    
+        if(isset($_SESSION['CourseAdded'])){
+            echo '<div>';
+            echo '<span id="hilfeText" class="help-block">';
+            echo $_SESSION['CourseAdded'];
+            unset($_SESSION['CourseAdded']);
+            echo '</span>';
+            echo '</div>';
+        }
+        if(isset($_SESSION['CourseDelete'])){
+            echo '<div>';
+            echo '<span id="hilfeText" class="help-block">';
+            echo $_SESSION['CourseDelete'];
+            unset($_SESSION['CourseDelete']);
+            echo '</span>';
+            echo '</div>';
+        }
+        if(isset($_SESSION['CourseEdited'])){
+            echo '<div>';
+            echo '<span id="hilfeText" class="help-block">';
+            echo $_SESSION['CourseEdited'];
+            unset($_SESSION['CourseEdited']);
+            echo '</span>';
+            echo '</div>';
+        }
     ?>
     <table class="table">
         <?php

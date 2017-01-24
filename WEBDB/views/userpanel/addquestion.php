@@ -23,6 +23,7 @@ window.addEventListener("load", function(){
     if(isset($_SESSION['AnswerMissing'])){
         echo $_SESSION['AnswerMissing'];
     }
+
     
     ?>
     <h3>Hier können sie ihre Fragen erstellen</h3></br>

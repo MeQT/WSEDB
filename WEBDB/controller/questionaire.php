@@ -21,8 +21,7 @@
                 $this->db = new DB();
                 $this->db->deleteQuestionairy($id);
                 $this->nav->questionairies();
-            }
-            
+            } 
         }
         public function editQuestionairy(){
             require_once 'models/questionairy.php';
@@ -69,12 +68,12 @@
                 $model->saveData();
 
                 if($validation){
-                    $_SESSION['QuestionairyEdited'] = "Editierung erfolgreich.";
+                    $_SESSION['QuestionairyEdited'] = "Fragebogen erfolgreich verändert.";
                     $_SESSION['QuestionairyIDAdded'] = $_POST['HiddenQuestionairyToSave'];
                     $this->nav->questionairies();
                 }
                 else{
-                    $_SESSION['QuestionairyFailed'] = "Editierung nicht erfolgreich.";
+                    $_SESSION['QuestionairyFailed'] = "Editierung fehlgeschlagen.";
                     $this->nav->editQuestionairy($model);
                 }
             }else{
@@ -159,6 +158,7 @@
             if($isthereaquestion == TRUE){
                 if($validation == TRUE){
                     $this->model->saveData();
+                    $_SESSION['QuestionairyAdded'] = "Fragebogen erfolgreich hinzugefügt.";
                     $this->nav->questionairies();
                 }
                 else {

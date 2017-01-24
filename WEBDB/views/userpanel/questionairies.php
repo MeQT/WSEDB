@@ -13,14 +13,28 @@
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }  
-        if(isset($_SESSION['QuestionairyEdited'])){
-            echo $_SESSION['QuestionairyEdited'];
-            unset($_SESSION['QuestionairyEdited']);
-        }
         require_once 'models/questionairy.php';
         ?>
     <div class="form-group">
     <a href="index.php?url=nav/addquestionairy" class="btn btn-primary">Neuen Fragebogen erstellen</a>
+    <?php 
+        if(isset($_SESSION['QuestionairyEdited'])){
+            echo '<div>';
+            echo '<span id="hilfeText" class="help-block">';
+            echo $_SESSION['QuestionairyEdited'];
+            unset($_SESSION['QuestionairyEdited']);
+            echo '</span>';
+            echo '</div>';
+        }
+        if(isset($_SESSION['QuestionairyAdded'])){
+            echo '<div>';
+            echo '<span id="hilfeText" class="help-block">';
+            echo $_SESSION['QuestionairyAdded'];
+            unset($_SESSION['QuestionairyAdded']);
+            echo '</span>';
+            echo '</div>';
+        }
+    ?>
     </div>
     <table class="table">
         <?php
