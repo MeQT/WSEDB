@@ -32,9 +32,14 @@ class result extends controller {
 		if (isset($_SESSION['surveyID'])) {
 			if ($_SESSION['questionNumber'] < count($this->db->getResultAnswers($_SESSION['surveyID']))-1) {
 				$_SESSION['questionNumber']++;
-				$_SESSION['questionText'] = $this->db->getResultQuestions($_SESSION['surveyID'])[$_SESSION['questionNumber']];				
-			}		
-			
+				$_SESSION['questionText'] = $this->db->getResultQuestions($_SESSION['surveyID'])[$_SESSION['questionNumber']];	
+				$_SESSION['personSum'] = $this->db->getAttendencesQuestions($_SESSION['surveyID'], $this->db->getQuestionIDs($_SESSION['surveyID'])[$_SESSION['questionNumber']]);
+			}
+			else {
+				$_SESSION['questionNumber'] = -1;
+				$_SESSION['questionText'] = 'Die Umfrage ist beendet.';
+			}
+				
 			$this->view('/survey/result',$this->db->getResultAnswers($_SESSION['surveyID']));
 		}
 	}
