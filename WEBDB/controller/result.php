@@ -14,13 +14,15 @@ class result extends controller {
 		unset($_SESSION['questionNumber']);
 		unset($_SESSION['questionText']);
 		unset($_SESSION['answerText']);
+		unset($_SESSION['personSum']);
 		$this->db = new DB();		
 		if (isset($_POST['surveyID'])) {
 			$_SESSION['sum'] = 0;
 			$_SESSION['surveyID'] = $_POST['surveyID'];
 			$_SESSION['questionNumber'] = 0;
 			$_SESSION['questionText'] = $this->db->getResultQuestions($_SESSION['surveyID'])[$_SESSION['questionNumber']];
-			$_SESSION['answerText'] = $this->db->getAnswerText($_POST['surveyID']);
+			$_SESSION['answerText'] = $this->db->getAnswerText($_SESSION['surveyID']);
+			$_SESSION['personSum'] = $this->db->getAttendencesQuestions($_SESSION['surveyID'], $this->db->getQuestionIDs($_SESSION['surveyID'])[$_SESSION['questionNumber']]);
 			$this->view('/survey/result',$this->db->getResultAnswers($_SESSION['surveyID']));
 		}		
 	}

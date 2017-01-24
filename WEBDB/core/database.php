@@ -647,6 +647,33 @@ define('DBPASS', 'pkn_2404');
         	return $questionText;
         }
         
+        public function getQuestionIDs($surveyID) {
+        	$questionID = null;
+        	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
+        
+        	$query = "SELECT QuestionairyID FROM Survey where SurveyID = '".$surveyID."'";
+        	$questionairyResult = mysqli_query($this->db, $query);
+        	$questionairyRow = mysqli_fetch_row($questionairyResult);
+        	 
+        	$query = "SELECT Question FROM QuestionairyQuestions where Questionairy='".$questionairyRow[0]."'";
+        	$questionResult = mysqli_query($this->db, $query);
+        
+        	//$count = 0;
+        	while ($questionRow = mysqli_fetch_row($questionResult) ) {
+        		//$query = "Select Text FROM Question where QuestionID='".$questionRow[0]."'";
+        		//$result = mysqli_query($this->db, $query);
+        		 
+        		//$row = mysqli_fetch_row($result);
+        		 
+        		$questionID[] = $questionRow[0];
+        		 
+        		//$count++;
+        	}
+        	//mysqli_close($db);
+        
+        	return $questionID;
+        }
+        
         public function getAnswerText($surveyID) {
         	
         	$query = "SELECT QuestionairyID FROM Survey where SurveyID = '".$surveyID."'";
