@@ -531,6 +531,15 @@ define('DBPASS', 'pkn_2404');
             }
             return $output;
         }
+        public function getAttendencesQuestions($surveyID, $questionID){
+        	$output = 0;
+        	$query = "SELECT COUNT(DISTINCT(UserID)) as Count FROM Result WHERE SurveyID ='".$surveyID."' and QuestionID ='".$questionID."'";
+        	$result = $this->db->query($query);
+        	while($row = $result->fetch_assoc()){
+        		$output = $row['Count'];
+        	}
+        	return $output;
+        }
         public function getSurveyByCode($surveyCode){   
             require_once 'models/survey.php';
             $query = "SELECT SurveyID,QuestionairyID,TimeStart,TimeEnd,SurveyCode,Person FROM Survey WHERE SurveyCode =".$surveyCode;
@@ -570,42 +579,55 @@ define('DBPASS', 'pkn_2404');
 
         	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         	 
-        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
+        	$query = "SELECT QuestionairyID FROM Survey where SurveyID = '".$surveyID."'";
+        	$questionairyResult = mysqli_query($this->db, $query);
+        	$questionairyRow = mysqli_fetch_row($questionairyResult);
+        	
+        	$query = "SELECT Question FROM QuestionairyQuestions where Questionairy='".$questionairyRow[0]."'";
         	$questionResult = mysqli_query($this->db, $query);
-        	 
+        	
         	$count = 0;
         	while ($questionRow = mysqli_fetch_row($questionResult) ) {
-        		 
-        		$query = "SELECT DISTINCT AnswerID FROM Result where QuestionID ='".$questionRow[0]."'";
+        	
+        		$query = "SELECT DISTINCT AnswerID from Answer where Question ='".$questionRow[0]."'";
         		$answerResult = mysqli_query($this->db, $query);
-        		 
-        		while ($answerRow = mysqli_fetch_row($answerResult) ) {
-        			if (is_null($answerRow[0])) {
-        				$query = "SELECT Answers FROM Result where SurveyID='".$surveyID."' and AnswerID is null";
-        				$result = mysqli_query($this->db, $query);
-        				 
+        			
+        		if (mysqli_num_rows($answerResult) == '0') {
+        			$query = "SELECT Answers FROM Result where SurveyID='".$surveyID."' and AnswerID is null";
+        			$result = mysqli_query($this->db, $query);
+        	
+        			if (mysqli_num_rows($result) == '0') {
+        				$answer[$count][] = 'null';
+        			}
+        			else {
         				while ($resultRow = mysqli_fetch_row($result) )
         					$answer[$count][] = $resultRow[0];
         			}
-        			else {
+        		}
+        		else {
+        			while ($answerRow = mysqli_fetch_row($answerResult) ) {
         				$query = "SELECT COUNT(AnswerID) FROM Result where SurveyID='".$surveyID."' and AnswerID ='".$answerRow[0]."'";
         				$result = mysqli_query($this->db, $query);
-        				 
+        					
         				while ($resultRow = mysqli_fetch_row($result) )
         					$answer[$count][] = $resultRow[0];
         			}
         		}
         		$count++;
         	}
-        	//mysqli_close($db);        	
-        	 
+        	//mysqli_close($db);
+        	
         	return $answer;
         } 
         public function getResultQuestions($surveyID) {
         	$questionText = null;
         	//$db = new mysqli('projekt.wi.fh-flensburg.de','projekt2016a','pkn_2404','projekt2016a','3306');
         
-        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
+        	$query = "SELECT QuestionairyID FROM Survey where SurveyID = '".$surveyID."'";
+        	$questionairyResult = mysqli_query($this->db, $query);
+        	$questionairyRow = mysqli_fetch_row($questionairyResult);
+        	
+        	$query = "SELECT Question FROM QuestionairyQuestions where Questionairy='".$questionairyRow[0]."'";
         	$questionResult = mysqli_query($this->db, $query);
         
         	$count = 0;
@@ -626,13 +648,17 @@ define('DBPASS', 'pkn_2404');
         
         public function getAnswerText($surveyID) {
         	
-        	$query = "SELECT DISTINCT QuestionID FROM Result where SurveyID='".$surveyID."'";
+        	$query = "SELECT QuestionairyID FROM Survey where SurveyID = '".$surveyID."'";
+        	$questionairyResult = mysqli_query($this->db, $query);
+        	$questionairyRow = mysqli_fetch_row($questionairyResult);
+        	
+        	$query = "SELECT Question FROM QuestionairyQuestions where Questionairy='".$questionairyRow[0]."'";
         	$questionResult = mysqli_query($this->db, $query);
         
         	$count = 0;
         	while ($questionRow = mysqli_fetch_row($questionResult) ) {
         
-        		$query = "SELECT DISTINCT AnswerID FROM Result where QuestionID ='".$questionRow[0]."'";
+        		$query = "SELECT DISTINCT AnswerID FROM Answer where Question ='".$questionRow[0]."'";
         		$answerResult = mysqli_query($this->db, $query);
         
         		while ($answerRow = mysqli_fetch_row($answerResult) ) {
