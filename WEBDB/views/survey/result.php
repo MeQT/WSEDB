@@ -26,51 +26,60 @@ if (!empty($data)) {
 		$answerCount++;
 	}
 	
+	$size = 0;
+	
+	for ($x = 0; $x < count($data[$questionNumber]); $x++ ) {
+		$size += $data[$questionNumber][$x];
+	}	
+	
 	if (is_numeric($data[$questionNumber][0])) {
-		echo '<table id="q-graph">';
-		//echo '<caption style="width:calc('.$answerCount.'*80px);">'.$_SESSION['questionText'].'</caption>';
-		echo '<thead>';
-		echo '<tr style="margin-left:calc('.$answerCount.'*10%)" >';
-		echo '<th></th>';		
-		echo '<th class="button"><input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input></th>';
-		echo '</tr>';
-		echo '</thead>';
-		echo '<tbody>';
-	
-		//$height = 0.8;
-		$left = 0;
-		//$count = 1;
-		$size = 0;
-	
-		$answerCount = 1;
-	
-		for ($x = 0; $x < count($data[$questionNumber]); $x++ ) {
-			$size += $data[$questionNumber][$x];
-		}
-	
-		for ($y = 0; $y < count($data[$questionNumber]); $y++) {
-			echo '<tr class="qtr" style="margin-left:calc('.$left.'*1px);" id="">';
-			echo '<th scope="row">'.$_SESSION['answerText'][$questionNumber][$y].'</th>';
-			echo '<td class="answer bar" style="height: calc('.$data[$questionNumber][$y].'/'.$size.' * 100%);"><p>'.$data[$questionNumber][$y].'</p></td>';
+		if ($size != '0') {
+			echo '<table id="q-graph">';
+			//echo '<caption style="width:calc('.$answerCount.'*80px);">'.$_SESSION['questionText'].'</caption>';
+			echo '<thead>';
+			echo '<tr style="margin-left:calc('.$answerCount.'*10%)" >';
+			echo '<th></th>';
+			echo '<th class="button"><input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input></th>';
 			echo '</tr>';
-	
-			//$count++;
-			//$height -= 0.4;
-			$left += 70;
+			echo '</thead>';
+			echo '<tbody>';
+			
+			//$height = 0.8;
+			$left = 0;
+			//$count = 1;
+			
+			$answerCount = 1;
+			
+			for ($y = 0; $y < count($data[$questionNumber]); $y++) {
+				echo '<tr class="qtr" style="margin-left:calc('.$left.'*1px);" id="">';
+				echo '<th scope="row">'.$_SESSION['answerText'][$questionNumber][$y].'</th>';
+				echo '<td class="answer bar" style="height: calc('.$data[$questionNumber][$y].'/'.$size.' * 100%);"><p>'.$data[$questionNumber][$y].'</p></td>';
+				echo '</tr>';
+			
+				//$count++;
+				//$height -= 0.4;
+				$left += 70;
+			}
+			
+			echo '</tbody>';
+			echo '</table>';
+			
+			$answerCount--;
+			
+			echo '<div id="ticks">';
+			echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.$size.'</p></div>';
+			echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-$size/5).'</p></div>';
+			echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-2*$size/5).'</p></div>';
+			echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-3*$size/5).'</p></div>';
+			echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-4*$size/5).'</p></div>';
+			echo '</div>';
 		}
-	
-		echo '</tbody>';
-		echo '</table>';
-	
-		$answerCount--;
-	
-		echo '<div id="ticks">';
-		echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.$size.'</p></div>';
-		echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-$size/5).'</p></div>';
-		echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-2*$size/5).'</p></div>';
-		echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-3*$size/5).'</p></div>';
-		echo '<div class="tick" style="height: 59px; width:calc('.$answerCount.'*75px);"><p>'.($size-4*$size/5).'</p></div>';
-		echo '</div>';
+		else {
+			echo '<br/><br/>';
+			echo 'Auswertung nicht möglich!';
+			echo '<hr/>';
+			echo '<input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input>';
+		}		
 	}
 	else {
 // 		echo '<table border=0 cellpadding=8 id="">';
@@ -88,11 +97,18 @@ if (!empty($data)) {
 // 		echo '</tbody>';
 // 		echo '</table>';
 		echo '<br/><br/>';
-		$count = 1;
-		for ($y = 0; $y < count($data[$questionNumber]); $y++) {
-			echo '<b>Antwort '.$count++.': </b>'.'<div>'.utf8_encode($data[$questionNumber][$y]).'</div>';
+		if ($data[$questionNumber][0] == 'null') {
+			echo '<br>Auswertung nicht möglich!</br>';
 			echo '<hr/>';
+			echo '<input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input>';
 		}
+		else {
+			$count = 1;
+			for ($y = 0; $y < count($data[$questionNumber]); $y++) {
+				echo '<b>Antwort '.$count++.': </b>'.'<div>'.utf8_encode($data[$questionNumber][$y]).'</div>';
+				echo '<hr/>';
+			}
+		}		
 		echo '<input type="submit" class="btn btn-primary btn-xs" value="Nächste Frage"></input>';
 	}
 }
