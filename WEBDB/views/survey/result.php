@@ -46,10 +46,10 @@ if ($_SESSION['questionNumber'] != '-1') {
 					
 				$answerCounter = 1;
 				for ($i = 0; $i < $answerCount; $i++) {
-					echo '<th style="width:250px; text-align: left; top:calc('.$answerTop.'*1px)">'.$answerCounter++.' '.$_SESSION['answerText'][$questionNumber][$i].'</th>';
+					echo '<th style="width:350px; text-align: left; top:calc('.$answerTop.'*1px)">'.$answerCounter++.' '.$_SESSION['answerText'][$questionNumber][$i].'</th>';
 					$answerTop += 20;
 				}
-				//echo '<th style="top:300px">TEST</th>';
+				echo '<th style="width:250px; text-align: left; top:160px">Teilnehmer: '.$_SESSION['personSum'].'</th>';
 				echo '</tr>';
 				echo '</thead>';
 				echo '<tbody>';
@@ -63,7 +63,7 @@ if ($_SESSION['questionNumber'] != '-1') {
 				for ($y = 0; $y < count($data[$questionNumber]); $y++) {
 					echo '<tr class="qtr" style="margin-left:calc('.$left.'*1px);" id="">';
 					echo '<th scope="row">'.$answerCount++.'</th>';
-					echo '<td class="answer bar" style="height: calc('.$data[$questionNumber][$y].'/'.$_SESSION['personSum'].' * 100%);"><p><font color="white" size="3">'.$data[$questionNumber][$y].'</font></p></td>';
+					echo '<td class="answer bar" style="height: calc('.$data[$questionNumber][$y].'/'.$_SESSION['personSum'].' * 100%);"><p><font color="black"size="3"><b>'.$data[$questionNumber][$y].'</b></font></p></td>';
 					echo '</tr>';
 						
 					//$count++;

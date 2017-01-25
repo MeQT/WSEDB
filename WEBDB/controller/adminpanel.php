@@ -22,12 +22,19 @@
 		unset($_SESSION['ValidateUser']);		
 		require_once 'core/database.php';
 		$db = new DB();
-		if (isset($_POST['personID'])){			
+		if (isset($_POST['personID'])){		
+			require_once 'core/mail.php';
+			require_once 'models/user.php';
+			$mail = new mail();
+			$user = new user($_POST['personID']);
 			if ($db->validateUser($_POST['personID']) == 0){
-				$_SESSION['ValidateUser'] = "Benutzer erfolgreich gesperrt.";				
+				$_SESSION['ValidateUser'] = "Benutzer erfolgreich gesperrt.";
+				$mail->sendUnValidateUser($db->getEmail($_POST['personID']), $db->getUserName($_POST['personID']));
+				
 			}
 			else {
 				$_SESSION['ValidateUser'] = "Benutzer erfolgreich zugelassen.";
+				$mail->sendValidateUser($db->getEmail($_POST['personID']), $db->getUserName($_POST['personID']));
 			}
 		}
 		$this->nav->adminpanel();

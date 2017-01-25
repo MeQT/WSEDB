@@ -11,7 +11,7 @@
 <html lang="en">
 <head>    
     <link href="css/bootstrap-toggle.min.css" rel="stylesheet">   
-    <script src="js/bootstrap-toggle.min.js"></script> 
+    <script src="js/bootstrap-toggle.min.js"></script>     
 </head>
 <body>
 <?php 
@@ -68,8 +68,20 @@ if (!empty($data) && $data != -1)
 			echo '<script>';
 			echo '$(function() {';
 			echo '$("#'.$entry->id.'").change(function() {';
+			//echo 'var success = confirm(\'Möchten Sie den Benutzer wirklich sperren?\');';
+			//echo 'if(success == true) {';
+			//echo 'OnChange="return confirm(\'Möchten Sie den Benutzer wirklich löschen?\');"';
 			echo 'document.getElementById("personID").value="'.$entry->id.'";';
+			//echo '$("#'.$entry->id.'").checked = true;';
+			//echo 'document.getElementById("'.$entry->id.'").checked = true;';
 			echo 'document.getElementById("form1").submit();';
+			//echo 'document.getElementById("'.$entry->id.'").checked = false;';
+			
+			//echo 'if ('.$entry->isValidated.' == true) {';			
+			//echo '}';
+			//echo 'else {';			
+			//echo '}';
+			//echo '$("#'.$entry->id.'").prop("checked",true);';
 			echo '	})';
 			echo '})';
 			echo '</script>';
@@ -86,7 +98,7 @@ if (!empty($data) && $data != -1)
 		echo '<form action="index.php?url=adminpanel/deleteUser" method="Post">';
 		echo '<input type = "hidden" name="personID" value ="'.$entry->id.'">';
 		if ($entry->isAdmin == 0){
-			echo '<td class="col-xs-2"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen"/></td>';
+			echo '<td class="col-xs-2"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" OnClick="return confirm(\'Möchten Sie den Benutzer wirklich löschen?\');"/></td>';
 		}
 		else{
 			echo '<td class="col-xs-2"><input type="submit" class="btn btn-primary btn-xs" value = "l&ouml;schen" disabled/></td>';

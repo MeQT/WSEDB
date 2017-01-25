@@ -221,6 +221,12 @@ define('DBPASS', 'pkn_2404');
         		return false;
         	}
         }
+        public function getUserName($id){
+        	$query = "SELECT Username FROM Person WHERE PersonID = '$id'";
+        	$result = mysqli_query($this->db, $query);
+        	$row = mysqli_fetch_array($result);
+        	return $row['Username'];
+        }
         public function saveQuestion($question){
             require_once 'models/questions.php';
             $query = "INSERT INTO Question(Text,SelectionType,Time,Author)"

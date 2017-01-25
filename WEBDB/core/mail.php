@@ -70,5 +70,38 @@
                 return true;
             }
         }
+        public function sendValidateUser($email, $userName) {
+        	$message = "Hallo,<br><br> Sie wurden erfolgreich zugelassen.<br>
+        				Sie können sich absofort einloggen.<br><br>Viele Grüße";
+        	
+        	$this->mail->addAddress($email);
+        	$this->mail->Subject = 'HS Flensburg Testimeter Account "'.$userName.'" zugelassen.';
+        	$this->mail->Body 	 = $message;
+        	$this->mail->AltBody = $message;
+        	
+        	if(!$this->mail->send()) {
+        		return false;
+        	}
+        	else {
+        		return true;
+        	}
+        }
+        public function sendUnValidateUser($email, $userName) {
+        	$message = "Hallo,<br><br> Sie wurden gesperrt.<br>
+        				Sie können sich absofort nicht mehr einloggen!<br><br>Viele Grüße";
+        	 
+        	$this->mail->addAddress($email);
+        	$this->mail->Subject = 'HS Flensburg Testimeter Account "'.$userName.'" gesperrt.';
+        	$this->mail->Body 	 = $message;
+        	$this->mail->AltBody = $message;
+        	 
+        	if(!$this->mail->send()) {
+        		return false;
+        	}
+        	else {
+        		return true;
+        	}
+        }
+        
     }
 
